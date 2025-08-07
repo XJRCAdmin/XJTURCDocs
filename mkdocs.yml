@@ -39,7 +39,7 @@ theme:
         icon: material/weather-night
         name: 暗色模式
     - scheme: slate
-      primary: white
+      primary: deep purple
       toggle:
         icon: material/weather-sunny
         name: 亮色模式
@@ -72,6 +72,9 @@ nav:
     - SSH: blog/视/ssh&remotessh/index.md
     - VPN: blog/视/VPN教程/index.md
     - Docker & Dev Container: blog/视/docker/index.md
+    - LINUX: blog/视/linux/linux.md
+  - 机:
+    - Git: blog/机/GitIntro/index.md
 
 plugins:
   - search #搜索配置
@@ -94,12 +97,12 @@ plugins:
       manual: false
   - minify:
       minify_html: true
-  - git-revision-date-localized:
-      fallback_to_build_date: true
-      locale: zh
-  - git-authors:
-      show_contribution: true
-      show_line_count: true
+  # - git-revision-date-localized:
+  #     fallback_to_build_date: true
+  #     locale: zh
+  # - git-authors:
+  #     show_contribution: true
+  #     show_line_count: true
 
 
 
