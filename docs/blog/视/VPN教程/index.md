@@ -13,9 +13,10 @@ resources:
 ---
 
 
-## Ubuntu 22.04 VPN配置教程
+## Ubuntu 22.04 clash VPN配置教程
 --------------------
 ubuntu版本不同其实差别不是很大。
+
 #### 步骤一：建立clash文件夹并导入安装包
 ```bash
 mkdir clash
@@ -33,6 +34,8 @@ tar -xzvf clashpremium-release-linux-amd64.s1lSU-Ho.tar.gz.tar.gz
 ```bash
 wget -O config.yaml "https://cqd4w.no-mad-world.club/link/JMdr9H6ofZOHDvJO?clash=3"
 ```
+当然，若上述链接不行的话你也可以在这里复制wget命令：
+![](imgs/test.png)
 
 #### 步骤三：执行配置命令实现启动clash和VPN代理
 ```bash
@@ -71,7 +74,7 @@ clash界面如下图所示
 
 ![Youtube image](imgs/Youtube.png)
 
-#### 平日开启VPN的方法
+### 平日开启VPN的方法
 
 在终端中`cd`到`clash`的文件夹下，输入`./clash -d .`启动clash，启动完之后一般不要使用`ctrl+c`或`ctrl+z`打断运行，否则再次输入`./clash -d .`运行会出现端口占用，如果打断了就只能：
 ```bash

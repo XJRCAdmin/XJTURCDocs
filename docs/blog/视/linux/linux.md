@@ -181,7 +181,7 @@ drwxrwxr-x 2 rc rc 4096 7月   11 22:31 folder
 
 对于目录中每一项开头的 "-rw-rw-r--"（以文本 `hello.txt` 为例）字样，下图给了一些解释：
 
-![pic4](images/linux4.png)
+![pic4](images/linux4.jpg)
 
 + 开头第一个字符是用于特殊权限的 `flag`，它来表明该文件的一些特殊属性如文件夹、连接等。
 + 接下来九个 flag 每三个为一组，分别代表所属用户、所属组、所有其他用户对于这个文件的 r(read)、w(write)、x(execute) 三种访问的权限。
@@ -318,6 +318,44 @@ Homebrew 的安装方法：
 
 ### Port Forwarding
 
+本地端口转发（Local Forwarding）：把本机某个端口（client）转发到 SSH 服务器（server）能访问的目标主机/端口。用 -L。
+
+远程端口转发（Remote Forwarding / 反向转发）：把 SSH 服务器上的某个端口转发到本机（client）上的目标主机/端口。用 -R。
+
+```bash
+ssh [其他选项] -L [bind_address:]local_port:dest_host:dest_port user@ssh_server
+ssh [其他选项] -R [bind_address:]remote_port:dest_host:dest_port user@ssh_server
+```
+
+##### bind_address（可选）
+
+- 对 -L：表示**在本地（client）**上绑定哪个地址（默认 localhost）。比如 0.0.0.0:8080 让本机所有网卡可访问该端口（注意安全）。
+
+- 对 -R：表示在**远端（server）**上绑定哪个地址（默认 localhost，通常只有 server 本机能访问，若想让外网也能访问需服务器端开启 GatewayPorts yes 或使用 0.0.0.0，且服务端 SSHD 配置允许）。
+##### local_port / remote_port：本地或远程被监听的端口号。
+
+##### dest_host:dest_port：当隧道被触发时，SSH 的那一端会尝试连接到此目的地。注意解析位置：
+
+- 对 -L：dest_host 在 SSH 服务器端解析/访问（它是服务器去连接 dest_host:dest_port）。
+
+- 对 -R：dest_host 在 客户端解析/访问（远端收到连接后会让客户端连接 dest_host:dest_port）。
+
+#### 具体示例
+**本地端口转发：访问远端数据库**
+把本地 localhost:5432 转发到服务器能访问的 db:5432：
+```bash
+ssh -L 5432:db:5432 user@gateway.example.com -N
+```
+解释：在本地访问 localhost:5432 会通过 SSH 隧道到 gateway.example.com，然后 gateway 去连接 db.internal:5432（db.internal 在服务器端解析）。
+
+**远程端口转发：把本地服务暴露到远端服务器**
+本地运行一个 web 服务 localhost:3000，你想让远端服务器（或其用户）通过 remoteserver:8080 访问它：
+
+```bash
+ssh -R 8080:localhost:3000 user@remoteserver.example.com -N
+```
+解释：当远端有人访问 remoteserver:8080，SSH 服务端会把连接通过隧道发回到你的客户端，并由客户端连接 localhost:3000。
+如果你想让远端服务器对外网可访问（不是仅限服务器本机），需要在服务器 SSHD 中启用 GatewayPorts yes 并用 -R 0.0.0.0:8080:localhost:3000。
 
 ### Vim
 

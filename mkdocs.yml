@@ -5,8 +5,9 @@ site_url: https://localhost:7788/
 site_dir: site
 theme:
   name: material
-  logo: 'static/images/CbiIrobot.svg'
-  favicon: 'static/images/favicon.ico'
+  # 下面的logo路径是以docs为根的路径
+  logo: static/images/CbiIrobot.svg
+  favicon: static/images/favicon.ico
   language: zh
   custom_dir: material/overrides
   features:
@@ -46,6 +47,8 @@ theme:
 
 extra_javascript:
   - 'https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+extra_css:
+  - stylesheets/extra.css
 
 extra:
   generator: false
@@ -69,12 +72,16 @@ nav:
     - ssh: blog/电/ssh&remotessh/index.md
   - 视:
     - Introduction: blog/视/intro.md
+    - Git: blog/机/GitIntro/index.md
     - SSH: blog/视/ssh&remotessh/index.md
     - VPN: blog/视/VPN教程/index.md
     - Docker & Dev Container: blog/视/docker/index.md
     - LINUX: blog/视/linux/linux.md
+    - 视觉设备: blog/视/visualDev/index.md
   - 机:
-    - Git: blog/机/GitIntro/index.md
+    - Example: blog/机/example/index.md
+  - 硬件组:
+    - Introduction: blog/硬件组/intro.md
 
 plugins:
   - search #搜索配置
