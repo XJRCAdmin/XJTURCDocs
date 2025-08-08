@@ -388,7 +388,8 @@ Ctrl+B 方向键  # Switch between panes
 
 这一系列操作的快捷键基本上都是 Ctrl+B xxx，请自行学习掌握。
 
-附：https://tmuxcheatsheet.com/
+附：[tmux cheat sheet](https://tmuxcheatsheet.com/)和[you need to learn tmux RIGHT NOW!!](https://www.youtube.com/watch?v=nTqu6w2wc68)
+
 
 ### Network
 
@@ -413,8 +414,6 @@ curl https://net9.org/home/
 ps aux | grep nginx
 kill -9 <PID>
 ```
-
-
 
 ## 后续拓展
 

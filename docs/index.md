@@ -1,5 +1,8 @@
 # Welcome to XJTURC
 
+!!! blue "Tips"
+    这是XJTURC的文档网站。
+
 ## Commands
 
 * `mkdocs new [dir-name]` - Create a new project.
@@ -9,7 +12,28 @@
 
 ## Project layout
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+```bash
+.
+├── docs
+│   ├── blog
+│   │   ├── 机
+│   │   ├── 电
+│   │   ├── 硬件组
+│   │   └── 视
+│   ├── index.md
+│   ├── static
+│   │   └── images
+│   └── stylesheets
+│       └── extra.css
+├── material
+│   └── overrides
+├── mkdocs.yml
+└── site
+    ├── 404.html
+    ├── css
+    ├── img
+    ├── index.html
+    ├── js
+    ├── search
+    └── webfonts
+```

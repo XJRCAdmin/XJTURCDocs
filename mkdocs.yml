@@ -70,18 +70,25 @@ nav:
   - Home: index.md
   - 电: 
     - ssh: blog/电/ssh&remotessh/index.md
-  - 视:
-    - Introduction: blog/视/Intro/intro0.md
-    - 基础工具:
-      - Introduction: blog/视/Intro/intro1.md 
-      - LINUX: blog/视/linux/linux.md
-      - Git: blog/视/GitIntro/index.md
-      - SSH: blog/视/ssh&remotessh/index.md
-      - VPN: blog/视/VPN教程/index.md
-      - Docker & Dev Container: blog/视/docker/index.md
-    - 设备:
-      - 视觉设备: blog/视/visualDev/index.md
-      - 串口使用: blog/视/serialUse/index.md
+  - 视: 
+    - Introduction: blog/视/index.md
+    - 常用命令汇总: blog/视/common-command/index.md
+    - Markdown: blog/视/markdown/index.md
+    - Bash自学: blog/视/bash/index.md
+    - LINUX: blog/视/linux/linux.md
+    - Git Intro: blog/视/GitIntro/index.md
+    - SSH: blog/视/ssh&remotessh/index.md
+    - VPN: blog/视/VPN教程/index.md
+    - Doxygen与commit规范: blog/视/Doxygen-commit/index.md
+    - Missing Semester qa: blog/视/qa/index.md
+    - CMake Introduction: blog/视/CMake/index.md
+    - Docker & Dev Container: blog/视/docker/index.md
+    - 视觉设备: blog/视/visualDev/index.md
+    - 串口使用: blog/视/serialUse/index.md
+    - intel-realsense相机: blog/视/realsense/index.md
+    - 强化学习: blog/视/RL/index.md
+
+
   - 机:
     - Example: blog/机/example/index.md
   - 硬件组:

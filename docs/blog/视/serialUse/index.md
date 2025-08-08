@@ -1,19 +1,31 @@
 ---
-<<<<<<< HEAD
-title: 串口使用
-=======
-title: 
->>>>>>> a4d3115be996eb9006e7e580ce1c06261d825122
-date: 2024-10-19
+title: 视觉设备介绍
+date: 2024-10-16
 description: >
 resources:
   - src: "**.{png,jpg}"
 ---
-
-<<<<<<< HEAD
 ## 逐飞无线串口
+![serial](images/无线串口.png)
 
-=======
+### 基础参数
+- 产品名称：无线模块套件
+- 电源电压：3.3V-5V
+- 无线频率：2.4GHz频段
+- 产品接口：无线转串口—双排2X4P插针式接口；无线转USB-USB接口
+- 产品尺寸：无线转串口—32X10MM；无线转USB-52X12MM
+- 波特率范围：9600、57600、115200、230400、460800
+
+逐飞科技无线串口透传模块资料: [产品链接](https://gitee.com/seekfree/Wireless_Uart_Product)
+
+## SocketCAN
+!!! blue-warning "这部分笔者也不是很清楚"
+    购买的时候，有些厂家售卖的can是pcan （/dev/下ls发现是pcan）（驱动与socketcan不一样似乎），有一些商家售卖的CAN是另一种（/dev/下ls发现是can0），外观几乎没有区别。
+![](images/can.png)
+### 参考链接
+  - [CSDN SocketCAN](https://blog.csdn.net/weixin_42350014/article/details/143811349)
+  - 购买链接:[京东](https://item.m.jd.com/product/10113851950323.html?gx=RnAomTM2PWGTnM5wysIzOhbfEQtJZg&gxd=RnAowWUKOmDcw5ARq9V0DuELZuVnU60&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=QQfriends_shareid22cbd58844a3c4cd175464197464190079_shangxiang_none)
+
 ## Linux 上硬件设备的调试
 
 ### 命令： dmesg
@@ -52,11 +64,9 @@ lsusb -v | grep usb # 详细展现设备的日志记录
 在实际使用中，可以通过向该文件“读”“写”，来做到从硬件设备接受数据与发送数据的作用，比如`ttyUSB0`与`ttyUSB1`是一对连接好的usb-ttl，向其中一边发送数据，另一端会接受到数据。
 
 ```bash
-
 echo "hello world" >> /dev/ttyUSB0
 cat /dev/ttyUSB1
 
 ```
 
-## 逐飞无线串口
->>>>>>> a4d3115be996eb9006e7e580ce1c06261d825122
+

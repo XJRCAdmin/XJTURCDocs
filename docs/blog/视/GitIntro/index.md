@@ -1,3 +1,17 @@
+---
+title: Linux/ubuntu Git教程
+date: 2025-08-04
+description: >
+draft: false
+categories:
+    - technology
+resources:
+  - src: "**.{png,jpg}"
+    title: "Image #:counter"
+    params:
+      byline: ""
+---
+
 # Git：分布式版本控制软件
 
 ![image-20211007231126799](https://i.loli.net/2021/10/07/yTHKCmGkxJXUOSj.png)
