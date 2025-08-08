@@ -106,7 +106,7 @@ resources:
 - 描述：arrch64架构的计算资源，与树莓派4B差不多的计算资源，具有Nvidia JetPack支持，可以使用TensorRT加速推理。
 - 状态：散装在桌上，目前积灰。
 
-### 产品型号：Nividia Jetson Xavier NX
+### Nvidia Jetson Xavier NX
 - 刷机教程 https://zhuanlan.zhihu.com/p/668191700
 - 数量：2？
 - 状态：2024.10.16出借中。更新于2025-08-08：有一个之前在四足优宝特（电机）狗上，现在卸下了。只有见到一个，另外一个不懂哪里去了。

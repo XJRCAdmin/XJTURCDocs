@@ -71,13 +71,17 @@ nav:
   - 电: 
     - ssh: blog/电/ssh&remotessh/index.md
   - 视:
-    - Introduction: blog/视/intro.md
-    - Git: blog/机/GitIntro/index.md
-    - SSH: blog/视/ssh&remotessh/index.md
-    - VPN: blog/视/VPN教程/index.md
-    - Docker & Dev Container: blog/视/docker/index.md
-    - LINUX: blog/视/linux/linux.md
-    - 视觉设备: blog/视/visualDev/index.md
+    - Introduction: blog/视/Intro/intro0.md
+    - 基础工具:
+      - Introduction: blog/视/Intro/intro1.md 
+      - LINUX: blog/视/linux/linux.md
+      - Git: blog/视/GitIntro/index.md
+      - SSH: blog/视/ssh&remotessh/index.md
+      - VPN: blog/视/VPN教程/index.md
+      - Docker & Dev Container: blog/视/docker/index.md
+    - 设备:
+      - 视觉设备: blog/视/visualDev/index.md
+      - 串口使用: blog/视/serialUse/index.md
   - 机:
     - Example: blog/机/example/index.md
   - 硬件组:
