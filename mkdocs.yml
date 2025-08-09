@@ -74,6 +74,10 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/XJRCAdmin/XJTURCDocs/
+      name: XJRCAdmin on GitHub
+
+copyright: Copyright &copy; 2020 - 2025 XJRCAdmin All rights reserved
+
 nav:
   - Home: index.md  
   - 贡献指南: blog/comtribution/index.md
@@ -124,6 +128,14 @@ plugins:
       manual: false
   - minify:
       minify_html: true
+  # - comments:
+    # repo: XJRCAdmin/XJTURCDocs
+    # category: Announcements
+    # mapping: url
+    # input_position: top
+    # theme: preferred_color_scheme
+    # lang: zh-CN
+    # loading: lazy
   # - git-revision-date-localized:
   #     fallback_to_build_date: true
   #     locale: zh
