@@ -6,3 +6,4 @@
 # 部署指南
 
 ![](images/image1.png)
+![](images/image2.png)
