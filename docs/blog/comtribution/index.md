@@ -15,7 +15,10 @@ npm install -g vercel
 ```
 接着注册一个vercel账号，[点击这里](https://vercel.com/signup)。
 
-登录vercel账号
+!!! question "问题"
+    笔者有一些记不清了，您似乎需要为您的github repository先安装vercel，这一段请自行询问chatgpt老师。
+
+您还需要登录vercel账号：
 ```bash
 vercel login
 ```
@@ -49,14 +52,29 @@ gh secret set VERCEL_ORG_ID
 
 ## 生成 Vercel 账户访问令牌
 ![](images/image3.png)
+
 - 登录你的 Vercel 账户，进入 Settings（设置） > Tokens。
 - 点击 Create Token，为令牌命名，选择适当的作用域和过期时间，点击 Create。
 - 复制生成的令牌。
 
 接着，回到github repo的settings页面，点击Secrets and variables > Actions。
+
 - 点击 New repository secret，添加以下 Secrets：
     - Name: VERCEL_TOKEN
     - Value: 你从 Vercel 账户中复制的令牌。
+
 目前一共是三个secrets，名称需要与下文github actions中使用的名称一致。
 ![](images/image2.png)
 
+可选，但强烈建议您在`docs/`文件夹中放置一个`vercel.json`文件，其中至少包含以下内容：
+```json
+{
+  "trailingSlash": true
+}
+```
+
+## workflows配置
+最后，你需要编写一个GitHub Actions工作流，用于构建文档并部署到Vercel平台。虽然不存在适用于所有项目的通用解决方案，但以下是针对常用包管理器的基础配置示例。
+
+!!! blue-info "Tips"
+    请参考本代码仓库的.github/workflows/docs.yml文件。

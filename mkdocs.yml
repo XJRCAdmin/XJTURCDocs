@@ -50,8 +50,9 @@ theme:
         icon: material/weather-sunny
         name: 亮色模式
 
-extra_javascript:
-  - 'https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+# extra_javascript:
+#   - 'https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+
 extra_css:
   - stylesheets/extra.css
 
@@ -75,6 +76,11 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/XJRCAdmin/XJTURCDocs/
       name: XJRCAdmin on GitHub
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 copyright: Copyright &copy; 2020 - 2025 XJRCAdmin All rights reserved
 
@@ -101,15 +107,13 @@ nav:
     - 串口使用: blog/视/serialUse/index.md
     - intel-realsense相机: blog/视/realsense/index.md
     - 强化学习: blog/视/RL/index.md
-
-
   - 机:
     - Example: blog/机/example/index.md
   - 硬件组:
     - Introduction: blog/硬件组/intro.md
 
 plugins:
-  - search #搜索配置
+  - search  # 搜索配置
   - glightbox:
       enabled: !ENV [glightbox, false]
       touchNavigation: true
@@ -129,7 +133,7 @@ plugins:
       manual: false
   - minify:
       minify_html: true
-  # - comments:
+  - comments
     # repo: XJRCAdmin/XJTURCDocs
     # category: Announcements
     # mapping: url
@@ -156,7 +160,8 @@ markdown_extensions:
   - def_list
   - toc:
       permalink: true
-  - pymdownx.arithmatex
+  - pymdownx.arithmatex:
+     generic: true 
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.details
