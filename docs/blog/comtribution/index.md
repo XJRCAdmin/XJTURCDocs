@@ -4,3 +4,5 @@
 本项目部署到vercel上，遵循xx协议。
 
 # 部署指南
+
+![](images/image1.png)
