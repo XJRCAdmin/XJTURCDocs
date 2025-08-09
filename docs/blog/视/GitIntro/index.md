@@ -65,7 +65,7 @@ Git 需要绑定文本编辑器使用，自带支持以下编辑器：
 + Atom
 + VS Codium
 
-如果你没有安装上述文本编辑器，那么你使用的很可能是⻛评并不好的记事本（英文：Notepad），不建议拿它作为 Git 的绑定编辑器。这种情况下建议使用 Notepad++，它的操作与界面可以和记事本实现很好的过渡。可以使用 [科协云盘下载链接](https://cloud.tsinghua.edu.cn/f/9bd487642fcb4e468c67/?dl=1) 下载，安装过程中全部点“下一步”（或同位置的按钮）即可。完成之后你将和记事本永远告别，打开文本文件的默认方式会变成 Notepad++。
+如果你没有安装上述文本编辑器，那么你使用的很可能是⻛评并不好的记事本（英文：Notepad），不建议拿它作为 Git 的绑定编辑器。这种情况下建议使用 Notepad++，它的操作与界面可以和记事本实现很好的过渡。可以使用 [清华科协云盘下载链接](https://cloud.tsinghua.edu.cn/f/9bd487642fcb4e468c67/?dl=1) 下载，安装过程中全部点“下一步”（或同位置的按钮）即可。完成之后你将和记事本永远告别，打开文本文件的默认方式会变成 Notepad++。
 
 **下载**
 
@@ -266,21 +266,20 @@ Creating a new branch is quick AND simple.
 
 + GitHub：<s>全球最大同性交流网站</s>。一个基于Git的代码托管服务平台，开源社区交流代码的重要网站。网址 https://www.github.com/
 + GitLab：类似Github，但主要面向企业、组织等内部合作。网址 https://www.gitlab.com/
-+ Tsinghua Git：清华大学基于 GitLab 搭建的大学内部的 Git，适用于课程小组内部或者学生组织内部的合作。网址 https://git.tsinghua.edu.cn/
++ Gitee：码云，国内最大的开源社区。不用梯子也可以访问。网址 https://gitee.com/
+
 
 下面我们介绍一些在远程仓库控制时的基本操作：
 
 + 克隆仓库到本地
 
-比如，以 [本技能引导文档](https://github.com/SAST-skill-docers/sast-skill-docs) 所在的 Git 仓库为例。我们使用 `git clone git@github.com:SAST-skill-docers/sast-skill-docs.git`，这样便把远程仓库中的内容取到了本地，并创建了工作区。
+比如，以 [本技能引导文档](https://github.com/XJRCAdmin/XJTURCDocs) 所在的 Git 仓库为例。我们使用 `git clone git@github.com:XJRCAdmin/XJTURCDocs.git`，这样便把远程仓库中的内容取到了本地，并创建了工作区。
 
-![image-20211008200605468](https://i.loli.net/2021/10/08/6sKx2NSBD98pcWE.png)
-
-![image-20211008200810881](https://i.loli.net/2021/10/08/EOyfHRC97DTQnk6.png)
+![](images/image1.png)
 
 + 添加远程仓库地址
 
-有时，我们的项目是使用 `git init` 来创建的，并不是从 GitHub 上直接 Clone 的别人的代码。这时我们要首先在 GitHub/GitLab/Tsinghua Git 上新建一个 Repo，然后按照提示，使用 `git remote add origin <你的 Repo 的 HTTP/SSH 地址>`。这样便是告诉本地的 Git 管理器，这个地址起一个简便的名字叫做 `origin`，方便今后使用。
+有时，我们的项目是使用 `git init` 来创建的，并不是从 GitHub 上直接 Clone 的别人的代码。这时我们要首先在 GitHub/GitLab 上新建一个 Repo，然后按照提示，使用 `git remote add origin <你的 Repo 的 HTTP/SSH 地址>`。这样便是告诉本地的 Git 管理器，这个地址起一个简便的名字叫做 `origin`，方便今后使用，当然也可以起名叫做`public`。
 
 + 推送更改
 
@@ -313,8 +312,6 @@ LFS 在 Linux 下一般是一个单独的包 `git-lfs`. 安装之后就可以用
 **`man gitignore`**
 
 ## 后续拓展
-
-想要学习更多 Git 内容？
 
 + 使用命令 `git help`
 + Pro Git Book https://git-scm.com/book/zh/v2
