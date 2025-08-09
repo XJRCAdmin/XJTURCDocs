@@ -133,7 +133,7 @@ plugins:
       manual: false
   - minify:
       minify_html: true
-  - comments
+  # - comments
     # repo: XJRCAdmin/XJTURCDocs
     # category: Announcements
     # mapping: url
