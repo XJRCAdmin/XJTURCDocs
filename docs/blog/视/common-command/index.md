@@ -63,7 +63,7 @@ cp JetBrainsMono/*.ttf ~/.local/share/fonts/JetBrainsMono/
 fc-cache -fv
 ```
 安装完插件之后就可以修改命令行中的字体选项了，找到安装的字体并设定。
-![](index-insert/image.45hryie6yz.webp)
+![](images/image.45hryie6yz.webp)
 安装插件：
 ```zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions

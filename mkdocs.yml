@@ -3,6 +3,9 @@ site_description: A short description of RC project.
 site_author: Admin
 site_url: https://localhost:7788/
 site_dir: site
+repo_url: https://github.com/XJRCAdmin/XJTURCDocs
+repo_name: XJTURCDocs
+
 theme:
   name: material
   # 下面的logo路径是以docs为根的路径
@@ -10,6 +13,8 @@ theme:
   favicon: static/images/favicon.ico
   language: zh
   custom_dir: material/overrides
+  icon:
+    repo: fontawesome/brands/github
   features:
   
     - announce.dismiss #呈现可标记为由用户读取的临时公告，可以包含一个用于取消当前公告的按钮
@@ -66,8 +71,12 @@ extra:
           note: >-
             Thanks for your feedback! Help us improve this page by
             using our <a href="https://marketingplatform.google.com/about/analytics/" target="_blank" rel="noopener">feedback form</a>.
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/XJRCAdmin/XJTURCDocs/
 nav:
-  - Home: index.md
+  - Home: index.md  
+  - 贡献指南: blog/comtribution/index.md
   - 电: 
     - ssh: blog/电/ssh&remotessh/index.md
   - 视: 
