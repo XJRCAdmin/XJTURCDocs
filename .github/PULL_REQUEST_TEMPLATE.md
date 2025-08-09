@@ -3,7 +3,7 @@ Making sure that your local build is OK before committing will help you reduce d
 and make it easier for maintainers to review. 
 -->
 
-> It was updated on 2025/08/09
+> 更新于 2025/08/09
 
 ## 这是什么类型的PR？
 
