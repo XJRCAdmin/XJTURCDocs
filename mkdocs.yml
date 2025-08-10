@@ -88,10 +88,10 @@ nav:
   - Home: index.md  
   - 贡献指南: blog/comtribution/index.md
   - 四足组:
-    - 四足组: docs/blog/四足组/index.md
+    - 四足组: blog/四足组/index.md
   - 电: 
     - ssh: blog/电/ssh&remotessh/index.md
-    - 新手指南: docs/blog/电/freshman/index.md
+    - 新手指南: blog/电/freshman/index.md
   - 视: 
     - Introduction: blog/视/index.md
     - 常用命令汇总: blog/视/common-command/index.md
