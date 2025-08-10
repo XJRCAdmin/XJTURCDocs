@@ -87,8 +87,11 @@ copyright: Copyright &copy; 2020 - 2025 XJRCAdmin All rights reserved
 nav:
   - Home: index.md  
   - 贡献指南: blog/comtribution/index.md
+  - 四足组:
+    - 四足组: docs/blog/四足组/index.md
   - 电: 
     - ssh: blog/电/ssh&remotessh/index.md
+    - 新手指南: docs/blog/电/freshman/index.md
   - 视: 
     - Introduction: blog/视/index.md
     - 常用命令汇总: blog/视/common-command/index.md
@@ -106,12 +109,14 @@ nav:
     - 视觉设备: blog/视/visualDev/index.md
     - 串口使用: blog/视/serialUse/index.md
     - intel-realsense相机: blog/视/realsense/index.md
+    - Roboflow标注概览: blog/视/roboflow/Roboflow.md
     - 强化学习: blog/视/RL/index.md
     - 队内服务器使用指南: blog/视/RCserver/index.md
   - 机:
     - Example: blog/机/example/index.md
   - 硬件组:
     - Introduction: blog/硬件组/intro.md
+  
 
 plugins:
   - search  # 搜索配置
