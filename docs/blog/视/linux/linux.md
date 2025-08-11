@@ -10,6 +10,10 @@ resources:
     params:
       byline: ""
 ---
+
+!!! info "提示"
+    本篇文档在清华科协sast的入门文档上的基础上进行了微调。
+
 ![](images/linux.png)
 
 ## 前置知识
@@ -332,9 +336,13 @@ ssh [其他选项] -R [bind_address:]remote_port:dest_host:dest_port user@ssh_se
 - 对 -L：表示**在本地（client）**上绑定哪个地址（默认 localhost）。比如 0.0.0.0:8080 让本机所有网卡可访问该端口（注意安全）。
 
 - 对 -R：表示在**远端（server）**上绑定哪个地址（默认 localhost，通常只有 server 本机能访问，若想让外网也能访问需服务器端开启 GatewayPorts yes 或使用 0.0.0.0，且服务端 SSHD 配置允许）。
-##### local_port / remote_port：本地或远程被监听的端口号。
+##### local_port / remote_port
 
-##### dest_host:dest_port：当隧道被触发时，SSH 的那一端会尝试连接到此目的地。注意解析位置：
+本地或远程被监听的端口号。
+
+##### dest_host:dest_port
+
+当隧道被触发时，SSH 的那一端会尝试连接到此目的地。注意解析位置：
 
 - 对 -L：dest_host 在 SSH 服务器端解析/访问（它是服务器去连接 dest_host:dest_port）。
 
