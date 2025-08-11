@@ -4,8 +4,15 @@ comments: true
 
 # Welcome to XJTURC!
 
-!!! blue "Tips"
-    这是XJTURC的文档网站。
+<p style="text-align:center; font-size:2em;">
+  <span>🚀</span>
+  <a href="https://xjturc-welcome.streamlit.app/" target="_blank" style="font-weight:bold; text-decoration:none;">
+    点击查看 XJTU Robocon 历年成就！
+  </a>
+  <span>🎉</span>
+</p>
+
+这里是XJTURC的文档网站，您可以查看各组介绍与各组相关文档。
 
 !!! green "TODO"
     
@@ -17,33 +24,3 @@ comments: true
     - 为本站添加评论系统
     - 修改本站某些博客下的某些链接，指向队内服务器上的往年代码仓库
     - 难度较大，可能会做的：添加ROS2导航框架小览
-
-## Project layout
-
-```bash
-.
-├── docs
-│   ├── blog
-│   │   ├── 四足组
-│   │   ├── 机
-│   │   ├── 电
-│   │   ├── 硬件组
-│   │   └── 视
-│   ├── index.md
-│   ├── static
-│   │   └── images
-│   └── stylesheets
-│       └── extra.css
-├── material
-│   └── overrides
-├── mkdocs.yml
-└── site
-    ├── 404.html
-    ├── css
-    ├── img
-    ├── index.html
-    ├── js
-    ├── search
-    └── webfonts
-```
-
