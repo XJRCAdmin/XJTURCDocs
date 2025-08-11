@@ -5,3 +5,6 @@ mkdocs-material
 mkdocs-material-extensions
 mkdocs-minify-plugin
 mkdocs-glightbox
+streamlit
+pandas
+numpy
