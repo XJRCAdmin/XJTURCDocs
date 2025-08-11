@@ -113,6 +113,7 @@ nav:
     - 强化学习: blog/视/RL/index.md
     - 队内服务器使用指南: blog/视/RCserver/index.md
   - 机:
+    - introduction: blog/机/introduction/index.md
     - Example: blog/机/example/index.md
   - 硬件组:
     - Introduction: blog/硬件组/intro.md
