@@ -12,7 +12,7 @@ theme:
   logo: static/images/CbiIrobot.svg
   favicon: static/images/favicon.ico
   language: zh
-  custom_dir: material/overrides
+  custom_dir: overrides
   icon:
     repo: fontawesome/brands/github
   features:
@@ -140,20 +140,12 @@ plugins:
       manual: false
   - minify:
       minify_html: true
-  # - comments
-    # repo: XJRCAdmin/XJTURCDocs
-    # category: Announcements
-    # mapping: url
-    # input_position: top
-    # theme: preferred_color_scheme
-    # lang: zh-CN
-    # loading: lazy
-  # - git-revision-date-localized:
-  #     fallback_to_build_date: true
-  #     locale: zh
-  # - git-authors:
-  #     show_contribution: true
-  #     show_line_count: true
+  - git-revision-date-localized:
+      fallback_to_build_date: true
+      locale: zh
+  - git-authors:
+      show_contribution: true
+      show_line_count: true
 
 
 

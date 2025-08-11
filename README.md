@@ -93,9 +93,9 @@ mkdocs serve
 
 
 ## 联系方式
-Admin的QQ: 853889865
-GitHub Issues: 提交问题
-邮箱: 通过QQ群联系管理员
+- 目前Admin的QQ: 853889865
+- GitHub Issues: 提交问题
+- 邮箱: 通过QQ群联系管理员
 ## 许可证
 本项目采用MIT许可证，详见LICENSE文件。
 

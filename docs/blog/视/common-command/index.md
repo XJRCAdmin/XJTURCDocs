@@ -1,6 +1,5 @@
 ---
 title: 常用命令汇总
-comments: true
 date: 2025-04-20
 ---
 # 常用命令汇总
