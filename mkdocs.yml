@@ -89,10 +89,10 @@ nav:
   - 贡献指南: blog/comtribution/index.md
   - 四足组:
     - 四足组: blog/四足组/index.md
-  - 电: 
+  - 电控组: 
     - ssh: blog/电/ssh&remotessh/index.md
     - 新手指南: blog/电/freshman/index.md
-  - 视: 
+  - 视觉组: 
     - Introduction: blog/视/index.md
     - 常用命令汇总: blog/视/common-command/index.md
     - Markdown: blog/视/markdown/index.md
@@ -112,12 +112,13 @@ nav:
     - Roboflow标注概览: blog/视/roboflow/Roboflow.md
     - 强化学习: blog/视/RL/index.md
     - 队内服务器使用指南: blog/视/RCserver/index.md
-  - 机:
+  - 机械组:
     - introduction: blog/机/introduction/index.md
     - Example: blog/机/example/index.md
   - 硬件组:
-    - Introduction: blog/硬件组/intro.md
-  
+    - Introduction: blog/solid/intro.md
+  - 运营组:
+    - 运营组: blog/yunying/index.md
 
 plugins:
   - search  # 搜索配置
