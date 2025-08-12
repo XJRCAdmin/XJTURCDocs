@@ -13,9 +13,14 @@
 ## Description 详细介绍
 
 ### ssh 登录
+![](image/ip.png)
 
-从队里华为路由器登录界面可以看到，通过有线方式连接的 rc-server 记录其 ip 地址，可以在连接 ROBOCON 局域网的情况下访问服务器。主用户用户名是robocon，密码是qingchun，服务均部署在git用户下，git用户无法直接通过ssh登录，需要登录后切换。ssh 端口经过路由器转发到 22 端口，为了防止枚举用户名与密码破解，通过端口转发方式访问的连接都只能通过 public-key 方式进行登录认证，而无法使用密码登录。
+从队里华为路由器登录界面（华为路由器默认局域网ip为192.168.3.1）可以看到，通过有线方式连接的 rc-server 记录其 ip 地址，可以在连接 ROBOCON 局域网的情况下访问服务器。主用户用户名是robocon，密码是qingchun，服务均部署在git用户下，git用户无法直接通过ssh登录，需要登录后切换。ssh 端口经过路由器转发到 22 端口，为了防止枚举用户名与密码破解，通过端口转发方式访问的连接都只能通过 public-key 方式进行登录认证，而无法使用密码登录。使用robocon和git用户登录服务器均需要公钥。
 
+```bash
+# 从robocon用户切换到git用户
+su git
+```
 ### git-service
 
 SOURCE:
@@ -38,7 +43,68 @@ SOURCE:
 
 目前部署在服务器上的配置文件如下：
 
-TOFILL（我没有办法访问主机，无法查看内容）
+```bash
+BRAND_NAME = rc-Gogs
+RUN_USER   = git
+RUN_MODE   = prod
+
+[database]
+TYPE     = mysql
+HOST     = 127.0.0.1:3306
+NAME     = gogs
+SCHEMA   = public
+USER     = git
+PASSWORD = qingchun
+SSL_MODE = disable
+PATH     = /home/git/gogs/data/gogs.db
+
+[repository]
+ROOT           = /home/git/gogs-repositories
+DEFAULT_BRANCH = master
+DISABLE_HTTP_GIT = true
+
+[server]
+DOMAIN           = rcserver
+HTTP_ADDR        = 0.0.0.0
+HTTP_PORT        = 5200
+EXTERNAL_URL     = https://rcserver:5200/gogs/
+DISABLE_SSH      = false
+START_SSH_SERVER = false
+PROTOCOL         = https
+SSH_PORT         = 22
+START_SSH_SERVER = false
+OFFLINE_MODE     = true
+CERT_FILE        = /home/git/cert/server/server.crt.pem
+KEY_FILE         = /home/git/cert/server/server.key.pem 
+
+[mailer]
+ENABLED = false
+
+[auth]
+REQUIRE_EMAIL_CONFIRMATION  = false
+DISABLE_REGISTRATION        = false
+ENABLE_REGISTRATION_CAPTCHA = true
+REQUIRE_SIGNIN_VIEW         = false
+
+[user]
+ENABLE_EMAIL_NOTIFICATION = false
+
+[picture]
+DISABLE_GRAVATAR        = false
+ENABLE_FEDERATED_AVATAR = false
+
+[session]
+PROVIDER = file
+
+[log]
+MODE      = console,file
+LEVEL     = Info
+ROOT_PATH = /home/git/gogs/log
+
+[security]
+INSTALL_LOCK = true
+SECRET_KEY   = OVfLU6Z3xEz1A16
+```
 
 #### 配置开机启动服务
 
