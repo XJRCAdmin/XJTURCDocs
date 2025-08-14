@@ -57,7 +57,8 @@ Linux 以各种形式被广泛应用在各个领域，包括但不限于：
 
 我推荐有条件的同学给电脑装一个Linux系统。<s>这样你就能在各种配置中度过一段漫长而有趣的时光了</s>。
 
-安装双系统的教程有许多，其中一个可以见：[阿汐的ubuntu安装指南](https://axi404.top/blog/install-ubuntu) 
+安装双系统的教程有许多，其中一个可以见(注意不要装20.04，装22.04)：[阿汐的ubuntu安装指南](https://axi404.top/blog/install-ubuntu) 
+
 
 你也可以在windows上安装wsl进行练习，请看这个链接：[安装 WSL | Microsoft Learn](https://learn.microsoft.com/zh-cn/windows/wsl/install)
 

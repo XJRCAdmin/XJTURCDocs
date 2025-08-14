@@ -31,21 +31,23 @@ mkdocs-glightbox: 图片灯箱效果
 XJTURC/
 ├── docs/                          # 文档源文件
 │   ├── blog/                      # 技术博客
-│   │   ├── 视/                    # 视觉组文档
+│   │   ├── 视觉组/                # 视觉组文档
 │   │   │   ├── index.md          # 视觉组主页
 │   │   │   ├── GitIntro/         # Git教程
 │   │   │   ├── linux/            # Linux基础
 │   │   │   ├── CMake/            # CMake教程
 │   │   │   ├── docker/           # Docker容器
 │   │   │   └── ...
-│   │   ├── 电/                    # 电控组文档
+│   │   ├── 电控组/                 # 电控组文档
 │   │   │   ├── freshman/         # 新人指南
 │   │   │   └── ssh&remotessh/    # SSH远程开发
-│   │   ├── 机/                    # 机械组文档
+│   │   ├── 机械组/                 # 机械组文档
 │   │   ├── 硬件组/                # 硬件组文档
+│   │   ├── 运营组/                # 运营组文档
 │   │   └── 四足组/                # 四足机器人组
 │   ├── static/                    # 静态资源
 │   └── stylesheets/              # 自定义样式
+|   |—— javascript/
 ├── material/                      # Material主题自定义
 ├── mkdocs.yml                    # MkDocs配置文件
 ├── requirements.txt              # Python依赖
@@ -106,5 +108,4 @@ mkdocs serve
 ****
 XJTURC - 西安交通大学Robocon机器人队
 
-
-让技术传承，让经验共享
+让技术传承，让经验共享  
