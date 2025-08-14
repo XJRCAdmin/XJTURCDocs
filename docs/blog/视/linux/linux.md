@@ -256,20 +256,20 @@ scp rc@152.32.34.12:~/data.csv .
 每次连接服务器都要输入用户名、IP 和端口未免过于繁琐，我们可以通过编辑 SSH 配置文件来简化命令。这个配置文件位于家路径的 `.ssh` 文件夹下，名字为 `config`（如果不存在需自己创建），即 `~/.ssh/config`。对于 Windows 系统而言，这个 `.ssh` 文件夹位于用户目录下 `C:\Users\<username>\.ssh\config`。配置文件写法如下：
 
 ```
-HOST sast
+HOST rc
     HostName 152.136.177.53
     Port 8000     (默认22，此时不需要指定)
     User root
 ```
 
-这样每次我们想连接到 `root@152.136.177.53 -p 8000` 时只需要输入 `ssh sast` 即可。
+这样每次我们想连接到 `root@152.136.177.53 -p 8000` 时只需要输入 `ssh rc` 即可。
 
 这个配置文件同样适用于 `scp` 命令：
 
 ```
 # 前一小节例子的简略版
-scp test.zip sast:~/test.zip 
-scp sast:~/data.csv . 
+scp test.zip rc:~/test.zip 
+scp rc:~/data.csv . 
 ```
 
 ### Key Authentication
@@ -435,4 +435,5 @@ kill -9 <PID>
 ## 参考资料
 
 + 清华sast https://docs.net9.org/basic/linux/
+
 + 菜鸟教程 https://www.runoob.com/linux/linux-tutorial.html
