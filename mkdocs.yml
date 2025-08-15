@@ -101,6 +101,7 @@ nav:
     - Git Intro: blog/视/GitIntro/index.md
     - SSH: blog/视/ssh&remotessh/index.md
     - 一些现代C++语法特性: blog/视/ModernCpp/index.md
+    - 网线连接树莓派须知: blog/视/raspberry/index.md
     - VPN: blog/视/VPN教程/index.md
     - Doxygen与commit规范: blog/视/Doxygen-commit/index.md
     - Missing Semester qa: blog/视/qa/index.md
