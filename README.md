@@ -100,7 +100,7 @@ mkdocs serve
 - GitHub Issues: 提交问题
 - 邮箱: 通过QQ群联系管理员
 ## 许可证
-本项目采用MIT许可证，详见LICENSE文件。
+本项目采用 :fontawesome-brands-creative-commons: CC BY-SA 4.0 协议，详见LICENSE文件。
 
 # 致谢
 感谢所有为XJTURC文档项目做出贡献的队员和校友！
