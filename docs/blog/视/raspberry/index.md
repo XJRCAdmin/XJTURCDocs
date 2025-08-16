@@ -72,4 +72,5 @@ sudo nmcli connection add type ethernet ifname eth0 con-name static-eth0 \
 ipv4.addresses 192.168.1.2/24 ipv4.gateway 192.168.1.1 ipv4.dns "8.8.8.8" ipv4.method manual sudo nmcli connection up static-eth0
 ```
 
-之后就可以`192.168.2.1`找到树莓派 4B。
+之后就可以`192.168.1.2`找到树莓派 4B。
+
