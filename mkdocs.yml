@@ -98,6 +98,7 @@ nav:
     - Markdown: blog/视/markdown/index.md
     - Bash自学: blog/视/bash/index.md
     - LINUX: blog/视/linux/linux.md
+    - 进程、前后台、服务与例行性任务: blog/视/ustc-linux101-ch4/index.md 
     - Git Intro: blog/视/GitIntro/index.md
     - SSH: blog/视/ssh&remotessh/index.md
     - 一些现代C++语法特性: blog/视/ModernCpp/index.md
