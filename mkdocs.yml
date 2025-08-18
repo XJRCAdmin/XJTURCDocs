@@ -94,6 +94,7 @@ nav:
     - 新手指南: blog/电/freshman/index.md
   - 视觉组: 
     - Introduction: blog/视/index.md
+    - 在windows上搭建cpp环境: blog/视/windows-cpp/index.md
     - 常用命令汇总: blog/视/common-command/index.md
     - Markdown: blog/视/markdown/index.md
     - Bash自学: blog/视/bash/index.md
