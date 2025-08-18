@@ -1,3 +1,6 @@
+---
+title:Windows-cpp 环境搭建
+---
 > 本文初版参照RM视觉组的msys2-windows-cpp环境搭建教程，并在一定程度上进行了补充。
 
 让我们开始吧。
