@@ -40,6 +40,11 @@ fec0:0:0:ffff::2%1
 fec0:0:0:ffff::3%1 
 TCPIP 上的 NetBIOS . . . . . . . : 已启用
 ```
+# 核心原因
+
+- 没有 DHCP 服务器 给树莓派分配 IP。
+- 运行 dhclient 发出了 DHCP Discover，但另一端（Windows）并没有回应 DHCP Offer。
+- Windows 默认不会给以太网直连设备分配 IP（除非开了网络共享或者手动设定）。
 
 # 修改方法
 树莓派使用的是Network-Manager网络服务，把 `eth0` 设置为静态 IPv4。
