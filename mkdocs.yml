@@ -113,6 +113,7 @@ nav:
     - 串口使用: blog/视/serialUse/index.md
     - intel-realsense相机: blog/视/realsense/index.md
     - Roboflow标注概览: blog/视/roboflow/Roboflow.md
+    - ROS2相关教程: blog/视/ros2/index.md
     - 强化学习: blog/视/RL/index.md
     - 队内服务器使用指南: blog/视/RCserver/index.md
   - 机械组:
