@@ -74,7 +74,10 @@ cmake 是一个用于组织 cpp 项目的工具，能够实现多个 cpp 文件�
 
 cmake 下载地址：[download | Cmake ](https://cmake.org/download/)，我们用 64 位的 windows 安装包。
 
-安装过程也没啥好说的，记着勾上环境变量：
+- 下滑找到 Windows x64 Installer（适用于 64 位系统），下载 .msi 文件。
+![](output_image/image1.png)
+
+之后的安装过程也没啥好说的，记着勾上环境变量：
 ![](output_image/4dba3736ea5da00345a10c575fbc604b.png)
 
 再开个终端，试一下有没有：
