@@ -95,7 +95,8 @@ install (FILES cmake-examples.conf
 可执行文件和库在 CMake 中统称为「目标（targets）」。我们将频繁遇到“目标”这个术语。在 CMake 中，目标是传递给 `add_executable` 或 `add_library` 的第一个参数。
 
 - `target_link_libraries(libA PUBLIC zlib)`: `<target>` 是由 `add_executable()` 或 `add_library()` 创建的目标，表示你要为哪个目标设置链接依赖（不能是 ALIAS 目标），这里表示为`libA <- zlib`，将A链接zlib，其中`public`是`scoped`关键字，意思是当前目标链接依赖zlib，之后如果有B链接A，会将A的依赖`zlib`传递给链后的目标B使用。
-- `target_include_directories(my_lib PUBLIC my_lib/public_headers)` 用来方便查找target的头文件。
+- `target_include_directories(my_lib PUBLIC my_lib/public_headers)` 只是给 `<target>` **告知头文件搜索路径**（影响预处理/编译阶段）。若你只有头文件需要被编译器找到（比如项目内放在 src/include 的头），只需 target_include_directories(...)就可以了.
+
 
 
 - `message(STATUS "I am here!")`打印消息，没别的。

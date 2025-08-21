@@ -100,9 +100,13 @@ cmake 下载地址：[download | Cmake ](https://cmake.org/download/)，我们�
 
 之后您会看到包含CMakeLists.txt在内的项目文件。Cmakelists 就是用于管理 cmake 项目的工具，而 main. cpp 就是默认生成的实例代码。
 
-直接点击vscode下方状态栏的生成（一个齿轮），会看到这样的结果：
+直接点击vscode下方状态栏的生成(build)（一个齿轮），会看到这样的结果：
 ![](output_image/5bbee310968b68903f19775ed70a141b.png)
 
 三角符号就是运行，点击之后可以看到 hello 输出：
 ![](output_image/feaccdeccb39a7796e47897973dfef41.png)
 至此，cpp 开发与运行环境基本搞定，大家可以在此基础上学习 cmake脚本的编写以及 c++的语法知识了。
+
+??? question "按照教程并未成功怎么办?"
+    上述教程后的clangd和vscode部分开始显得简略,并且添加了很多具有主观色彩的内容,读者无法完全理解是很正常的.
+    除了上述要点之外, 笔者发现配置 clangd 工具链似乎并没有那么容易, 因为你将会与你电脑原有配置继续打交道, 并且如果你的 system 中没有下载 LLVM、clangd 的话 (并不是指 vscode 的扩展), 你需要访问官网先下载安装它。vscode 中的 clangd 插件只是语言服务器（只做编辑器智能）, 归根到底依赖于你电脑上安装的 clangd 工具链。一个有用的链接是 [知乎-vscode+clang+llvm 搭建 C++ 编译环境（windows）](https://zhuanlan.zhihu.com/p/613922486)。如果你能够坚持下来, 相信一定很有能耐了, 做什么都会成功的。
