@@ -83,7 +83,8 @@ resources:
 - 数量：2
 - 采购日期：2023年10月
 - 配件：专用电源适配器，电源，(键盘，屏幕，鼠标，网线，USB Hub){Optional}
-- 其他参数：？
+- 其他参数见下图：
+![](images/image4.jpg)
 
 ### intel NUC
 
