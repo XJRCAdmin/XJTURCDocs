@@ -41,7 +41,7 @@ SOURCE:
 
 请参照 [<u>下载安装-配置与运行</u>][1-8] 与 [<u>配置文件中文解释</u>][1-9] 修改`custom/conf/app.ini` 的部分值。
 
-目前部署在服务器上的配置文件如下：
+目前部署在服务器上的配置文件如下，~~甚至密码都告诉你了~~：
 
 ```bash
 BRAND_NAME = rc-Gogs
@@ -407,3 +407,4 @@ TOFILL
 [3-1]: https://github.com/sigoden/dufs
 [3-2]: https://github.com/sigoden/dufs/releases/tag/v0.43.0
 [3-3]: https://github.com/sigoden/dufs/tree/v0.43.0?tab=readme-ov-file#configuration-file
+
