@@ -17,7 +17,8 @@ title: "进程、前后台、服务与例行性任务"
 
     - 这些程序是以什么形态在电脑上运行的？
     - 如何关闭没有反应的程序呢？
-    - 本地的终端可以开启标签页运行多个 Shell 运行多个程序，但是使用 [SSH 远程连接](../Ch01/supplement.md#ssh)时怎么运行多个程序呢？
+    - 本地的终端可以开启标签页运行多个 Shell 运行多个程序，但是使用 [SSH 远程连接](../ssh&remotessh/index.md)时怎么运行多个程序呢？
+
     - 如何让我的任务一直执行，即使我关闭了终端/退出了 SSH？
     - 如何管理系统中的服务？
     - 如何让我的任务定时执行？
@@ -268,7 +269,7 @@ $ nohup ping 101.lug.ustc.edu.cn &
 nohup: ignoring input and appending output to '/home/ustc/nohup.out'
 ```
 
-在需要屏蔽 SIGHUP 的程序前添加 nohup，则运行时的输出将被[重定向](../Ch06/index.md#redirection)到 nohup.out，也可以通过重定向手段自定义输出的文件。
+在需要屏蔽 SIGHUP 的程序前添加 nohup，则运行时的输出将被重定向到 nohup.out，也可以通过重定向手段自定义输出的文件。
 
 ### 命令行多终端方案——tmux
 

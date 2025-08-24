@@ -16,7 +16,6 @@ theme:
   icon:
     repo: fontawesome/brands/github
   features:
-  
     - announce.dismiss #呈现可标记为由用户读取的临时公告，可以包含一个用于取消当前公告的按钮
     # - navigation.instant
     #- header.autohide  #自动隐藏
@@ -59,19 +58,19 @@ extra_css:
 extra:
   generator: false
   feedback:
-      title: 此页面有帮助吗？
-      ratings:
-        - icon: material/thumb-up-outline #图标可自定义
-          name: This page was helpful
-          data: 1
-          note: >-
-            谢谢你的反馈！
-        - icon: material/thumb-down-outline
-          name: This page could be improved
-          data: 0
-          note: >-
-            Thanks for your feedback! Help us improve this page by
-            using our <a href="https://marketingplatform.google.com/about/analytics/" target="_blank" rel="noopener">feedback form</a>.
+    title: 此页面有帮助吗？
+    ratings:
+      - icon: material/thumb-up-outline #图标可自定义
+        name: This page was helpful
+        data: 1
+        note: >-
+          谢谢你的反馈！
+      - icon: material/thumb-down-outline
+        name: This page could be improved
+        data: 0
+        note: >-
+          Thanks for your feedback! Help us improve this page by
+          using our <a href="https://marketingplatform.google.com/about/analytics/" target="_blank" rel="noopener">feedback form</a>.
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/XJRCAdmin/XJTURCDocs/
@@ -82,50 +81,52 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
-copyright: Copyright &copy; 2020 - 2025 XJRCAdmin All rights reserved
+copyright: Copyright &copy; 2020 - 2025 XJRCAdmin CC BY-SA 4.0
 
 nav:
-  - Home: index.md  
-  - 贡献指南: blog/comtribution/index.md
+  - Home: index.md
+  - 贡献指南:
+      - 贡献指南: blog/contribution/index.md
+      - 部署指南: blog/contribution/index2.md
   - 四足组:
-    - 四足组: blog/四足组/index.md
-  - 电控组: 
-    - ssh: blog/电/ssh&remotessh/index.md
-    - 新手指南: blog/电/freshman/index.md
-  - 视觉组: 
-    - Introduction: blog/视/index.md
-    - 在windows上搭建cpp环境: blog/视/windows-cpp/index.md
-    - 常用命令汇总: blog/视/common-command/index.md
-    - Markdown: blog/视/markdown/index.md
-    - Bash自学: blog/视/bash/index.md
-    - LINUX: blog/视/linux/linux.md
-    - 进程、前后台、服务与例行性任务: blog/视/ustc-linux101-ch4/index.md 
-    - Git Intro: blog/视/GitIntro/index.md
-    - SSH: blog/视/ssh&remotessh/index.md
-    - 一些现代C++语法特性: blog/视/ModernCpp/index.md
-    - 网线连接树莓派须知: blog/视/raspberry/index.md
-    - VPN: blog/视/VPN教程/index.md
-    - Doxygen与commit规范: blog/视/Doxygen-commit/index.md
-    - Missing Semester qa: blog/视/qa/index.md
-    - CMake Introduction: blog/视/CMake/index.md
-    - Docker & Dev Container: blog/视/docker/index.md
-    - 视觉设备: blog/视/visualDev/index.md
-    - 串口使用: blog/视/serialUse/index.md
-    - intel-realsense相机: blog/视/realsense/index.md
-    - Roboflow标注概览: blog/视/roboflow/Roboflow.md
-    - ROS2相关教程: blog/视/ros2/index.md
-    - 强化学习: blog/视/RL/index.md
-    - 队内服务器使用指南: blog/视/RCserver/index.md
+      - 四足组: blog/foursteps/index.md
+  - 电控组:
+      - ssh: blog/electronics/ssh&remotessh/index.md
+      - 新手指南: blog/electronics/freshman/index.md
+  - 视觉组:
+      - Introduction: blog/vision/index.md
+      - 在windows上搭建cpp环境: blog/vision/windows-cpp/index.md
+      - 常用命令汇总: blog/vision/common-command/index.md
+      - Markdown: blog/vision/markdown/index.md
+      - Bash自学: blog/vision/bash/index.md
+      - LINUX: blog/vision/linux/linux.md
+      - 进程、前后台、服务与例行性任务: blog/vision/ustc-linux101-ch4/index.md
+      - Git Intro: blog/vision/GitIntro/index.md
+      - SSH: blog/vision/ssh&remotessh/index.md
+      - 一些现代C++语法特性: blog/vision/ModernCpp/index.md
+      - 网线连接树莓派须知: blog/vision/raspberry/index.md
+      - VPN: blog/vision/VPN教程/index.md
+      - Doxygen与commit规范: blog/vision/Doxygen-commit/index.md
+      - Missing Semester qa: blog/vision/qa/index.md
+      - CMake Introduction: blog/vision/CMake/index.md
+      - Docker & Dev Container: blog/vision/docker/index.md
+      - 视觉设备: blog/vision/visualDev/index.md
+      - 串口使用: blog/vision/serialUse/index.md
+      - intel-realsense相机: blog/vision/realsense/index.md
+      - Roboflow标注概览: blog/vision/roboflow/Roboflow.md
+      - ROS2相关教程: blog/vision/ros2/index.md
+      - 强化学习: blog/vision/RL/index.md
+      - 队内服务器使用指南: blog/vision/RCserver/index.md
   - 机械组:
-    - introduction: blog/机/introduction/index.md
-    - Example: blog/机/example/index.md
+      - introduction: blog/mechanics/introduction/index.md
+      - Example: blog/mechanics/example/index.md
   - 硬件组:
-    - Introduction: blog/solid/intro.md
+      - Introduction: blog/solid/intro.md
   - 运营组:
-    - 运营组: blog/yunying/index.md
+      - 运营组: blog/yunying/index.md
 
 plugins:
-  - search  # 搜索配置
+  - search # 搜索配置
   - glightbox:
       enabled: !ENV [glightbox, false]
       touchNavigation: true
@@ -145,27 +146,28 @@ plugins:
       manual: false
   - minify:
       minify_html: true
-  - git-revision-date-localized:
-      fallback_to_build_date: true
-      locale: zh
-  - git-authors:
-      show_contribution: true
-      show_line_count: true
-
-
-
+  # - git-revision-date-localized:
+  #     fallback_to_build_date: true
+  #     locale: zh
+  # - git-authors:
+  #     show_contribution: true
+  #     show_line_count: true
 
 markdown_extensions:
   - admonition
   - codehilite:
       guess_lang: false
       linenums: true
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - footnotes
   - def_list
   - toc:
       permalink: true
   - pymdownx.arithmatex:
-     generic: true 
+      generic: true
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.details
