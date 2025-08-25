@@ -17,6 +17,8 @@
 
 从队里华为路由器登录界面（华为路由器默认局域网ip为192.168.3.1）可以看到，通过有线方式连接的 rc-server 记录其 ip 地址，可以在连接 ROBOCON 局域网的情况下访问服务器。主用户用户名是robocon，密码是qingchun，服务均部署在git用户下，git用户无法直接通过ssh登录，需要登录后切换。ssh 端口经过路由器转发到 22 端口，为了防止枚举用户名与密码破解，通过端口转发方式访问的连接都只能通过 public-key 方式进行登录认证，而无法使用密码登录。使用robocon和git用户登录服务器均需要公钥。
 
+另外，如果您想从校园网登上服务器，您可以在局域网条件下先查看路由器在校园网下的WAN IP，然后通过该IP登录服务器。
+
 ```bash
 # 从robocon用户切换到git用户
 su git
@@ -155,7 +157,7 @@ WantedBy=multi-user.target
 
 这一段代码将 /gogs/ location 下的所有服务重写到本地回环ip上
 
-根据访问源ip判断是否是来自于ROBOCN局域网ip(通过ip是否是192.168.3.xxx来判断)，如果是，则说明其是通过路由器内部访问的，允许访问注册界面，如果不是，则将对注册界面的访问重定向/重写到拒绝注册页面。
+根据访问源ip判断是否是来自于ROBOCON局域网ip(通过ip是否是192.168.3.xxx来判断)，如果是，则说明其是通过路由器内部访问的，允许访问注册界面，如果不是，则将对注册界面的访问重定向/重写到拒绝注册页面。
 
 目前在`/etc/nginx/sites-available/default`中是这样配置的：
 
@@ -268,7 +270,92 @@ SOURCE:
 
 #### nginx configuration
 
-TOFILL（大概只是实现了反向代理，与tls加密）
+```bash
+robocon@rc-server:/etc/nginx$ cat nginx.conf 
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+        worker_connections 768;
+        # multi_accept on;
+}
+
+http {
+
+        ##
+        # Basic Settings
+        ##
+
+        sendfile on;
+        tcp_nopush on;
+        types_hash_max_size 2048;
+        # server_tokens off;
+
+        # server_names_hash_bucket_size 64;
+        # server_name_in_redirect off;
+
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+
+        ##
+        # SSL Settings
+        ##
+
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
+        ssl_prefer_server_ciphers on;
+
+        ##
+        # Logging Settings
+        ##
+
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+
+        ##
+        # Gzip Settings
+        ##
+
+        gzip on;
+
+        # gzip_vary on;
+        # gzip_proxied any;
+        # gzip_comp_level 6;
+        # gzip_buffers 16 8k;
+        # gzip_http_version 1.1;
+        # gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+        ##
+        # Virtual Host Configs
+        ##
+
+        include /etc/nginx/conf.d/*.conf;
+        include /etc/nginx/sites-enabled/*;
+}
+
+
+#mail {
+#       # See sample authentication script at:
+#       # http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript
+#
+#       # auth_http localhost/auth.php;
+#       # pop3_capabilities "TOP" "USER";
+#       # imap_capabilities "IMAP4rev1" "UIDPLUS";
+#
+#       server {
+#               listen     localhost:110;
+#               protocol   pop3;
+#               proxy      on;
+#       }
+#
+#       server {
+#               listen     localhost:143;
+#               protocol   imap;
+#               proxy      on;
+#       }
+#}
+```
 
 ### file-service
 
@@ -289,8 +376,8 @@ After=network.target
 Type=simple
 User=git
 Group=git
-WorkingDirectory=/Serve/Directory # toChange
-ExecStart=/home/git/dufs --config /Path2ConfigFile # toChange
+WorkingDirectory=/home/git/gogs
+ExecStart=/home/git/gogs/gogs web
 Restart=always
 RestartSec=2s
 Environment=USER=git HOME=/home/git
@@ -378,9 +465,46 @@ done
 
 ### nginx 其他配置
 
-TOFILL 
+#### FastCGI
+FastCGI（FastCommon Gateway Interface）全称是“快速通用网关接口”，是一种让客户端（web浏览器）与Web服务器（nginx等）程序进行通信（数据传输）的协议。
 
+FastCGI的工作原理如下：
 
+- Web Server启动同时，加载FastCGI进程管理器(nginx的php-fpm或者IIS的ISAPI或Apache的Module)
+- FastCGI进程管理器读取php.ini配置文件，对自身进行初始化，启动多个CGI解释器进程(php-cgi)，等待来自Web Server的连接。
+- 当Web Server接收到客户端请求时，FastCGI进程管理器选择并连接到一个CGI解释器。Web server会将相关环境变量和标准输入发送到FastCGI子进程php-cgi进行处理
+- FastCGI子进程完成处理后将数据按照CGI规定的格式返回给Web Server，然后关闭FastCGI子进程或者等待下一次请求。
+
+![](image/fastcgi.png)
+所以说，需要按照配置文件`/etc/nginx/fastcgi.conf`将 Nginx 的请求环境变量打包并传给 FastCGI 后端。FastCGI的优势在于它可以缓存进程，避免了每次请求都要创建和销毁进程的开销，提高了服务器的性能和响应速度。
+```bash
+fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+fastcgi_param  QUERY_STRING       $query_string;
+fastcgi_param  REQUEST_METHOD     $request_method;
+fastcgi_param  CONTENT_TYPE       $content_type;
+fastcgi_param  CONTENT_LENGTH     $content_length;
+
+fastcgi_param  SCRIPT_NAME        $fastcgi_script_name;
+fastcgi_param  REQUEST_URI        $request_uri;
+fastcgi_param  DOCUMENT_URI       $document_uri;
+fastcgi_param  DOCUMENT_ROOT      $document_root;
+fastcgi_param  SERVER_PROTOCOL    $server_protocol;
+fastcgi_param  REQUEST_SCHEME     $scheme;
+fastcgi_param  HTTPS              $https if_not_empty;
+
+fastcgi_param  GATEWAY_INTERFACE  CGI/1.1;
+fastcgi_param  SERVER_SOFTWARE    nginx/$nginx_version;
+
+fastcgi_param  REMOTE_ADDR        $remote_addr;
+fastcgi_param  REMOTE_PORT        $remote_port;
+fastcgi_param  REMOTE_USER        $remote_user;
+fastcgi_param  SERVER_ADDR        $server_addr;
+fastcgi_param  SERVER_PORT        $server_port;
+fastcgi_param  SERVER_NAME        $server_name;
+
+# PHP only, required if PHP was built with --enable-force-cgi-redirect
+fastcgi_param  REDIRECT_STATUS    200;
+```
 
 [1-1]: https://github.com/gogs/gogs/ 
 [1-2]: https://gogs.io/docs/
@@ -397,13 +521,11 @@ TOFILL
 [1-11]: https://www.cnblogs.com/benwu/articles/15843305.html
 [1-12]: https://www.cnblogs.com/firstlady/p/17916938.html
 [1-13]: https://geekdaxue.co/read/aisuhua@kegnat/hg0cnp
-
 [2-1]: https://github.com/gohugoio/hugo
 [2-2]: https://github.com/google/docsy
 [2-3]: https://github.com/google/docsy-example
 [2-4]: https://www.docsy.dev/docs/
-[2-5]: https://t.is-local.org/zh-cn/docs/
-
+[2-5]: https://t.is-local.org/zh-cn/docs/- 
 [3-1]: https://github.com/sigoden/dufs
 [3-2]: https://github.com/sigoden/dufs/releases/tag/v0.43.0
 [3-3]: https://github.com/sigoden/dufs/tree/v0.43.0?tab=readme-ov-file#configuration-file
