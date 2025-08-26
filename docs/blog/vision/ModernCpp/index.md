@@ -8,7 +8,7 @@
 - 数据类型 `bool` `char` `int` `float` `double` `void`（无类型）
 - 修饰符 `signed` unsigned short(2 byte) long(8 byte) const。volatile(表示变量可能被意外修改，禁止编译器优化，确保每次从内存中去读取) `mutable`(表示类成员可以在 `const` 对象中修改,但有些变量只是辅助用途，并不是对象核心状态,所以可以修改。)
 
-数组 指针 引用 函数 结构体 类等请详见 [C++ 类 & 对象 | 菜鸟教程](https://www.runoob.com/cplusplus/cpp-classes-objects.html)
+数组、指针、引用、函数、结构体、类等请详见 [C++ 类 & 对象 | 菜鸟教程](https://www.runoob.com/cplusplus/cpp-classes-objects.html)
 ## 函数
 函数中值得一提的是lambda 表达式：
 	Lambda 表达式把函数看作对象。Lambda 表达式可以像对象一样使用，比如可以将它们赋给变量和作为参数传递，还可以像函数一样对其求值。
@@ -38,16 +38,25 @@ auto modern_main() -> void {
 想要学习lambda，上述内容仍远不及，参考：
 
 - [深入浅出 C++ Lambda表达式：语法、特点和应用_lamda表达式-CSDN博客](https://blog.csdn.net/m0_60134435/article/details/136151698)
-- 
+
 # 移动语义
 一个应用场景是锁，当对象A和B都有机会获得对于C的写入/读取锁时，A获得锁后，B若已经有锁，则A需要从B中拿锁，B的锁将销毁。
 
+- [std::move - C++ 参考手册 (cppreference.com)](https://cppreference.cn/w/cpp/utility/move)
 - [一文入魂：妈妈再也不担心我不懂C++移动语义了 - 知乎](https://zhuanlan.zhihu.com/p/455848360)
 - [ c++ 左值引用与右值引用 - 知乎](https://zhuanlan.zhihu.com/p/97128024)
 # RAII
+RAII 全称是 Resource Acquisition Is Initialization，中文常译为资源获取即初始化。核心思想很简单也很强大：把资源的生命周期绑定到对象的生命周期——在对象构造时获取资源（如内存、文件句柄、锁、网络连接等），在对象析构时释放资源。这样可以保证不论函数如何返回（正常返回或抛出异常），资源都能被正确释放，实现异常安全与简洁的资源管理。
+
+- [RAII - C++ 参考手册 (cppreference.com)](https://cppreference.cn/w/cpp/language/raii)
+- [每个程序员都应该知道的RAII - 博客园](https://www.cnblogs.com/qiangz/p/17795846.html)
 # 智能指针
 主要是三个：`std::weak_ptr<T>`,`std::shared_ptr<T>`,`std::unique_ptr<T>`。
 
-- [万字长文全面详解现代C++智能指针：原理、应用和陷阱 - 七昂的技术之旅 - 博客园](https://www.cnblogs.com/qiangz/p/17911186.html)
+- [万字长文全面详解现代C++智能指针：原理、应用和陷阱  - 博客园](https://www.cnblogs.com/qiangz/p/17911186.html)
 - [现代 C++：一文读懂智能指针 - 知乎](https://zhuanlan.zhihu.com/p/150555165) 
-- [C++ 高效使用智能指针的8个建议 - 七昂的技术之旅 - 博客园](https://www.cnblogs.com/qiangz/p/17904768.html)
+- [C++ 高效使用智能指针的8个建议  - 博客园](https://www.cnblogs.com/qiangz/p/17904768.html)
+# noexcept
+noexcept是C++11引入的关键字，用于指定函数是否会抛出异常。它有两种用途：作为说明符（声明函数不会抛出异常）和作为运算符（检查表达式是否会抛出异常）。
+
+- [C++ 异常处理：noexcept 关键字 - 知乎](https://zhuanlan.zhihu.com/p/1908050280634881478)
