@@ -36,10 +36,18 @@ auto modern_main() -> void {
 ```
 
 想要学习lambda，上述内容仍远不及，参考：
+
 - [深入浅出 C++ Lambda表达式：语法、特点和应用_lamda表达式-CSDN博客](https://blog.csdn.net/m0_60134435/article/details/136151698)
 - 
 # 移动语义
 一个应用场景是锁，当对象A和B都有机会获得对于C的写入/读取锁时，A获得锁后，B若已经有锁，则A需要从B中拿锁，B的锁将销毁。
+
 - [一文入魂：妈妈再也不担心我不懂C++移动语义了 - 知乎](https://zhuanlan.zhihu.com/p/455848360)
 - [ c++ 左值引用与右值引用 - 知乎](https://zhuanlan.zhihu.com/p/97128024)
 # RAII
+# 智能指针
+主要是三个：`std::weak_ptr<T>`,`std::shared_ptr<T>`,`std::unique_ptr<T>`。
+
+- [万字长文全面详解现代C++智能指针：原理、应用和陷阱 - 七昂的技术之旅 - 博客园](https://www.cnblogs.com/qiangz/p/17911186.html)
+- [现代 C++：一文读懂智能指针 - 知乎](https://zhuanlan.zhihu.com/p/150555165) 
+- [C++ 高效使用智能指针的8个建议 - 七昂的技术之旅 - 博客园](https://www.cnblogs.com/qiangz/p/17904768.html)
