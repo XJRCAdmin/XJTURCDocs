@@ -109,7 +109,8 @@ resources:
 - Git Graph
 - Remote SSH
 - Dev Containers
-- TODO...
+- Tabnine
+- GitHub Copilot
 
 ### git学习与使用
 

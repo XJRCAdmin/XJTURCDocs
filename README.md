@@ -1,5 +1,6 @@
 # XJTURC 文档仓库
-欢迎访问https://xjturc.vercel.app！
+欢迎访问https://xjturc.vercel.app 查看文档。
+
 ## 项目简介
 XJTURC（西安交通大学Robocon机器人队）文档仓库是一个为Robocon竞赛团队提供完整技术文档和教程的知识库。本项目旨在为视觉组、电控组、机械组和硬件组等不同技术方向的队员提供系统化的学习资源，帮助新人快速上手并掌握相关技术。
 

@@ -116,3 +116,4 @@ install (FILES cmake-examples.conf
 - [github上的learning cmake](https://github.com/ttroy50/cmake-examples/blob/master)
 - [CMake Tutorial — CMake 4.1.0-rc4 Documentation](https://cmake.org/cmake/help/latest/guide/tutorial/)
 - [IPADS新人培训第二讲：CMake_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV14h41187FZ?vd_source=7bd9495d31281f143b7b2db3418d2f17&spm_id_from=333.788.videopod.sections)
+- [Modern CMake](https://cliutils.gitlab.io/modern-cmake/)
