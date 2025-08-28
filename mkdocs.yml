@@ -109,6 +109,7 @@ nav:
       - Doxygen与commit规范: blog/vision/Doxygen-commit/index.md
       - Missing Semester qa: blog/vision/qa/index.md
       - CMake Introduction: blog/vision/CMake/index.md
+      - Cmake Debug: blog/vision/Debug/index.md
       - Docker & Dev Container: blog/vision/docker/index.md
       - 视觉设备: blog/vision/visualDev/index.md
       - 串口使用: blog/vision/serialUse/index.md
