@@ -105,7 +105,7 @@ nav:
       - SSH: blog/vision/ssh&remotessh/index.md
       - 一些现代C++语法特性: blog/vision/ModernCpp/index.md
       - 网线连接树莓派须知: blog/vision/raspberry/index.md
-      - VPN: blog/vision/VPN教程/index.md
+      - Ubuntu VPN: blog/vision/VPN教程/index.md
       - Doxygen与commit规范: blog/vision/Doxygen-commit/index.md
       - Missing Semester qa: blog/vision/qa/index.md
       - CMake Introduction: blog/vision/CMake/index.md
