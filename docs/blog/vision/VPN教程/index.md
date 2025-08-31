@@ -78,7 +78,7 @@ clash界面如下图所示
 
 在终端中`cd`到`clash`的文件夹下，输入`./clash -d .`启动clash，启动完之后一般不要使用`ctrl+c`或`ctrl+z`打断运行，否则再次输入`./clash -d .`运行会出现端口占用，如果打断了就只能：
 ```bash
-pa aux | grep clash
+ps aux | grep clash
 kill -9 [端口号]
 ```
 在浏览器中打开ikuuu的dashboard，里面可以配置代理和节点。
