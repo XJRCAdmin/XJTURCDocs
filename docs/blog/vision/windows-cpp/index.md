@@ -56,7 +56,7 @@ msys 2 本质上是编译工具链的管理工具，我们还需要使用它来�
 
 之后，输入安装指令： `pacman -S mingw-w64-ucrt-x86_64-toolchain` ，遇到需要选择的部分一路回车就行。
 
-安装`clangd`： `pacman -S mingw-w64-ucrtx86_64-clang mingw-w64-ucrt-x86_64-clang-tools-extra` 。以上安装步骤大致需要 3 G 的硬盘空间。
+安装`clangd`： `pacman -S mingw-w64-ucrt-x86_64-clang mingw-w64-ucrt-x86_64-clang-tools-extra` 。以上安装步骤大致需要 3 G 的硬盘空间。
 
 > clangd是llvm项目推出的C++语言服务器，通过LSP(Language Server Protocal)协议向编辑器如vscode/vim/emacs提供语法补全、错误检测、跳转、格式化等等功能。是基于Clang C编译器的。
 
