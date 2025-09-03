@@ -43,10 +43,10 @@ resources:
 
 所有的软件都是运行在操作系统的管理之下。选择 `Ubuntu` 作为系统是因为它是持续更新的系统，并且用户量比较大，社区支持比较好，教育通用，`debian` 系。
 
-参考安装文档：**《Ubuntu双系统安装教程》**[[pdf下载地址]](https://115.154.175.254:5200/files/api/public/dl/J1gGccUv/public/Share/links/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.pdf)
+参考安装文档：**《Ubuntu双系统安装教程》**[[pdf下载地址]](https://115.154.129.4:5200/files/api/public/dl/J1gGccUv/public/Share/links/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.pdf)
 
 !!! blue-tip "潘羽涵"
-    如果有安装在外置硬盘上的安装需求，可以参考：**《Ubuntu安装教程——磁盘分区设置》** [[pdf下载地址]](https://115.154.175.254:5200/files/api/public/dl/dJ32ey2v/public/Share/links/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E8%AE%BE%E7%BD%AE.pdf) 就是写的有点抽象（我写的），并且需要注意，有的电脑的UEFI/BIOS有特殊的地方：对于一个物理硬盘，只识别第一个ESP(EFI)分区，不识别后面的分区，那么就需要在安装完系统后，保证EFI分区在第一个，如果ventoy抢占了第一个，需要在windows中将ventoy分区格式化掉。此时不可以按照文章中提到的“小技巧”进行操作，而是需要反向操作，将ventoy装在后面，并且会有额外的好处：可以和后面的逻辑分区合并成一个更大的分区作为u盘使用。（该段话是否有表述不当？误会点？）
+    如果有安装在外置硬盘上的安装需求，可以参考：**《Ubuntu安装教程——磁盘分区设置》** [[pdf下载地址]](https://115.154.129.4:5200/files/api/public/dl/dJ32ey2v/public/Share/links/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E8%AE%BE%E7%BD%AE.pdf) 就是写的有点抽象（我写的），并且需要注意，有的电脑的UEFI/BIOS有特殊的地方：对于一个物理硬盘，只识别第一个ESP(EFI)分区，不识别后面的分区，那么就需要在安装完系统后，保证EFI分区在第一个，如果ventoy抢占了第一个，需要在windows中将ventoy分区格式化掉。此时不可以按照文章中提到的“小技巧”进行操作，而是需要反向操作，将ventoy装在后面，并且会有额外的好处：可以和后面的逻辑分区合并成一个更大的分区作为u盘使用。（该段话是否有表述不当？误会点？）
 
 
 《鸟哥的Linux私房菜》 有所涉及，但是安装的系统是比较老的`CentOS`
@@ -70,8 +70,8 @@ resources:
   - B站上：黑马程序员，翁恺老师
   - 《Essential C++》 C++ 特性的最小集合
   - 侯捷老师的视频
-- C++写程序的额外注意点：[pdf book:《Effective C++》](https://115.154.175.254:5200/files/api/public/dl/c1IHQFQa/public/Share/links/C%2B%2B/Effective%20C%2B%2B%20%E4%B8%AD%E6%96%87%E7%AC%AC%E4%B8%89%E7%89%88.pdf)
-- C++11新特性的小汇总：[pdf book:《morden C++》](https://115.154.175.254:5200/files/api/public/dl/zz4zJABW/public/Share/links/C%2B%2B/morden%20C%2B%2B%20%E6%95%99%E7%A8%8B%20%E4%B8%AD%E6%96%87%E7%89%88.pdf)
+- C++写程序的额外注意点：[pdf book:《Effective C++》](https://115.154.129.4:5200/files/api/public/dl/c1IHQFQa/public/Share/links/C%2B%2B/Effective%20C%2B%2B%20%E4%B8%AD%E6%96%87%E7%AC%AC%E4%B8%89%E7%89%88.pdf)
+- C++11新特性的小汇总：[pdf book:《morden C++》](https://115.154.129.4:5200/files/api/public/dl/zz4zJABW/public/Share/links/C%2B%2B/morden%20C%2B%2B%20%E6%95%99%E7%A8%8B%20%E4%B8%AD%E6%96%87%E7%89%88.pdf)
 
 ### 初等算法自学
 
