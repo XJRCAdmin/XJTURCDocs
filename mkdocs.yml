@@ -99,6 +99,7 @@ nav:
       - 常用命令汇总: blog/vision/common-command/index.md
       - Markdown: blog/vision/markdown/index.md
       - Bash自学: blog/vision/bash/index.md
+      - 硬盘固件等知识: blog/vision/SSD-knowledge/index.md
       - LINUX: blog/vision/linux/linux.md
       - 进程、前后台、服务与例行性任务: blog/vision/ustc-linux101-ch4/index.md
       - Git Intro: blog/vision/GitIntro/index.md

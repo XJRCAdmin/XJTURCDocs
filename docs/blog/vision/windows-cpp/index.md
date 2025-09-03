@@ -68,6 +68,9 @@ msys 2 本质上是编译工具链的管理工具，我们还需要使用它来�
 ![](output_image/8432d41adeda615d4705f207b162b85b.png)
 
 # cmake
+!!! tip "提示"
+    以下教程简略且带有主观性，请谨慎阅读，并且留意文末的question部分。
+
 > 如果您想了解一下更快，集成度更高的xmake(基于.lua去描述工程)，您可以略微看一下[xmake入门，构建项目原来可以如此简单](https://zhuanlan.zhihu.com/p/35051214)。
 
 cmake 是一个用于组织 cpp 项目的工具，能够实现多个 cpp 文件的构建，找头文件的效率更高，并且我们以后要用的 ros 2 也使用 cmake 构建项目，有必要学习一下。
@@ -109,4 +112,5 @@ cmake 下载地址：[download | Cmake ](https://cmake.org/download/)，我们�
 
 ??? question "按照教程并未成功怎么办?"
     上述教程后的clangd和vscode部分开始显得简略,并且添加了很多具有主观色彩的内容,读者无法完全理解是很正常的.
+    
     除了上述要点之外, 笔者发现配置 clangd 工具链似乎并没有那么容易, 因为你将会与你电脑原有配置继续打交道, 并且如果你的 system 中没有下载 LLVM、clangd 的话 (并不是指 vscode 的扩展), 你需要访问官网先下载安装它。vscode 中的 clangd 插件只是语言服务器（只做编辑器智能）, 归根到底依赖于你电脑上安装的 clangd 工具链。一个有用的链接是 [知乎-vscode+clang+llvm 搭建 C++ 编译环境（windows）](https://zhuanlan.zhihu.com/p/613922486)。如果你能够坚持下来, 相信一定很有能耐了, 做什么都会成功的。
