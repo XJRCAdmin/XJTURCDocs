@@ -25,7 +25,7 @@ ROS 和手机又很多相似之处，手机中的 APP 等同于 ROS 中的 Node�
 ![Node](images/1.png)
 ## Package
 虽然 ROS 程序的基础单元是节点，但我们并不能像手机安装 app 一样只安装单个节点，而是以 Package 为单位进行安装
-![Package](iamges/package.png)
+![Package](images/package.png)
 
 ROS 采用的模块化的设计理念，强调功能的相互独立，所以造成单个节点的功能比较单一，要想实现一个完整的任务，通常需要几个节点的配合才能完成。
 ![](images/Nodes.png)
@@ -34,7 +34,7 @@ ROS 采用的模块化的设计理念，强调功能的相互独立，所以造�
 
 **ROS package的框架，编程层面**:
 
-![ROS Workspace](ros_workspace.png)
+![ROS Workspace](images/ros_workspace.png)
 
 # 话题 Topic 和消息 Message
 ## Topic->"频道"
@@ -87,7 +87,7 @@ cd ~/<your-ros-learning-folder>/ws/src   # 外层文件夹叫什么无所谓，�
 ros2 pkg create pub_sub_cmd_vel --license MIT --build-type ament_cmake --dependencies rclcpp geometry_msgs tf2_ros tf2_geometry_msgs
 ```
 ![](images/ros2-create.png)
-然后需要在/src 文件夹下创建源`pub_sub_cmd_vel.cpp`文件，这里您尝试引入头文件会发现 VSCode 并不能智能补全，找不到路径，于是您需要修改`CMakeLists.txt`文件，添加如下内容，具体在哪里添加、怎么添加，请自行GPT。:
+然后需要在/src 文件夹下创建源`pub_sub_cmd_vel.cpp`文件，这里您尝试引入头文件会发现 VSCode 并不能智能补全，找不到路径，于是您需要修改`CMakeLists.txt`文件，添加如下内容，具体在哪里添加、怎么添加，请自行GPT。
 ```cmake
 add_executable(pub_sub_cmd_vel src/pub_sub_cmd_vel.cpp)
 ament_target_dependencies(pub_sub_cmd_vel rclcpp geometry_msgs tf2_ros tf2_geometry_msgs)
@@ -201,7 +201,7 @@ install(TARGETS
 ament_package()
 ```
 
-
+![](images/result.png)
 除了上述方法之外，也可以模仿 ROS2 官方文档：[Writing-A-Simple-Cpp-Publisher-And-Subscriber](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html)
 
 # ROS2其他通信机制
