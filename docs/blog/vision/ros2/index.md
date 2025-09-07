@@ -25,6 +25,7 @@ ROS 和手机又很多相似之处，手机中的 APP 等同于 ROS 中的 Node�
 ![Node](images/1.png)
 ## Package
 虽然 ROS 程序的基础单元是节点，但我们并不能像手机安装 app 一样只安装单个节点，而是以 Package 为单位进行安装
+
 ![Package](images/package.png)
 
 ROS 采用的模块化的设计理念，强调功能的相互独立，所以造成单个节点的功能比较单一，要想实现一个完整的任务，通常需要几个节点的配合才能完成。
