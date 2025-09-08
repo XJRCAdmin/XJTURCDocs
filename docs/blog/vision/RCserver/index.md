@@ -361,6 +361,33 @@ http {
 
 拟采用 rust 语言实现的 [dufs][3-1] 来提供文件服务。原本的 FileBrowser 由于bug太多，拟弃用。
 
+目前已部署了相关dufs服务，路径在`/home/robocon/Files/dufs-install`下。配置了启动时的config.yaml，以及相关服务。
+```config.yaml
+serve-path: './Duf'
+bind: 0.0.0.0
+port: 5252
+path-prefix: /
+
+hidden:
+  - '*.log'
+  - 'tmp'
+
+auth:
+  - "rc-admin:qingchun@/:rw" # rc-admin的密码，qingchun，当访问 https://rcserver:5252/ 时，使用该账号密码登录。
+
+allow-upload: true
+allow-delete: true
+allow-search: true
+allow-symlink: false
+allow-archive: true
+enable-cors: true
+render-try-index: true
+render-spa: false
+compress: medium
+log-format: default
+log-file: "/home/robocon/Files/dufs-install/dufs.log"
+```
+
 #### 安装与启动方式
 
 建议通过二进制形式安装，直接从 [<u>dufs-Releases</u>][3-2] 页面下载系统对应的二进制包。
