@@ -361,7 +361,7 @@ http {
 
 拟采用 rust 语言实现的 [dufs][3-1] 来提供文件服务。原本的 FileBrowser 由于bug太多，拟弃用。
 
-目前已部署了相关dufs服务，路径在`/home/robocon/Files/dufs-install`下。配置了启动时的config.yaml，以及相关服务。
+目前已部署了相关dufs服务，路径在`/home/robocon/Files/dufs-install`下。配置了启动时的config.yaml，以及相关服务。(但是目前不在局域网下貌似访问不上？)
 ```config.yaml
 serve-path: './Duf'
 bind: 0.0.0.0

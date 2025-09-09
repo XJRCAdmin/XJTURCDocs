@@ -372,6 +372,8 @@ ssh -R 8080:localhost:3000 user@remoteserver.example.com -N
 
 ![hottest_editors](images/linux6.png)
 
+[上交ipads实验室新人的vim培训](https://ipads.se.sjtu.edu.cn/zh/slides/tutorial-2021/Tutorial04_Vim.pdf)
+
 ### tmux
 
 我们每次打开终端或是 SSH 登录远程服务器时，都是创建了一个会话（英文：session）来进行临时的交互，此时窗口（或连接）是和它开启的进程（比如 Shell）绑定在一起。当我们关闭窗口或者断开连接时，对应的进程也随之终止了。

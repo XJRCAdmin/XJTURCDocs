@@ -117,6 +117,7 @@ nav:
       - intel-realsense相机: blog/vision/realsense/index.md
       - Roboflow标注概览: blog/vision/roboflow/Roboflow.md
       - ROS2相关教程: blog/vision/ros2/index.md
+      - Navigation 2: blog/vision/Nav2/index.md
       - 强化学习: blog/vision/RL/index.md
       - 队内服务器使用指南: blog/vision/RCserver/index.md
       - 安装队内服务器证书: blog/vision/install-ca-crt/index.md
