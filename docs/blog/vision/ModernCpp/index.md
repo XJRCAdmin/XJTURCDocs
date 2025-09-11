@@ -16,6 +16,7 @@
 ```cpp
 [capture](parameters)->return-type{body}
 ```
+
 - `[capture]` 是捕获列表，指定了lambda的传入值的方式，有引用传值，常见的有`[&]`和`[=]` ，分别代表这按值捕获和按引用捕获外部变量。
 
 - `[parameter]` 是参数列表，用于表示 Lambda表达式的参数，可以为空，表示没有参数，也可以和普通函数一样指定参数的类型和名称，还可以在 c++14 中使用 `auto` 关键字来实现泛型参数。
@@ -60,3 +61,22 @@ RAII 全称是 Resource Acquisition Is Initialization，中文常译为资源获
 noexcept是C++11引入的关键字，用于指定函数是否会抛出异常。它有两种用途：作为说明符（声明函数不会抛出异常）和作为运算符（检查表达式是否会抛出异常）。
 
 - [C++ 异常处理：noexcept 关键字 - 知乎](https://zhuanlan.zhihu.com/p/1908050280634881478)
+
+# Arg模板参数包
+
+一个例子是SocketCAN与电控下层板通信时，需要将多个参数写入一个CAN报文。CAN报文的大小这里是64字节，如果使用double类型(8 bytes)的变量，可以一条报文放下8个double。使用模板参数包的好处是可以多个double，甚至是double、float、int混用共同塞入一条CAN报文，只要大小不超过64字节。
+
+```cpp
+void fill_with(void *_dst, Args &&... _args)
+{
+    static_assert(((sizeof(Args) + ...) < 64), "args too large");
+    (void)std::initializer_list<int>{
+        ([&]{
+            memcpy(_dst, std::addressof(_args), sizeof(_args));
+        }(), 0
+        )...
+    };
+}
+```
+
+- [C++ 模板参数包（Variadic Templates） - 知乎](https://zhuanlan.zhihu.com/p/718517878)
