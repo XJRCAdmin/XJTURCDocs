@@ -104,6 +104,7 @@ nav:
       - 进程、前后台、服务与例行性任务: blog/vision/ustc-linux101-ch4/index.md
       - Git Intro: blog/vision/GitIntro/index.md
       - SSH: blog/vision/ssh&remotessh/index.md
+      - 安装lazyvim: blog/vision/lazyvim/index.md
       - 一些现代C++语法特性: blog/vision/ModernCpp/index.md
       - 网线连接树莓派须知: blog/vision/raspberry/index.md
       - Ubuntu VPN: blog/vision/VPN教程/index.md

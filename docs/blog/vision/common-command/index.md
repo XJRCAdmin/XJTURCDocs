@@ -85,3 +85,9 @@ plugins=(z git zsh-autosuggestions zsh-syntax-highlighting)
 git config --global user.name "新的用户名"
 git config --global user.email "新的邮箱地址"
 ```
+
+## Neovim
+
+[安装lazyvim](../lazyvim/index.md)
+
+
