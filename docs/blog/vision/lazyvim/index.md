@@ -1,7 +1,9 @@
-# Neovim 安装
+# LazyVim 安装
+Neovim 是经典编辑器 Vim 的现代分支，以其强大的功能和灵活性赢得了广大开发者的青睐。LazyVim 是一个基于 Neovim 构建的插件管理和配置框架。通过模块化的设计理念，LazyVim 允许用户轻松地添加、移除或自定义各种插件，同时保持整个配置文件结构清晰简洁。
 
 ![](images/lazyvim.webp)
 
+## 安装Neovim
 ```bash
 wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
 tar -xzvf nvim-linux-x86_64.tar.gz
@@ -9,7 +11,7 @@ rm -rf nvim-linux-x86_64.tar.gz
 cd /usr/local/bin
 ln -s ~/<your_nvim_path>/bin/nvim  nvim
 ``` 
-安装lazyvim
+## 安装lazyvim
 
 ```bash
 git clone https://github.com/LazyVim/starter ~/.config/nvim
