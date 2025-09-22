@@ -47,3 +47,4 @@ fc-cache -fv
 
 接着按照[lazyvim config](https://www.lazyvim.org/configuration#icons--colorscheme)，对`lua/plugins/core.lua`进行修改。
 
+
