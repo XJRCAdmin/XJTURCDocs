@@ -80,3 +80,5 @@ void fill_with(void *_dst, Args &&... _args)
 ```
 
 - [C++ 模板参数包（Variadic Templates） - 知乎](https://zhuanlan.zhihu.com/p/718517878)
+
+# 编写命名空间
