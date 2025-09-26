@@ -23,8 +23,16 @@ rm -rf ~/.config/nvim/.git
 到nerd网站中下载：https://www.nerdfonts.com/font-downloads，下面以选择`0xProto Nerd`字体。
 
 ```bash
-cd <your nerd font path>
-mv *.ttf ~/usr/local/share/fonts/
+# 进入下载目录（根据你的实际情况调整）
+cd ~/Downloads
+# 解压 .zip 文件 (实操下来应该是0xProto.zip压缩包，需要先解压拿到.ttf文件)
+unzip "字体包名.zip"
+cd <您解压后.ttf文件所在的文件夹路径>
+# 把.ttf移动到系统级的fonts里面 实操发现如果选择用户级的fonts 后面终端设置字体时找不到我们下载的字体 不过还是贴出命令供您选择(二选一哦！)
+用户级操作：mkdir -p ~/.local/share/fonts
+          mv *.ttf ~/.local/share/fonts/
+系统级操作：sudo mv *.ttf /usr/local/share/fonts/
+# 加载字体
 fc-list
 fc-cache -fv
 ```
@@ -46,5 +54,6 @@ fc-cache -fv
 - 在弹出的字体选择器中，搜索并选择你刚刚安装的 Nerd Font，比如 "0xProto Nerd Font Mono"。你也可以在这里调整字体大小。
 
 接着按照[lazyvim config](https://www.lazyvim.org/configuration#icons--colorscheme)，对`lua/plugins/core.lua`进行修改。
+
 
 
