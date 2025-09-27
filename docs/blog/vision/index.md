@@ -48,6 +48,7 @@ resources:
 !!! blue-tip "潘羽涵"
     如果有安装在外置硬盘上的安装需求，可以参考：**《Ubuntu安装教程——磁盘分区设置》** [[pdf下载地址]](https://115.154.129.4:5200/files/api/public/dl/dJ32ey2v/public/Share/links/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E8%AE%BE%E7%BD%AE.pdf) 就是写的有点抽象（我写的），并且需要注意，有的电脑的UEFI/BIOS有特殊的地方：对于一个物理硬盘，只识别第一个ESP(EFI)分区，不识别后面的分区，那么就需要在安装完系统后，保证EFI分区在第一个，如果ventoy抢占了第一个，需要在windows中将ventoy分区格式化掉。此时不可以按照文章中提到的“小技巧”进行操作，而是需要反向操作，将ventoy装在后面，并且会有额外的好处：可以和后面的逻辑分区合并成一个更大的分区作为u盘使用。（该段话是否有表述不当？误会点？）
 
+在安装Ubnutu系统时，我们可能会遇到一系列问题致使我们要重新安装Ubuntu系统，所以找了以下博客提供重新装系统时的一些帮助。[电脑双系统完美卸载Ubuntu_双系统卸载ubuntu-CSDN博客](https://blog.csdn.net/m0_37548216/article/details/123376311?sharetype=blog&shareId=123376311&sharerefer=APP&sharesource=2501_90812940)
 
 《鸟哥的Linux私房菜》 有所涉及，但是安装的系统是比较老的`CentOS`
 
