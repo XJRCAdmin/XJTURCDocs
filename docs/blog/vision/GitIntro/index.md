@@ -268,7 +268,43 @@ Creating a new branch is quick AND simple.
 + GitLab：类似Github，但主要面向企业、组织等内部合作。网址 https://www.gitlab.com/
 + Gitee：码云，国内最大的开源社区。不用梯子也可以访问。网址 https://gitee.com/
 
-
+### 安全连接远程仓库
+为了安全地与 GitHub、GitLab 等远程仓库进行通信（避免每次输入密码），推荐使用 SSH 密钥进行认证。
+1. 检查现有 SSH 密钥
+   首先检查是否已存在 SSH 密钥：
+   ```bash
+   ls -al ~/.ssh
+   ```
+   如果看到类似 id_rsa、id_ed25519 的文件，说明可能已有密钥。
+3. 生成新的 SSH 密钥（如无现有密钥）
+   推荐使用更安全的 Ed25519 算法：
+   ```bash
+   ssh-keygen -t ed25519 -C "your_email@example.com"
+   ```
+   或者使用传统的 RSA 算法（兼容性更好）：
+   ```bash
+   ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+   ```
+   + -C注释，通常用你的邮箱
+   + 按提示输入保存路径（直接回车使用默认路径）
+   + 设置密码（可选，为空则无密码）
+5. 将 SSH 密钥添加到 ssh-agent
+   ```bash
+   # 启动 ssh-agent
+   eval "$(ssh-agent -s)"
+   # 添加私钥到 agent
+   ssh-add ~/.ssh/id_ed25519  # 或 id_rsa
+   ```
+7. 复制公钥内容，将公钥添加到远程仓库
+8. 测试连接
+   ```bash
+   ssh -T git@github.com
+   ```
+   如果看到以下信息，说明成功：
+   ```text
+   Hi username! You've successfully authenticated...
+   ```
+   
 下面我们介绍一些在远程仓库控制时的基本操作：
 
 + 克隆仓库到本地
@@ -290,6 +326,7 @@ Creating a new branch is quick AND simple.
 + 拉取更改
 
 我们可以使用命令 `git pull origin master` 来从远端 `origin` 的 `master` 获取其最新的数据（可能是别人更新上去的）。正常的推送更改流程为：先 Add 和 Commit 本地修改，然后拉取远端更改，如果此时出现了合并冲突（英文：Merge Conflict），解决合并冲突。然后，在合并冲突解决后推送更改。
+
 
 ## Git LFS: 如何优雅管理大文件
 
@@ -322,4 +359,5 @@ LFS 在 Linux 下一般是一个单独的包 `git-lfs`. 安装之后就可以用
 
 + 清华sast 课程讲义 https://docs.net9.org/basic/git/
 + 2021 春季学期《面向对象程序设计基础》课程讲义
+
 + 廖雪峰的 Git 教程 https://www.liaoxuefeng.com/wiki/896043488029600
