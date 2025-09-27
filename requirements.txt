@@ -1,10 +1,20 @@
+# 给这个文件稍微添加一下注释MkDocs 是一个静态文档生成工具，用于生成项目文档
 mkdocs
+# MkDocs 插件，用于在文档中显示作者信息
 mkdocs-git-authors-plugin
+# MkDocs 插件，用于显示本地化的提交日期
 mkdocs-git-revision-date-localized-plugin
+# MkDocs 的 Material 主题，提供现代的文档样式
 mkdocs-material
+# 为 MkDocs Material 主题提供额外扩展的插件
 mkdocs-material-extensions
+# MkDocs 插件，用于压缩 HTML、CSS 和 JavaScript 文件
 mkdocs-minify-plugin
+# MkDocs 插件，用于为图片添加灯箱效果
 mkdocs-glightbox
+# Streamlit 是一个 Python 数据可视化和应用开发框架
 streamlit
+# Pandas 是一个强大的数据处理和分析库
 pandas
+# NumPy 是一个高性能的数值计算库
 numpy
