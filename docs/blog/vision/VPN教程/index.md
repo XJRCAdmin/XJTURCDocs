@@ -83,6 +83,6 @@ kill -9 [端口号]
 ```
 在浏览器中打开ikuuu的[dashboard](https://clash.razord.top/#/proxies)，里面可以配置代理和节点。
 
-
+如果您不想每次开机都进行`clash -d .`,您完全可以将clash创建为系统服务。参考[clash 知识库](https://clash.wiki/introduction/service.html)
 
 

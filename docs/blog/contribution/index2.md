@@ -21,7 +21,7 @@ vercel login
 ```bash
 vercel link --yes
 ```
-上一步命令执行完成后，会看到如图：
+由于vercel的命名要求，请不要在主项目名称中使用大写字母以及`---`。上一步命令执行完成后，会看到如图：
 
 ![](images/image0.png)
 
