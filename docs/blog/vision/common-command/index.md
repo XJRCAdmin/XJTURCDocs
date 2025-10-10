@@ -90,4 +90,9 @@ git config --global user.email "新的邮箱地址"
 
 [安装lazyvim](../lazyvim/index.md)
 
-
+## docx阅读器
+```bash
+sudo apt update
+sudo apt install libreoffice-writer
+libreoffice yourfile.docx  # 打开文件
+```
