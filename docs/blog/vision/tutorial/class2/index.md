@@ -340,7 +340,7 @@ int main()
 2. 引用未定义的符号
    1. 链接 `main.o`，直接产生可执行文件
    2. 链接器报错：
-      ```
+      ```bash
       main.o:main.c:(.text+0x18): undefined reference to `max'
       ```
 

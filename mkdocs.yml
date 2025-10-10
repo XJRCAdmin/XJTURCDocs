@@ -123,6 +123,7 @@ nav:
       - 队内服务器使用指南: blog/vision/RCserver/index.md
       - 安装队内服务器证书: blog/vision/install-ca-crt/index.md
       - 培训讲稿:
+          - index: blog/vision/tutorial/index.md
           - 第二次培训讲稿: blog/vision/tutorial/class2/index.md
           - 第三次培训讲稿: blog/vision/tutorial/class3/index.md
   - 机械组:
