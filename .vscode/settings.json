@@ -12,5 +12,10 @@
     "tag:yaml.org,2002:python/object/apply:pymdownx.slugs.slugify mapping",
     "pymdownx.progressbar",
     "markdown.extensions.meta"
-  ]
+  ], 
+  "[markdown]": {
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": null
+},
+"markdown.extension.toc.updateOnSave": false,
 }
