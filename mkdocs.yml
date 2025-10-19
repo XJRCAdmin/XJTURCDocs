@@ -126,6 +126,8 @@ nav:
           - index: blog/vision/tutorial/index.md
           - 第二次培训讲稿: blog/vision/tutorial/class2/index.md
           - 第三次培训讲稿: blog/vision/tutorial/class3/index.md
+          - 第四次培训讲稿: blog/vision/tutorial/class4/index.md
+
   - 机械组:
       - introduction: blog/mechanics/introduction/index.md
       - Example: blog/mechanics/example/index.md
