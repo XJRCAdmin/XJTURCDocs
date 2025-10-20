@@ -7,7 +7,17 @@ date: 2025-04-20
     任何人都可以完善这一篇博文。
 
 由于不想一直gpt询问或者搜索一些很基础的命令，所以这里总结一下。
-
+## 基础编译套餐
+```bash
+sudo apt install -y build-essential clang cmake make git curl wget unzip zip
+sudo apt install -y vim tree htop tmux
+```
+## 开启ssh service
+```bash
+sudo systemctl enable ssh
+sudo systemctl start ssh
+sudo systemctl status ssh #查看状态
+```
 ## miniconda
 以下命令不需要加上`sudo`，因为我们需要将conda安装在用户目录下。
 ```bash
