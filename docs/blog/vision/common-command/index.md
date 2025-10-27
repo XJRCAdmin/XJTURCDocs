@@ -106,3 +106,7 @@ sudo apt update
 sudo apt install libreoffice-writer
 libreoffice yourfile.docx  # 打开文件
 ```
+# 鱼香ros一键安装脚本
+```bash
+wget http://fishros.com/install -O fishros && . fishros
+```
