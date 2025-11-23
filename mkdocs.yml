@@ -115,6 +115,7 @@ nav:
       - Docker & Dev Container: blog/vision/docker/index.md
       - 视觉设备: blog/vision/visualDev/index.md
       - 串口使用: blog/vision/serialUse/index.md
+      - blender数据集生成: blog/vision/blender/index.md
       - intel-realsense相机: blog/vision/realsense/index.md
       - Roboflow标注概览: blog/vision/roboflow/Roboflow.md
       - ROS2相关教程: blog/vision/ros2/index.md
