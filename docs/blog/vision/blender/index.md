@@ -59,8 +59,10 @@ blender -v
 
 ## 2.1 关于 blender 的基本概念
 
-**Blender 是“数据块 Data-Block”系统，每个元素都是数据，可以被引用、共享、复用。**
+Blender 是“数据块 Data-Block”系统，每个元素都是数据，可以被引用、共享、复用。
 blender 中有 5 个核心对象类型：
+
+```bash
 Scene
 ├── World（天空、环境光）
 ├── Camera（相机）
@@ -70,6 +72,7 @@ Scene
 ├── Mesh（顶点/面）
 ├── Material（材质节点）
 └── Transform（位移/旋转/缩放）
+```
 
 #### Scene（场景）
 
@@ -310,7 +313,8 @@ Blender 中有三种 transform：
 2. **Mapping**
    - 控制纹理位置、旋转、缩放
    - 用法：Mapping Node 接 Texture Coordinate，再接 Texture
-     ![](pic/mapping.png)
+
+![](pic/mapping.png)
 
 ##### 模式（Mode）
 
@@ -353,7 +357,8 @@ Mode 决定 API 可访问的数据集合，切换模式时，Blender 会切换�
 - **Location**: 物体在世界坐标的位置
 - **Rotation**: 欧拉角（默认 XYZ）
 - **Scale**: 缩放
-  ![](pic/cube_pos.png)
+
+![](pic/cube_pos.png)
 
 或使用 Python：
 
