@@ -91,7 +91,6 @@ nav:
   - 四足组:
       - 四足组: blog/foursteps/index.md
   - 电控组:
-      - ssh: blog/electronics/ssh&remotessh/index.md
       - 新手指南: blog/electronics/freshman/index.md
       - R2上层代码说明: blog/electronics/r2/index.md
   - 视觉组:
