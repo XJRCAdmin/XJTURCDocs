@@ -130,12 +130,31 @@ git config --global user.email "新的邮箱地址"
 
 ```bash
 sudo apt update
+sudo apt-get install libreoffice # 安装 libreoffice 基础包
 sudo apt install libreoffice-writer
 libreoffice yourfile.docx  # 打开文件
 ```
 
-# 鱼香 ros 一键安装脚本
+## 鱼香 ros 一键安装脚本
 
 ```bash
 wget http://fishros.com/install -O fishros && . fishros
+```
+
+# git lfs 安装
+
+```bash
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo apt-get install git-lfs
+git lfs install
+git lfs track "dev/rtd/models/*.trt"  # 添加示例文件
+git add .gitattributes
+```
+
+## Google chrome 安装
+
+```bash
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
+# 或者 sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
