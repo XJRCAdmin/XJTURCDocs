@@ -158,3 +158,29 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install ./google-chrome-stable_current_amd64.deb
 # 或者 sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
+
+## kill 脚本
+
+下面是一个强制 kill 某个进程的脚本，用于替代`ps aux | grep xxx | kill -9 <PID>`的繁琐操作，您可以将他保存起来。
+
+```bash
+#!/bin/bash
+# Usage: ./kill.sh <pattern>
+
+if [ $# -ne 1 ]; then
+echo "Usage: $0 <pattern>"
+exit 1
+fi
+
+PATTERN="$1"
+
+# 以下命令列出所有进程，过滤出包含 PATTERN 的行，排除 grep 本身和本脚本，然后取 PID 列并 kill -9
+ps aux | grep -F "$PATTERN" | grep -v grep | grep -v "$0" | awk '{ print $2 }' | while read PID; do
+if [ -n "$PID" ]; then
+echo "Killing PID: $PID (matching "$PATTERN")"
+kill -9 "$PID"
+fi
+done
+```
+
+如上所述,该脚本的用法是`./kill.sh <name>`。
