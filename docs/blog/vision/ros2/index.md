@@ -224,3 +224,83 @@ ROS1 和 ROS2 在核心概念上是几乎相同的，都有 Node，Topic，Actio
 
 - [rm_vision](https://gitlab.com/rm_vision)
 - [Robomaster-oss](https://github.com/robomaster-oss/rmoss_core)
+
+# ROS2 Debug 的vscode配置
+
+在项目根目录的.vscode文件夹下创建launch.json文件，内容如下：
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "ROS 2: Launch C++ Node",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/install/${input:package}/lib/${input:package}/${input:node}",
+      "args": [], 
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        {
+          "name": "AMENT_PREFIX_PATH",
+          "value": "${workspaceFolder}/install/${input:package}:/opt/ros/foxy"
+        },
+        {
+          "name": "LD_LIBRARY_PATH",
+          "value": "${workspaceFolder}/install/${input:package}/lib:/opt/ros/foxy/lib"
+        }
+      ],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "colcon: build selected package" 
+    }
+  ],
+  "inputs": [
+    {
+      "id": "package",
+      "type": "promptString",
+      "description": "Enter the ROS 2 package name",
+      "default": "lidar_detection"  //修改成你的ros2 package
+    },
+    {
+      "id": "node",
+      "type": "promptString",
+      "description": "Enter the C++ node executable name",
+      "default": "obstacle_detector_node"  //修改成你的C++节点可执行文件名
+    }
+  ]
+}
+```
+不出意外，上述代码结合下面的task.json会触发工作流，即先对进行debug的包`colcon build`，之后再开始debug。
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "colcon: build selected package",
+      "type": "shell",
+      "command": "colcon build --symlink-install --packages-select ${input:package} --cmake-args -DCMAKE_BUILD_TYPE=Debug",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "package",
+      "type": "promptString",
+      "description": "Enter the ROS 2 package name to build",
+      "default": "lidar_detection"  // 修改成你的ros2 package
+    }
+  ]
+}
+```
