@@ -24,7 +24,7 @@ resources:
 ## SocketCAN
 
 !!! blue-warning "这部分笔者也不是很清楚"
-购买的时候，有些厂家售卖的 can 是 pcan （/dev/下 ls 发现是 pcan）（驱动与 socketcan 不一样似乎），有一些商家售卖的 CAN 是另一种（/dev/下 ls 发现是 can0），外观几乎没有区别。
+    购买的时候，有些厂家售卖的 can 是 pcan （/dev/下 ls 发现是 pcan）（驱动与 socketcan 不一样似乎），有一些商家售卖的 CAN 是另一种（/dev/下 ls 发现是 can0），外观几乎没有区别。
 ![](images/can.png)
 
 ### 参考链接
