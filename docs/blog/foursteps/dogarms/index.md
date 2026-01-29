@@ -11,9 +11,9 @@ date: 2026-01-20
 
 摄像头固定在第三个俯仰轴上，不随 roll 转动。
 
-![](https://cdn.nlark.com/yuque/0/2026/png/57353340/1769429650482-3c154fe1-8cde-4496-9f12-5f1ff98dea32.png)
+![](images/1.png)
 
-![](https://cdn.nlark.com/yuque/0/2026/png/57353340/1769430286403-6da1880e-f499-4148-956c-8486cd87997a.png)
+![](images/2.png)
 
 ### DH 参数模型
 
@@ -55,7 +55,8 @@ init_q = [0,0,0,pi/2, 0]; % 对应5个关节的弧度
 robot.teach(init_q);
 ```
 
-![](https://cdn.nlark.com/yuque/0/2026/png/57353340/1769431090336-cd3d9934-a77f-403b-b9e7-2f66d35f5a0b.png)
+输出结果：
+![](images/3.png)
 
 把 DH 参数丢给 AI 模型，生成 C++ 进行验证：
 
@@ -93,11 +94,11 @@ int main() {
 
 输出结果：
 
-![](https://cdn.nlark.com/yuque/0/2026/png/57353340/1769431613810-2d7dc078-8179-442d-8ef8-0ae6d72946dc.png)
+![](images/4.png)
 
 齐次变换矩阵为一 4×4 矩阵，主要由一 3×3 的旋转矩阵和一个位置矢量组成，由旋转矩阵可以得到欧拉角，位置矢量即为末端（吸盘）原点在底座（世界）坐标系下的坐标。由输出得吸盘在笛卡尔坐标系下的位置（726.9，0，64.5），与 matlab 一致。
 
-![](https://cdn.nlark.com/yuque/0/2026/png/57353340/1769431883663-d19e2a21-cf8d-4760-927d-788fe2effd33.png)
+![](images/5.png)
 
 [https://zhuanlan.zhihu.com/p/1982935982358677016](https://zhuanlan.zhihu.com/p/1982935982358677016)
 
@@ -119,7 +120,7 @@ int main() {
 >
 > 假设 Y 是车头，X 是车右方，Z 是车上方，那么绕 X 轴旋转得到的是 pitch，绕 Y 轴旋转得到的是 roll，绕 Z 轴得到的是 yaw。
 
-![](https://cdn.nlark.com/yuque/0/2026/png/57353340/1769433159538-ea8cf5fd-8415-4d71-96f7-4dcd28d8d70f.png)
+![](images/6.png)
 
 故我们定义绕 Z 轴旋转为偏航，绕 X 轴旋转为横滚，绕 Y 轴旋转为俯仰。
 
@@ -130,26 +131,26 @@ int main() {
 - 每次旋转是绕固定轴（一个固定参考系，比如世界坐标系）旋转，称为外旋。
 - 每次旋转是绕自身旋转之后的轴旋转，称为内旋。
 
-![](https://cdn.nlark.com/yuque/0/2026/png/57353340/1769433401059-ddc63616-5d64-4f14-b85b-30b93a4afb25.png)
+![](images/7.png)
 
-![](https://cdn.nlark.com/yuque/0/2026/png/57353340/1769433457101-d3268b79-6978-453a-a95c-4f54579d1285.png)
+![](images/8.png)
 
 我们采用内旋的定义，研究吸盘相对于底座的旋转。机械臂第一个关节带来的旋转运动为偏航，第二、三、四个关节为俯仰，末端电机的旋转为横滚。
 
-![](https://cdn.nlark.com/yuque/0/2026/png/57353340/1769434302628-1748823b-1824-40a1-9a9e-526dae4e0da3.png)
+![](images/9.png)
 
 定义第一个电机从上往下看逆时针旋转为正向，则第一个电机的转角即为偏航角；在运动学零点从 y 轴负向看去 xz 平面中记电机逆时针旋转为正，俯仰角即为三个俯仰电机转角之和（由于 DH 参数模型初始姿态三号俯仰电机并非水平，所以此处应该有 90 度的补偿）（叠甲: 我并没有研究清楚 DH 模型的初始姿态是有什么决定的，感觉可能是由参数 theta 决定的，由于电机是旋转关节，旋转关节中 theta 为自变量，所以在 DH 参数模型中所有 theta 初始都取为零了）；横滚角为最后一个电机的转角。
 
 ### 旋转矩阵（by 豆老师）
 
-**内旋定义**：每次旋转的参考坐标系是**前一次旋转后的本体坐标系**，旋转顺序为 $ \boldsymbol{Z \to Y \to X} $，对应的转角分别为 $ \boldsymbol{\alpha} $（绕 Z 轴）、$ \boldsymbol{\beta} $（绕 Y 轴）、$ \boldsymbol{\gamma} $（绕 X 轴）。
+**内旋定义**：每次旋转的参考坐标系是**前一次旋转后的本体坐标系**，旋转顺序为 $ \mathbf{Z \to Y \to X} $，对应的转角分别为 $ \mathbf{\alpha} $（绕 Z 轴）、$ \mathbf{\beta} $（绕 Y 轴）、$ \mathbf{\gamma} $（绕 X 轴）。
 
 #### 1. 第一步：绕本体 Z 轴旋转 $ \alpha $
 
 旋转前本体坐标系与世界坐标系重合，绕 Z 轴旋转的矩阵为：
 
 $$
-\boldsymbol{R}_z(\alpha) =
+\mathbf{R}_z(\alpha) =
 \begin{bmatrix}
 \cos\alpha & -\sin\alpha & 0 \\
 \sin\alpha & \cos\alpha & 0 \\
@@ -157,20 +158,20 @@ $$
 \end{bmatrix}
 $$
 
-旋转后，本体坐标系姿态由 $ \boldsymbol{R}\_z(\alpha) $ 描述。
+旋转后，本体坐标系姿态由 $ \mathbf{R}\_z(\alpha) $ 描述。
 
 #### 2. 第二步：绕旋转后本体 Y 轴旋转 $ \beta $
 
 此时的旋转轴是**第一步旋转后的本体 Y 轴**（记为 $ Y_1 $），需将世界坐标系下的旋转矩阵转换为本体坐标系的旋转操作，本质是**共轭变换**：
 
 $$
-\boldsymbol{R}_{y1}(\beta) = \boldsymbol{R}_z(\alpha) \cdot \boldsymbol{R}_y(\beta) \cdot \boldsymbol{R}_z^{-1}(\alpha)
+\mathbf{R}_{y1}(\beta) = \mathbf{R}_z(\alpha) \cdot \mathbf{R}_y(\beta) \cdot \mathbf{R}_z^{-1}(\alpha)
 $$
 
 其中世界坐标系下绕 Y 轴的旋转矩阵为：
 
 $$
-\boldsymbol{R}_y(\beta) =
+\mathbf{R}_y(\beta) =
 \begin{bmatrix}
 \cos\beta & 0 & \sin\beta \\
 0 & 1 & 0 \\
@@ -181,13 +182,13 @@ $$
 代入计算后，两步旋转的总矩阵为：
 
 $$
-\boldsymbol{R}_{zy} = \boldsymbol{R}_{y1}(\beta) \cdot \boldsymbol{R}_z(\alpha) = \boldsymbol{R}_z(\alpha) \cdot \boldsymbol{R}_y(\beta)
+\mathbf{R}_{zy} = \mathbf{R}_{y1}(\beta) \cdot \mathbf{R}_z(\alpha) = \mathbf{R}_z(\alpha) \cdot \mathbf{R}_y(\beta)
 $$
 
 展开结果：
 
 $$
-\boldsymbol{R}_{zy} =
+\mathbf{R}_{zy} =
 \begin{bmatrix}
 \cos\alpha\cos\beta & -\sin\alpha & \cos\alpha\sin\beta \\
 \sin\alpha\cos\beta & \cos\alpha & \sin\alpha\sin\beta \\
@@ -200,13 +201,13 @@ $$
 同理，旋转轴是**第二步旋转后的本体 X 轴**（记为 $ X_2 $），总旋转矩阵为三步旋转矩阵的乘积（内旋的核心性质：本体坐标系下的旋转序列等价于世界坐标系下旋转矩阵按顺序左乘）：
 
 $$
-\boldsymbol{R}_{zyx}(\alpha,\beta,\gamma) = \boldsymbol{R}_z(\alpha) \cdot \boldsymbol{R}_y(\beta) \cdot \boldsymbol{R}_x(\gamma)
+\mathbf{R}_{zyx}(\alpha,\beta,\gamma) = \mathbf{R}_z(\alpha) \cdot \mathbf{R}_y(\beta) \cdot \mathbf{R}_x(\gamma)
 $$
 
 其中世界坐标系下绕 X 轴的旋转矩阵为：
 
 $$
-\boldsymbol{R}_x(\gamma) =
+\mathbf{R}_x(\gamma) =
 \begin{bmatrix}
 1 & 0 & 0 \\
 0 & \cos\gamma & -\sin\gamma \\
@@ -219,7 +220,7 @@ $$
 将三个矩阵依次相乘，得到 **Z-Y-X 内旋总旋转矩阵**：
 
 $$
-\boldsymbol{R} =
+\mathbf{R} =
 \begin{bmatrix}
 \cos\alpha\cos\beta & \cos\alpha\sin\beta\sin\gamma - \sin\alpha\cos\gamma & \cos\alpha\sin\beta\cos\gamma + \sin\alpha\sin\gamma \\
 \sin\alpha\cos\beta & \sin\alpha\sin\beta\sin\gamma + \cos\alpha\cos\gamma & \sin\alpha\sin\beta\cos\gamma - \cos\alpha\sin\gamma \\
@@ -231,10 +232,10 @@ $$
 
 ### 二、从旋转矩阵反求转角（$ \alpha,\beta,\gamma $）
 
-设已知世界坐标系下的旋转矩阵 $ \boldsymbol{R} $ 为：
+设已知世界坐标系下的旋转矩阵 $ \mathbf{R} $ 为：
 
 $$
-\boldsymbol{R} =
+\mathbf{R} =
 \begin{bmatrix}
 r_{11} & r_{12} & r_{13} \\
 r_{21} & r_{22} & r_{23} \\
@@ -242,9 +243,9 @@ r_{31} & r_{32} & r_{33}
 \end{bmatrix}
 $$
 
-将 $ \boldsymbol{R} $ 与上述总旋转矩阵对比，通过元素对应关系求解转角。
+将 $ \mathbf{R} $ 与上述总旋转矩阵对比，通过元素对应关系求解转角。
 
-#### 1. 求解 $ \boldsymbol{\beta} $（绕 Y 轴转角）
+#### 1. 求解 $ \mathbf{\beta} $（绕 Y 轴转角）
 
 观察总矩阵的第 3 行第 1 列元素：
 
@@ -260,7 +261,7 @@ $$
 
 **取值范围**：$ \beta \in [-\frac{\pi}{2},\frac{\pi}{2}] $，若需覆盖全姿态（$ \beta \in [0,\pi] $），可结合 $ r\_{33} = \cos\beta $ 符号判断。
 
-#### 2. 求解 $ \boldsymbol{\alpha} $（绕 Z 轴转角）
+#### 2. 求解 $ \mathbf{\alpha} $（绕 Z 轴转角）
 
 观察总矩阵的第 1 行第 1 列和第 2 行第 1 列元素：
 
@@ -285,7 +286,7 @@ $$
 
 **取值范围**：$ \alpha \in [-\pi,\pi] $，$ \arctan2 $ 可直接确定象限。
 
-#### 3. 求解 $ \boldsymbol{\gamma} $（绕 X 轴转角）
+#### 3. 求解 $ \mathbf{\gamma} $（绕 X 轴转角）
 
 观察总矩阵的第 3 行第 2 列和第 3 行第 3 列元素：
 
@@ -310,7 +311,7 @@ $$
 
 **取值范围**：$ \gamma \in [-\pi,\pi] $。
 
-#### 4. 特殊情况：$ \boldsymbol{\cos\beta = 0} $（$ \beta = \pm\frac{\pi}{2} $）
+#### 4. 特殊情况：$ \mathbf{\cos\beta = 0} $（$ \beta = \pm\frac{\pi}{2} $）
 
 此时旋转矩阵出现**奇异性**，$ \alpha $ 和 $ \gamma $ 无法唯一确定，二者合并为一个自由度：
 
@@ -513,7 +514,7 @@ std::vector<Vec3d> Planar3LinkArmIK::computeIK(double x, double y, double theta)
 
 随机生成角度：
 
-![](https://cdn.nlark.com/yuque/0/2026/png/57353340/1769437724026-09433272-c137-4f26-99f5-0f8b1283340e.png)
+![](images/10.png)
 
 进行正解得到齐次变换矩阵，算出欧拉角后在圆柱坐标系下求逆解，将逆解得到的电机角度再次进行正解，比较与原始数据的正解结果计算误差：
 
@@ -574,6 +575,6 @@ bool verifyClosedLoop(const double input_theta[5], const std::string& case_name)
 
 测试结果：
 
-![](https://cdn.nlark.com/yuque/0/2026/png/57353340/1769437977303-efff574b-6bed-4d19-b9ea-b6071d477b9f.png)
+![](images/11.png)
 
 在某些角度下会失效，可能涉及到万向锁死，不过由于机械臂自身碰撞，这些角度也可能根本不会出现（等待后续实物继续优化）。
