@@ -143,9 +143,9 @@ int main() {
 
 ### 旋转矩阵（by 豆老师）
 
-**内旋定义**：每次旋转的参考坐标系是**前一次旋转后的本体坐标系**，旋转顺序为 $ \mathbf{Z \to Y \to X} $，对应的转角分别为 $ \mathbf{\alpha} $（绕 Z 轴）、$ \mathbf{\beta} $（绕 Y 轴）、$ \mathbf{\gamma} $（绕 X 轴）。
+**内旋定义**：每次旋转的参考坐标系是**前一次旋转后的本体坐标系**，旋转顺序为 $Z \to Y \to X$，对应的转角分别为 $\alpha$（绕 Z 轴）、$\beta$（绕 Y 轴）、$\gamma$（绕 X 轴）。
 
-#### 1. 第一步：绕本体 Z 轴旋转 $ \alpha $
+#### 1. 第一步：绕本体 Z 轴旋转 $\alpha$
 
 旋转前本体坐标系与世界坐标系重合，绕 Z 轴旋转的矩阵为：
 
@@ -158,11 +158,11 @@ $$
 \end{bmatrix}
 $$
 
-旋转后，本体坐标系姿态由 $ \mathbf{R}\_z(\alpha) $ 描述。
+旋转后，本体坐标系姿态由 $\mathbf{R}_z(\alpha)$ 描述。
 
-#### 2. 第二步：绕旋转后本体 Y 轴旋转 $ \beta $
+#### 2. 第二步：绕旋转后本体 Y 轴旋转 $\beta$
 
-此时的旋转轴是**第一步旋转后的本体 Y 轴**（记为 $ Y_1 $），需将世界坐标系下的旋转矩阵转换为本体坐标系的旋转操作，本质是**共轭变换**：
+此时的旋转轴是**第一步旋转后的本体 Y 轴**（记为 $Y_1$），需将世界坐标系下的旋转矩阵转换为本体坐标系的旋转操作，本质是**共轭变换**：
 
 $$
 \mathbf{R}_{y1}(\beta) = \mathbf{R}_z(\alpha) \cdot \mathbf{R}_y(\beta) \cdot \mathbf{R}_z^{-1}(\alpha)
@@ -196,9 +196,9 @@ $$
 \end{bmatrix}
 $$
 
-#### 3. 第三步：绕旋转后本体 X 轴旋转 $ \gamma $
+#### 3. 第三步：绕旋转后本体 X 轴旋转 $\gamma$
 
-同理，旋转轴是**第二步旋转后的本体 X 轴**（记为 $ X_2 $），总旋转矩阵为三步旋转矩阵的乘积（内旋的核心性质：本体坐标系下的旋转序列等价于世界坐标系下旋转矩阵按顺序左乘）：
+同理，旋转轴是**第二步旋转后的本体 X 轴**（记为 $X_2$），总旋转矩阵为三步旋转矩阵的乘积（内旋的核心性质：本体坐标系下的旋转序列等价于世界坐标系下旋转矩阵按顺序左乘）：
 
 $$
 \mathbf{R}_{zyx}(\alpha,\beta,\gamma) = \mathbf{R}_z(\alpha) \cdot \mathbf{R}_y(\beta) \cdot \mathbf{R}_x(\gamma)
@@ -230,9 +230,9 @@ $$
 
 ---
 
-### 二、从旋转矩阵反求转角（$ \alpha,\beta,\gamma $）
+### 二、从旋转矩阵反求转角（$\alpha,\beta,\gamma$）
 
-设已知世界坐标系下的旋转矩阵 $ \mathbf{R} $ 为：
+设已知世界坐标系下的旋转矩阵 $\mathbf{R}$ 为：
 
 $$
 \mathbf{R} =
@@ -243,9 +243,9 @@ r_{31} & r_{32} & r_{33}
 \end{bmatrix}
 $$
 
-将 $ \mathbf{R} $ 与上述总旋转矩阵对比，通过元素对应关系求解转角。
+将 $\mathbf{R}$ 与上述总旋转矩阵对比，通过元素对应关系求解转角。
 
-#### 1. 求解 $ \mathbf{\beta} $（绕 Y 轴转角）
+#### 1. 求解 $\beta$（绕 Y 轴转角）
 
 观察总矩阵的第 3 行第 1 列元素：
 
@@ -259,9 +259,9 @@ $$
 \beta = \arcsin(-r_{31}) = -\arcsin(r_{31})
 $$
 
-**取值范围**：$ \beta \in [-\frac{\pi}{2},\frac{\pi}{2}] $，若需覆盖全姿态（$ \beta \in [0,\pi] $），可结合 $ r\_{33} = \cos\beta $ 符号判断。
+**取值范围**：$\beta \in [-\frac{\pi}{2},\frac{\pi}{2}]$，若需覆盖全姿态（$\beta \in [0,\pi]$），可结合 $r_{33} = \cos\beta$ 符号判断。
 
-#### 2. 求解 $ \mathbf{\alpha} $（绕 Z 轴转角）
+#### 2. 求解 $\alpha$（绕 Z 轴转角）
 
 观察总矩阵的第 1 行第 1 列和第 2 行第 1 列元素：
 
@@ -272,7 +272,7 @@ r_{21} = \sin\alpha\cos\beta
 \end{cases}
 $$
 
-当 $ \cos\beta \neq 0 $（即 $ \beta \neq \pm\frac{\pi}{2} $）时，两式相除得：
+当 $\cos\beta \neq 0$（即 $\beta \neq \pm\frac{\pi}{2}$）时，两式相除得：
 
 $$
 \tan\alpha = \frac{r_{21}}{r_{11}}
@@ -284,9 +284,9 @@ $$
 \alpha = \arctan2(r_{21}, r_{11})
 $$
 
-**取值范围**：$ \alpha \in [-\pi,\pi] $，$ \arctan2 $ 可直接确定象限。
+**取值范围**：$\alpha \in [-\pi,\pi]$，$\arctan2$ 可直接确定象限。
 
-#### 3. 求解 $ \mathbf{\gamma} $（绕 X 轴转角）
+#### 3. 求解 $\gamma$（绕 X 轴转角）
 
 观察总矩阵的第 3 行第 2 列和第 3 行第 3 列元素：
 
@@ -297,7 +297,7 @@ r_{33} = \cos\beta\cos\gamma
 \end{cases}
 $$
 
-当 $ \cos\beta \neq 0 $ 时，两式相除得：
+当 $\cos\beta \neq 0$ 时，两式相除得：
 
 $$
 \tan\gamma = \frac{r_{32}}{r_{33}}
@@ -309,90 +309,16 @@ $$
 \gamma = \arctan2(r_{32}, r_{33})
 $$
 
-**取值范围**：$ \gamma \in [-\pi,\pi] $。
+**取值范围**：$\gamma \in [-\pi,\pi]$。
 
-#### 4. 特殊情况：$ \mathbf{\cos\beta = 0} $（$ \beta = \pm\frac{\pi}{2} $）
+#### 4. 特殊情况：$\cos\beta = 0$（$\beta = \pm\frac{\pi}{2}$）
 
-此时旋转矩阵出现**奇异性**，$ \alpha $ 和 $ \gamma $ 无法唯一确定，二者合并为一个自由度：
+此时旋转矩阵出现**奇异性**，$\alpha$ 和 $\gamma$ 无法唯一确定，二者合并为一个自由度：
 
-- 当 $ \beta = \frac{\pi}{2} $ 时，$ \tan(\alpha+\gamma) = -\frac{r*{12}}{r*{22}} $
-- 当 $ \beta = -\frac{\pi}{2} $ 时，$ \tan(\alpha-\gamma) = \frac{r*{12}}{r*{22}} $
+- 当 $\beta = \frac{\pi}{2}$ 时，$\tan(\alpha+\gamma) = -\dfrac{r_{12}}{r_{22}}$
+- 当 $\beta = -\frac{\pi}{2}$ 时，$\tan(\alpha-\gamma) = \dfrac{r_{12}}{r_{22}}$
 
 ---
-
-C++ 代码：
-
-```cpp
-/**
- * @brief 从齐次变换矩阵提取欧拉角
- * @note 旋转顺序：内旋 Z -> Y' -> X'' (Tait-Bryan Z-Y-X)
- *       数学等价于 外旋 X -> Y -> Z
- *       矩阵形式：R = Rz(yaw) * Ry(pitch) * Rx(roll)
- * @param homogeneous_matrix 4x4齐次变换矩阵（行优先存储）
- * @return 包含yaw/pitch/roll的欧拉角结构体
- */
-EulerAngles homogeneousMatrixToEuler(const double homogeneous_matrix[4][4]) {
-    EulerAngles euler;
-
-    // 提取旋转矩阵元素
-    double r00 = homogeneous_matrix[0][0];
-    double r01 = homogeneous_matrix[0][1];
-    double r02 = homogeneous_matrix[0][2];
-    double r10 = homogeneous_matrix[1][0];
-    double r11 = homogeneous_matrix[1][1];
-    double r12 = homogeneous_matrix[1][2];
-    double r20 = homogeneous_matrix[2][0];
-    double r21 = homogeneous_matrix[2][1];
-    double r22 = homogeneous_matrix[2][2];
-
-    /*
-     * 根据修正后的旋转矩阵:
-     * r02 = c₁s₂₃₄,  r12 = s₁s₂₃₄
-     * r20 = s₂₃₄c₅,  r21 = -s₂₃₄s₅
-     * r22 = -c₂₃₄
-     *
-     * 物理意义:
-     * yaw   = θ₁ (基座旋转)
-     * pitch = θ₂+θ₃+θ₄ (手臂俯仰)
-     * roll  = θ₅ (末端旋转)
-     */
-
-    const double EPSILON = 1e-6;
-    double s234 = sqrt(r02 * r02 + r12 * r12);  // |sin(θ₂+θ₃+θ₄)|
-
-    // 1. 提取欧拉角
-    if (s234 > EPSILON) {
-        // 非奇异情况: θ₂+θ₃+θ₄ ≠ 0 且 ≠ π
-        euler.yaw = atan2(r12, r02);       // θ₁ = atan2(s₁s₂₃₄, c₁s₂₃₄)
-        euler.pitch = atan2(s234, -r22);     // θ₂₃₄ = atan2(s₂₃₄, c₂₃₄)
-        euler.roll = atan2(-r21, r20);      // θ₅ = atan2(s₅, c₅)
-    }
-    else {
-        // 奇异情况 (万向锁): θ₂+θ₃+θ₄ ≈ 0 或 π
-        euler.roll = 0.0;  // 约定: 奇异时设roll=0
-
-        if (r22 < 0) {
-            // θ₂+θ₃+θ₄ ≈ 0 时, r22 = -c₂₃₄ ≈ -1
-            euler.pitch = 0.0;
-            // 此时只能确定 θ₁-θ₅
-            euler.yaw = atan2(r10, r00);
-        }
-        else {
-            // θ₂+θ₃+θ₄ ≈ π 时, r22 = -c₂₃₄ ≈ 1
-            euler.pitch = PI;  // 统一使用全局定义的PI，避免依赖M_PI
-            // 此时只能确定 θ₁+θ₅
-            euler.yaw = atan2(-r10, -r00);
-        }
-    }
-    euler.pitch += -THETA_OFFSET;
-    // 2. 归一化角度到 [-PI, PI]
-    euler.yaw = normalizeAngle(euler.yaw);
-    euler.pitch = normalizeAngle(euler.pitch);
-    euler.roll = normalizeAngle(euler.roll);
-
-    return euler;
-}
-```
 
 ### 运动学逆解（正解由状态转移矩阵求得）
 
