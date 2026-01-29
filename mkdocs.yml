@@ -90,7 +90,7 @@ nav:
       - 部署指南: blog/contribution/index2.md
   - 四足组:
       - 四足组: blog/foursteps/index.md
-      - 机械臂: blog/foursteps/dogarms/index.md
+      - 四足任务赛机械臂底层驱动思路: blog/foursteps/dogarms/index.md
   - 电控组:
       - 新手指南: blog/electronics/freshman/index.md
       - R2上层代码说明: blog/electronics/r2/index.md
@@ -195,12 +195,10 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
 
-  - markdown.extensions.meta
   - pymdownx.highlight:
       linenums: true
   - pymdownx.keys
   - pymdownx.snippets
-  - pymdownx.progressbar
   - pymdownx.superfences:
       custom_fences:
         - name: math
