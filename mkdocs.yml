@@ -90,6 +90,7 @@ nav:
       - 部署指南: blog/contribution/index2.md
   - 四足组:
       - 四足组: blog/foursteps/index.md
+      - 机械臂: blog/foursteps/dogarms/index.md
   - 电控组:
       - 新手指南: blog/electronics/freshman/index.md
       - R2上层代码说明: blog/electronics/r2/index.md

@@ -14,7 +14,7 @@ date: 2025-04-20
 
 ```bash
 sudo apt install -y build-essential clang cmake make git curl wget unzip zip
-sudo apt install -y vim tree htop tmux
+sudo apt install -y vim tree htop tmux iproute2
 
 # git lfs
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
