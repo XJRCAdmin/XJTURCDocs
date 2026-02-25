@@ -497,6 +497,11 @@ bool verifyClosedLoop(const double input_theta[5], const std::string& case_name)
         yaw_error = fabs(rad2deg(loop_target.yaw - original_yaw));
         pitch_error = fabs(rad2deg(loop_target.pitch - original_pitch));
         roll_error = fabs(rad2deg(loop_target.roll - original_roll));
+    } catch (const std::exception& e) {
+        PRINT_ERROR("逆解失败，异常信息：" << e.what() << "\n");
+        is_stable = false;
+        return is_stable;
+    }
 ```
 
 测试结果：

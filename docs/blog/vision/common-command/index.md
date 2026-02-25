@@ -6,7 +6,7 @@ date: 2025-04-20
 # 常用命令汇总
 
 !!! note "前言"
-    任何人都可以完善这一篇博文。
+任何人都可以完善这一篇博文。
 
 由于不想一直 gpt 询问或者搜索一些很基础的命令，所以这里总结一下。
 
@@ -184,3 +184,27 @@ done
 ```
 
 如上所述,该脚本的用法是`./kill.sh <name>`。
+
+## windows 安装 WSL2
+
+所谓 WSL，也就是 Windows Subsystem for Linux，是 Windows 系统中的一种 Linux 子系统，它允许你在 Windows 系统中运行 Linux 应用程序，并且以一种类似 Docker 的方式运行。值得注意的是，WSL 本身并不支持 GUI 应用程序，但是目前的 WSL2 可以与 Windows 共享 GUI，也就是从 WSL 中发起的 GUI 应用可以直接显示在 Windows 系统中。
+
+参考教程:
+
+- [刘悦的技术博客](https://www.cnblogs.com/v3ucn/p/18339221)
+- [Win11 家庭版启用或关闭 Windows 功能中没有 hyper-v？](https://zhuanlan.zhihu.com/p/700411014)
+- [在 Windows 11 家庭版中安装 Windows Sandbox](https://zhuanlan.zhihu.com/p/700419029)
+
+WSL2 上网配置 config，即在 windows 的用户目录下新建`.wslconfig`文件，内容如下,也可以参考[阿汐的博客](https://axi404.top/blog/wsl-coding)：
+
+```bash
+[wsl2]
+[wsl2]
+networkingMode=mirrored
+nestedVirtualization=true
+ipv6=true
+autoMemoryReclaim=gradual # gradual | dropcache | disabled
+dnsTunneling=true
+firewall=true
+autoProxy=true
+```
