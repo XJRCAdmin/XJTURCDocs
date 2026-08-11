@@ -182,4 +182,138 @@ Host WSL
 ![alt text](16.png)
 
 
+## Tailscale 教程
+
+上面的 ssh 连接方式通常要求客户端和服务器在同一个局域网内，或者服务器有公网 IP、端口映射。Tailscale 可以把多台设备组成一个安全的虚拟局域网（tailnet），这样即使电脑在宿舍、实验室、家里等不同网络下，也可以直接用 Tailscale 分配的地址进行 ssh 连接。
+
+### 适用场景
+
+- 服务器没有公网 IP，但是需要在外网远程连接；
+- 路由器不方便做端口转发；
+- 想继续使用上文的 ssh、scp、VSCode Remote SSH 流程；
+- 希望只允许加入同一个 Tailscale 网络的设备访问 ssh。
+
+这里推荐先使用“普通 ssh over Tailscale”：Tailscale 只负责打通网络，ssh 登录、密钥、VSCode Remote SSH 的使用方式都和上文一致。
+
+### 安装并登录 Tailscale
+
+在需要互相连接的两台设备上都安装 Tailscale：一台作为客户端电脑，一台作为要被连接的服务器。
+
+Linux 可以使用官方安装脚本：
+
+```bash
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up
+```
+
+Windows 和 macOS 可以从 Tailscale 官网下载安装包，安装完成后登录同一个账号即可。
+
+登录完成后，在服务器上查看当前设备的 Tailscale 地址：
+
+```bash
+tailscale ip -4
+tailscale status
+```
+
+输出中形如 `100.x.y.z` 的地址就是该服务器在 Tailscale 网络中的地址。这个地址通常不会因为换 Wi-Fi、换宿舍网络而变化。
+
+### 确认服务器 ssh 服务已经开启
+
+Tailscale 只负责让两台设备互相“看得见”，真正的远程登录仍然需要服务器上的 ssh 服务正常运行。可以在服务器上检查：
+
+```bash
+sudo systemctl enable --now ssh
+sudo systemctl status ssh
+```
+
+如果前文已经完成 `openssh-server` 的安装和 ssh 登录测试，这一步一般不需要重复配置。
+
+### 使用 Tailscale 地址登录服务器
+
+在客户端电脑上执行：
+
+```bash
+ssh ${UserName}@${TailscaleIP}
+```
+
+例如，服务器用户名是 `rc`，Tailscale 地址是 `100.100.123.123`，则输入：
+
+```bash
+ssh rc@100.100.123.123
+```
+
+后续输入密码或使用前文配置好的 ssh 密钥即可登录。
+
+如果 Tailscale 后台开启了 MagicDNS，也可以使用机器名连接，例如：
+
+```bash
+ssh rc@myserver
+```
+
+其中 `myserver` 是 Tailscale 管理页面中显示的设备名。
+
+### 配置 VSCode Remote SSH
+
+Tailscale 和 VSCode Remote SSH 可以直接配合使用，只需要把 `HostName` 改成服务器的 Tailscale 地址或 MagicDNS 名称：
+
+```bash
+Host RC_Tailscale
+    HostName 100.100.123.123
+    User rc
+
+Host RC_Tailscale_DNS
+    HostName myserver
+    User rc
+```
+
+保存后，在 VSCode Remote SSH 菜单中选择 `RC_Tailscale` 或 `RC_Tailscale_DNS` 即可远程连接。之后打开文件夹、运行终端、编辑代码的方式和前文完全一致。
+
+### 可选：使用 Tailscale SSH
+
+Tailscale 还提供了一个叫 Tailscale SSH 的功能，它可以让 Tailscale 接管 ssh 的认证和授权，减少手动分发 ssh 公钥的步骤。能够跨局域网段实现两台机器ssh liked 的访问。在目标服务器上可以执行：
+
+```bash
+sudo tailscale set --ssh
+```
+
+启用后，可以直接使用普通 ssh 命令连接：
+
+```bash
+ssh ${UserName}@${MachineName}
+ssh ${UserName}@${TailscaleIP}
+```
+配置好之后类似于：
+![](18.png)
+
+需要注意：
+
+- Tailscale SSH 只对来自 Tailscale 网络的 ssh 连接生效；
+- 它会接管目标设备 `22` 端口上的 SSH 访问；
+- 是否允许某个用户连接，取决于 Tailscale 管理后台里的访问控制策略；
+- 对初学者来说，优先使用上一节“普通 ssh over Tailscale”更直观，也更容易和 VSCode Remote SSH 配合。
+
+### 常见问题
+
+1. `ssh` 连接超时
+
+    先确认两台设备都已经登录 Tailscale，并且 `tailscale status` 中能看到对方在线。如果 Tailscale 网络本身不通，ssh 也无法连接。
+
+2. 能 ping 通 Tailscale 地址，但 ssh 连接失败
+
+    检查服务器上的 ssh 服务是否启动，用户名是否正确，以及服务器防火墙是否拦截了 ssh 端口。
+
+3. VSCode Remote SSH 连接失败
+
+    先不要打开 VSCode，直接在终端中执行 `ssh ${UserName}@${TailscaleIP}`。只有命令行可以正常连接后，VSCode Remote SSH 才更容易成功。
+
+4. 不知道应该用 Tailscale 地址还是原来的局域网 IP
+
+    如果两台设备不在同一个局域网，优先使用 Tailscale 的 `100.x.y.z` 地址；如果就在同一个局域网，两种地址通常都可以使用。
+
+参考资料：
+
+- [Tailscale Linux 安装文档](https://tailscale.com/download/linux)
+- [Protect your SSH servers using Tailscale](https://tailscale.com/docs/reference/ssh-over-tailscale)
+- [Tailscale SSH 文档](https://tailscale.com/docs/features/tailscale-ssh)
+
 --- 

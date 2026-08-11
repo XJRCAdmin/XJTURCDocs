@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" role="img" aria-labelledby="title desc">
+  <title id="title">存储层次示意图</title>
+  <desc id="desc">从应用程序到文件系统、分区表、块设备和硬盘硬件的层次关系。</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fc; }
+      .card { fill: #ffffff; stroke: #d5dee9; stroke-width: 2; rx: 18; }
+      .arrow { stroke: #52657a; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .title { font: 700 30px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #162033; }
+      .label { font: 700 24px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #223044; }
+      .text { font: 18px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #4a5a6b; }
+      .small { font: 16px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #617083; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#52657a" />
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="980" height="560" rx="28" />
+  <text class="title" x="50" y="58">数据从“文件”落到“硬盘”的路径</text>
+  <text class="small" x="52" y="88">硬盘只认识一块块可读写的地址，文件和目录是上层规则组织出来的。</text>
+
+  <rect class="card" x="70" y="125" width="840" height="65" />
+  <text class="label" x="105" y="165">应用程序</text>
+  <text class="text" x="280" y="165">保存 report.docx、main.cpp、image.png 等文件</text>
+
+  <path class="arrow" d="M490 195 V225" />
+  <rect class="card" x="70" y="230" width="840" height="65" />
+  <text class="label" x="105" y="270">文件系统</text>
+  <text class="text" x="280" y="270">NTFS / exFAT / FAT32 / ext4：管理目录、权限、空闲空间</text>
+
+  <path class="arrow" d="M490 300 V330" />
+  <rect class="card" x="70" y="335" width="840" height="65" />
+  <text class="label" x="105" y="375">分区表</text>
+  <text class="text" x="280" y="375">MBR / GPT：记录每个分区从哪里开始、到哪里结束</text>
+
+  <path class="arrow" d="M490 405 V435" />
+  <rect class="card" x="70" y="440" width="395" height="70" />
+  <text class="label" x="105" y="482">块设备</text>
+  <text class="small" x="230" y="482">LBA 0、LBA 1、LBA 2...</text>
+  <rect class="card" x="515" y="440" width="395" height="70" />
+  <text class="label" x="550" y="482">硬盘硬件</text>
+  <text class="small" x="700" y="482">HDD 盘片 / SSD 闪存</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="580" viewBox="0 0 980 580" role="img" aria-labelledby="title desc">
+  <title id="title">BIOS 与 UEFI 启动流程</title>
+  <desc id="desc">对比 BIOS 加载 MBR 启动代码和 UEFI 加载 EFI 系统分区中 EFI 文件的流程。</desc>
+  <defs>
+    <style>
+      .bg { fill: #fbfcff; }
+      .panel { fill: #ffffff; stroke: #d3dce8; stroke-width: 2; rx: 20; }
+      .bios { fill: #fff1e8; stroke: #d97738; }
+      .uefi { fill: #e8f2ff; stroke: #4a83d8; }
+      .step { fill: #ffffff; stroke: #c8d3df; stroke-width: 2; rx: 14; }
+      .arrow { stroke: #52657a; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .title { font: 700 30px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #162033; }
+      .head { font: 700 25px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #1e2d42; }
+      .label { font: 700 19px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #26364a; }
+      .text { font: 16px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #53667b; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#52657a" />
+    </marker>
+  </defs>
+  <rect class="bg" width="980" height="580" rx="28" />
+  <text class="title" x="52" y="58">开机启动：BIOS 看“第一扇区”，UEFI 找“启动文件”</text>
+
+  <rect class="panel bios" x="55" y="95" width="415" height="430" />
+  <text class="head" x="85" y="135">BIOS + MBR</text>
+  <rect class="step" x="100" y="165" width="325" height="58" />
+  <text class="label" x="130" y="199">1. POST 自检</text>
+  <path class="arrow" d="M262 226 V253" />
+  <rect class="step" x="100" y="255" width="325" height="58" />
+  <text class="label" x="130" y="289">2. 按启动顺序找硬盘</text>
+  <path class="arrow" d="M262 316 V343" />
+  <rect class="step" x="100" y="345" width="325" height="58" />
+  <text class="label" x="130" y="379">3. 读取 MBR 第一扇区</text>
+  <path class="arrow" d="M262 406 V433" />
+  <rect class="step" x="100" y="435" width="325" height="58" />
+  <text class="label" x="130" y="469">4. 启动代码加载系统</text>
+
+  <rect class="panel uefi" x="510" y="95" width="415" height="430" />
+  <text class="head" x="540" y="135">UEFI + GPT</text>
+  <rect class="step" x="555" y="165" width="325" height="58" />
+  <text class="label" x="585" y="199">1. 初始化硬件</text>
+  <path class="arrow" d="M717 226 V253" />
+  <rect class="step" x="555" y="255" width="325" height="58" />
+  <text class="label" x="585" y="289">2. 读取 NVRAM 启动项</text>
+  <path class="arrow" d="M717 316 V343" />
+  <rect class="step" x="555" y="345" width="325" height="58" />
+  <text class="label" x="585" y="379">3. 进入 EFI 系统分区</text>
+  <path class="arrow" d="M717 406 V433" />
+  <rect class="step" x="555" y="435" width="325" height="58" />
+  <text class="label" x="585" y="469">4. 加载 .efi 启动程序</text>
+
+  <text class="text" x="80" y="555">关键词：MBR、第一扇区、传统兼容</text>
+  <text class="text" x="535" y="555">关键词：ESP、.efi 文件、启动项管理</text>
+</svg>

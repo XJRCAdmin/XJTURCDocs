@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="540" viewBox="0 0 980 540" role="img" aria-labelledby="title desc">
+  <title id="title">MBR 与 GPT 分区布局对比</title>
+  <desc id="desc">MBR 将启动代码和分区记录集中在磁盘开头；GPT 有保护 MBR、主 GPT、分区区域和备份 GPT。</desc>
+  <defs>
+    <style>
+      .bg { fill: #fbfcff; }
+      .disk { fill: #ffffff; stroke: #cfd8e3; stroke-width: 2; rx: 20; }
+      .mbr { fill: #ffdfd6; stroke: #d1664b; }
+      .gpt { fill: #dcecff; stroke: #4b82d1; }
+      .part1 { fill: #e0f4e8; stroke: #45a66a; }
+      .part2 { fill: #f9edc7; stroke: #bf9a2f; }
+      .part3 { fill: #eee6ff; stroke: #8564cc; }
+      .backup { fill: #e7edf4; stroke: #6d7d90; }
+      .title { font: 700 30px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #172033; }
+      .label { font: 700 22px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #26364a; }
+      .text { font: 17px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #4c5e72; }
+      .tiny { font: 15px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #586a7f; }
+    </style>
+  </defs>
+  <rect class="bg" width="980" height="540" rx="28" />
+  <text class="title" x="52" y="58">MBR 与 GPT：同样是“磁盘地图”，表达能力不同</text>
+
+  <text class="label" x="70" y="115">MBR</text>
+  <rect class="disk" x="70" y="140" width="840" height="110" />
+  <rect class="mbr" x="95" y="170" width="120" height="50" rx="10" />
+  <text class="tiny" x="124" y="200">MBR</text>
+  <rect class="part1" x="235" y="170" width="145" height="50" rx="10" />
+  <text class="tiny" x="275" y="200">主分区 1</text>
+  <rect class="part2" x="395" y="170" width="145" height="50" rx="10" />
+  <text class="tiny" x="435" y="200">主分区 2</text>
+  <rect class="part3" x="555" y="170" width="145" height="50" rx="10" />
+  <text class="tiny" x="595" y="200">主分区 3</text>
+  <rect class="backup" x="715" y="170" width="145" height="50" rx="10" />
+  <text class="tiny" x="755" y="200">主分区 4</text>
+  <text class="text" x="95" y="278">特点：分区记录集中在开头；主分区数量少；传统上常与 BIOS 启动搭配。</text>
+
+  <text class="label" x="70" y="345">GPT</text>
+  <rect class="disk" x="70" y="370" width="840" height="110" />
+  <rect class="mbr" x="95" y="400" width="100" height="50" rx="10" />
+  <text class="tiny" x="113" y="430">保护 MBR</text>
+  <rect class="gpt" x="210" y="400" width="105" height="50" rx="10" />
+  <text class="tiny" x="238" y="430">主 GPT</text>
+  <rect class="part1" x="330" y="400" width="145" height="50" rx="10" />
+  <text class="tiny" x="367" y="430">分区 1</text>
+  <rect class="part2" x="490" y="400" width="145" height="50" rx="10" />
+  <text class="tiny" x="527" y="430">分区 2</text>
+  <rect class="part3" x="650" y="400" width="105" height="50" rx="10" />
+  <text class="tiny" x="680" y="430">更多...</text>
+  <rect class="backup" x="770" y="400" width="105" height="50" rx="10" />
+  <text class="tiny" x="793" y="430">备份 GPT</text>
+  <text class="text" x="95" y="508">特点：支持大硬盘和更多分区；头尾都有表信息；常与 UEFI 启动搭配。</text>
+</svg>

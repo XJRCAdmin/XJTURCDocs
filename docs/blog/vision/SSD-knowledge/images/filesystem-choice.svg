@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="520" viewBox="0 0 980 520" role="img" aria-labelledby="title desc">
+  <title id="title">文件系统选择示意图</title>
+  <desc id="desc">按使用场景选择 NTFS、exFAT、FAT32 或 ext4。</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #d6dde8; stroke-width: 2; rx: 18; }
+      .ntfs { fill: #dbeafe; }
+      .exfat { fill: #dcfce7; }
+      .fat32 { fill: #fef3c7; }
+      .ext4 { fill: #ede9fe; }
+      .title { font: 700 30px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #142033; }
+      .name { font: 700 30px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #18243a; }
+      .text { font: 18px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #45566c; }
+      .small { font: 16px "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #66768a; }
+    </style>
+  </defs>
+  <rect class="bg" width="980" height="520" rx="28" />
+  <text class="title" x="52" y="60">文件系统不是越“高级”越好，而是要匹配场景</text>
+  <text class="small" x="54" y="90">先问：主要在哪个系统用？是否需要跨平台？单个文件会不会超过 4GB？</text>
+
+  <rect class="card ntfs" x="70" y="135" width="395" height="135" />
+  <text class="name" x="105" y="183">NTFS</text>
+  <text class="text" x="105" y="220">Windows 系统盘 / 固定数据盘</text>
+  <text class="small" x="105" y="248">权限、日志、稳定性较完整</text>
+
+  <rect class="card exfat" x="515" y="135" width="395" height="135" />
+  <text class="name" x="550" y="183">exFAT</text>
+  <text class="text" x="550" y="220">U 盘 / 移动硬盘 / 跨平台交换</text>
+  <text class="small" x="550" y="248">支持大文件，跨 Windows/macOS/Linux 方便</text>
+
+  <rect class="card fat32" x="70" y="315" width="395" height="135" />
+  <text class="name" x="105" y="363">FAT32</text>
+  <text class="text" x="105" y="400">旧设备 / 小容量启动兼容分区</text>
+  <text class="small" x="105" y="428">兼容性强，但单文件不能超过 4GB</text>
+
+  <rect class="card ext4" x="515" y="315" width="395" height="135" />
+  <text class="name" x="550" y="363">ext4</text>
+  <text class="text" x="550" y="400">Linux 系统盘 / Linux 数据盘</text>
+  <text class="small" x="550" y="428">成熟稳定，Linux 支持最好</text>
+</svg>
