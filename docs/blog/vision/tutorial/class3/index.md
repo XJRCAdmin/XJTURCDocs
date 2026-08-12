@@ -16,8 +16,9 @@ Host NUC
     IdentityFile C:\Users\xixiboliya\.ssh\id_rsa 
 ```
 注意 `SSH config` 没有提供密码配置，因为将密码存储在明文文件中是不安全的做法，请使用密钥登录。
-## X11协议
-一个常见于通过SSH转发远程主机上的图形化界面（例如rviz）的错误：
+## X11 转发：远程程序为什么能在本机弹窗
+
+一个常见于通过 SSH 转发远程主机图形界面（例如 `rviz`、`rqt`、`xeyes`）的错误：
 ```bash
 qt.qpa.xcb: could not connect to display 
 qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
@@ -26,58 +27,211 @@ This application failed to start because no Qt platform plugin could be initiali
 
 Available platform plugins are:...   
 ```
-**X11**（X Window System 11 版本）协议是一种在Unix / Linux 等系统上用于客户端（应用程序）与 客户端上的X 服务器（显示系统 ）之间通信的图形协议，实现了在远程机器上运行由客户端编写好的程序，而在客户端与用户交互时显示实时的图形界面的转发，例如实时显示照片图像等。图中的X client便代指远端服务器。
 
-为了方便阐述，我们以“现在有一台本地主机B和远端服务器A”进行举例。
+!!! info "X11协议"
+    这部分主要帮助理解 SSH 图形转发的原理。实际调车时，如果可以直接接显示器、无线 HDMI、NoMachine、VNC 或 Web 可视化工具，往往会比 X11 转发稳定。
 
-在 Linux 操作系统中，本地的可视化都是建立在 X 的基础上实现的(尽管部分系统已逐步采用 Wayland)，而如果要使用 remote 传输：在远程服务器 A 中启动图形程序，在用户的本地主机 B 上可视化。就需要将服务器 A 上的 X 图形消息通过某种方式发送给 B。这种传输可通过多种方式实现，其中常见的是使用SSH 的 X11 转发（X forwarding），它通过加密隧道安全地传递 X 协议数据。
+先把两个容易反直觉的名词说清楚：
+
+- **X Server**：负责真正显示窗口、接收键盘鼠标输入的一端。它通常运行在你面前的电脑上，也就是本地主机 B。
+- **X Client**：需要显示图形界面的程序，例如 `rviz`、`rqt`、`xterm`。它可以运行在远端服务器 A 上。
+
+这和我们平时理解的“服务器/客户端”容易反过来。因为在 X11 语境里，**谁控制屏幕键鼠，谁就是 X Server**。远端运行的图形程序只是向这个显示服务发请求，所以它叫 X Client。
 
 ![](output_image/01609db003fdc401e66ed6f80a281572.png)
 
-在整个图形显示过程中，远程主机 A 充当 X Client（即图形程序的运行方），而本地主机 B 充当 X Server（负责图形显示的设备端）。
+为了方便说明，后面统一使用下面的角色：
 
-如此一般的转发流程是：
+- **本地主机 B**：你正在操作的电脑，负责显示窗口；
+- **远端服务器 A**：通过 SSH 登录的机器人、NUC、树莓派或服务器，负责运行图形程序；
+- **本地 `ssh` 客户端**：你在 B 上运行的 SSH 程序；
+- **远端 `sshd` 服务端**：A 上接收 SSH 连接的服务。
 
-- 用户在本地主机 B 上通过 `ssh -X`（或 `ssh -Y`）命令登录远程服务器 A。此时 SSH 客户端会在 B 上启动一个本地的虚拟 X11 监听端口（例如 `localhost:10.0`），并在远程环境变量中设置 `DISPLAY=localhost:10.0`。
-- 当远程服务器 A 上的 X Client（图形应用）启动时，它会将图形输出发送至该 `DISPLAY` 地址。
-- 远程的 SSH 守护进程（sshd）拦截该 X11 数据，并通过已建立的加密 SSH 隧道，将其安全地传输回本地主机 B。
-- 本地主机 B 上的 SSH 客户端接收这些数据后，转发给本地的 X Server，由后者解析并渲染图形界面，实现可视化显示。
+### 不使用 SSH 时，X11 怎么找显示器
 
-上述过程是双向的。这里需要说明两层“二向性”含义：一方面，X 协议本身就是双向的——X Client 向 X Server 发送绘制、资源请求等命令，X Server 则向 X Client 发送输入事件（键盘、鼠标）及其它回馈；另一方面，SSH 隧道也保持双向的数据通路，因此 X 协议在客户端与服务器之间的所有请求与响应都经由该隧道传输。
+X 程序通过 `DISPLAY` 环境变量知道应该把窗口画到哪里。它的常见格式是：
 
-对于默认情况下，若两台机器之间通过TCP协议通信，X server 会监听机器上端口号 “6000 + 显示编号”的数据，并将其转发给SSH隧道进而通信。“显示编号”对应到linux的配置如下：
 ```bash
-export DISPLAY=localhost:0.0  # [主机名]:显示编号.屏幕编号
+hostname:display.screen
 ```
-显示编号的计算方式是：对应一个 TCP 端口号，计算方式是 6000 + 显示编号（例如，localhost:10.0对应 6010）。
 
-在 SSH X11 转发情形下，`sshd` 会为远端会话提供一个代理 DISPLAY 接口（伪 DISPLAY），并在远端环境中将 `DISPLAY` 设置为类似 `localhost:10.0` 的值。具体机制可概括为：远端 X Client 连接到该伪造的 DISPLAY（该接口可以是远端由 `sshd` 创建的本地回环监听端口或 UNIX 套接字），`sshd` 将此连接对应的 X11 数据通过已建立的加密 SSH 信道转发到本地主机 B；本地主机上的 `ssh` 客户端接收后再将数据交给本地的真实 X Server（或对应的套接字）进行解析与渲染。整个链路在逻辑上等价于在远端与本地之间“打通了一条 X11 协议的双向隧道”。
+例如：
 
-在本地显示的情景下，显示编号一般是 0，即 DISPLAY=localhost:0.0，而在远程显示下，SSH 服务器使用 `X11DisplayOffset` 来避免与本地 X Server（如果存在，无论是本地机器还是远程机器）的端口冲突。
+- `:0`：连接本机的 0 号显示；
+- `localhost:0.0`：连接本机 `localhost` 上的 0 号显示、0 号屏幕；
+- `192.168.1.10:0.0`：连接 `192.168.1.10` 这台机器上的 0 号显示。
 
-因而有如下配置：
+传统 TCP 模式下，X Server 的端口号通常是 `6000 + display`。例如 `:0` 对应 6000，`:10` 对应 6010。但现代 Linux 桌面经常使用 Unix socket，很多 X Server 也默认关闭 TCP 监听，所以不要把 X11 简单理解成“永远连 6000 端口”。
 
-远程主机A：
+### 使用 SSH X11 转发时，真正发生了什么
+
+当你在本地主机 B 上运行：
+
+```bash
+ssh -X user@server_A
+```
+
+或者在 `~/.ssh/config` 里写了：
+
+```sshconfig
+Host server_A
+    HostName 192.168.x.x
+    User your_user
+    ForwardX11 yes
+```
+
+SSH 会做几件事：
+
+1. 本地主机 B 上必须先有一个可用的 X Server。Linux 桌面通常已经有；Windows 常见选择是 VcXsrv、Xming、MobaXterm 自带 X Server 或 WSLg；macOS 常见选择是 XQuartz。
+2. 本地 `ssh` 客户端请求远端 `sshd` 开启 X11 forwarding。
+3. 远端 `sshd` 在服务器 A 上创建一个“代理 X Server”，并把远端 shell 里的 `DISPLAY` 自动设置成类似 `localhost:10.0` 的值。
+4. 你在服务器 A 上启动 `rviz`、`rqt`、`xeyes` 这类 X Client 时，它们会连接 `DISPLAY=localhost:10.0`。
+5. 这个连接并不会真的显示在服务器 A 的屏幕上，而是被远端 `sshd` 收下，通过 SSH 加密通道发回本地主机 B。
+6. 本地 `ssh` 客户端再把数据交给本地真实的 X Server，窗口最终显示在 B 的屏幕上。
+
+键盘鼠标事件也会沿着同一条链路反向传回远端程序，所以这个过程是双向的：
+
+```text
+远端图形程序(X Client)
+        |
+        v
+远端 DISPLAY=localhost:10.0 代理入口
+        |
+        v
+远端 sshd == SSH 加密通道 == 本地 ssh
+        |
+        v
+本地 X Server
+        |
+        v
+本机屏幕、键盘、鼠标
+```
+
+这里最关键的一点是：**SSH 成功开启 X11 转发后，远端的 `DISPLAY` 应该由 SSH 自动设置，不应该手动改成 `localhost:0.0`。**
+
+如果你在远端手动执行：
+
+```bash
+export DISPLAY=localhost:0.0
+```
+
+它的意思通常会变成“让远端程序去找远端服务器 A 自己的 0 号显示”，而不是“显示到本地主机 B”。这正是很多教程容易讲乱的地方。
+
+### 为什么会出现 `localhost:10.0`
+
+`localhost:10.0` 里的 `10` 不是随便来的。OpenSSH 服务端有一个配置项叫 `X11DisplayOffset`，默认值通常是 10。它表示 sshd 给 X11 转发选择显示编号时，从 10 开始找，避免和机器上真正存在的 `:0`、`:1` 等本地显示冲突。
+
+所以看到远端 `echo $DISPLAY` 输出：
+
+```bash
+localhost:10.0
+```
+
+通常是好事，说明 SSH 已经帮你创建了代理入口。这里的 `localhost` 指的是**远端服务器 A 自己的回环地址**，不是本地主机 B。
+
+### 推荐配置
+
+远端服务器 A 的 `/etc/ssh/sshd_config` 需要允许 X11 转发：
+
 ```bash
 sudo nano /etc/ssh/sshd_config
-# 配置如下
-X11Forwarding yes # SSH支持发送X11协议的数据
-X11DisplayOffset 10 # 配置DISPLAY偏移量 = 从localhost:10.0开始，也就是6010端口。
-X11UseLocalhost yes # 确保X11 client通过localhost与SSH server通信。
 ```
-本地主机B：
+
+建议配置：
+
+```text
+X11Forwarding yes
+X11DisplayOffset 10
+X11UseLocalhost yes
+```
+
+修改后重启 SSH 服务：
+
 ```bash
+sudo systemctl restart ssh
+```
+
+本地主机 B 的 SSH 配置可以写成：
+
+```sshconfig
+Host alias_A
+    HostName ip_A
+    User usr_A
+    ForwardX11 yes
+```
+
+如果 `rviz`、Qt 或 OpenGL 程序在普通 `-X` 下受限，可以改用可信转发：
+
+```sshconfig
 Host alias_A
     HostName ip_A
     User usr_A
     ForwardX11 yes
     ForwardX11Trusted yes
-    ForwardAgent yes    
 ```
-接着需要告诉主机 B 的 X server 是哪个端口发送过来了 X11 数据。这就需要在主机 B 上设置 DISPLAY 环境变量。因为前面也说过，在本地的显示一般默认 0 号端口，因此我们通常设置为：
+
+等价命令是：
+
 ```bash
-export DISPLAY=localhost:0.0 # 本地 6000 端口
+ssh -X alias_A   # 普通 X11 转发
+ssh -Y alias_A   # 可信 X11 转发，权限更大，风险也更高
 ```
+
+`ForwardAgent yes` 是 SSH agent 转发，和 X11 转发不是一回事。除非你明确需要在远端继续用本地私钥跳转到其他机器，否则不要因为图形转发而顺手打开它。
+
+### Windows 本地主机要额外注意
+
+如果本地主机 B 是 Windows，并且你在 PowerShell 里直接运行 `ssh -X`，需要先启动一个 Windows 侧的 X Server，例如 VcXsrv。很多情况下还需要让本地 SSH 客户端知道真实 X Server 在哪里：
+
+```powershell
+$env:DISPLAY = "localhost:0.0"
+ssh -Y alias_A
+```
+
+这一步设置的是**本地主机 B 上的环境变量**，目的是让本地 `ssh` 客户端能连接本地 X Server。登录成功后，远端服务器 A 里的 `DISPLAY` 仍然应该由 SSH 自动设置成类似 `localhost:10.0`，不要在远端再手动改回 `localhost:0.0`。
+
+### 快速检查流程
+
+连接远端后先看：
+
+```bash
+echo $DISPLAY
+```
+
+正常情况下应看到类似：
+
+```bash
+localhost:10.0
+```
+
+然后用一个小程序测试：
+
+```bash
+sudo apt install xauth x11-apps
+xeyes
+```
+
+如果 `xeyes` 能在本机弹出窗口，再测试 `rqt` 或 `rviz`。如果 `echo $DISPLAY` 是空的，说明这次 SSH 会话没有成功开启 X11 转发。
+
+### 常见问题怎么判断
+
+| 现象 | 常见原因 | 检查方向 |
+| :- | :- | :- |
+| `echo $DISPLAY` 为空 | SSH 没开 X11 转发 | 使用 `ssh -X/-Y`，或检查 `ForwardX11 yes` |
+| `X11 forwarding request failed` | 远端 `sshd_config` 不允许，或缺少 `xauth` | 检查 `X11Forwarding yes`，安装 `xauth` |
+| `qt.qpa.xcb: could not connect to display` | 没有可用 DISPLAY，或本地 X Server 没启动 | 本地先启动 X Server，再重新 SSH |
+| `rviz` 能启动但显示异常 | 普通 `-X` 权限受限或 OpenGL 问题 | 尝试 `ssh -Y`，或改用 VNC/NoMachine |
+| `sudo rviz` 后打不开 | `sudo` 改变了环境和 Xauthority | 尽量不要用 `sudo` 跑 GUI；必须用时再单独处理权限 |
+
+总结一下：X11 转发不是让远端程序直接连本机的 6000 端口，而是 SSH 在远端创建一个代理 `DISPLAY`，远端程序连这个代理，SSH 再把图形协议转回本地真实的 X Server。正常使用时，本地要有 X Server，远端要允许 X11 forwarding，而远端的 `DISPLAY` 由 SSH 自动设置。
+
+参考资料：
+
+- [OpenSSH ssh(1)：X11 forwarding](https://man.openbsd.org/ssh#X11_FORWARDING)
+- [OpenSSH ssh_config(5)：ForwardX11 / ForwardX11Trusted](https://man.openbsd.org/ssh_config#ForwardX11)
+- [OpenSSH sshd_config(5)：X11Forwarding / X11DisplayOffset / X11UseLocalhost](https://man.openbsd.org/sshd_config#X11Forwarding)
+- [X.Org New Developer's Guide：X client/server concepts](https://www.x.org/guide/concepts/)
+- [X(7)：DISPLAY names](https://www.x.org/archive/X11R6.8.1/doc/X.7.html)
 
 # Public Key & Private Key
 (参考[只用10分钟，一次性搞懂公钥和私钥 - 知乎](https://zhuanlan.zhihu.com/p/698175888))
@@ -403,4 +557,3 @@ int main() {
 Producer（生产者）线程不断向队列FakeDiskScheduler中生产数据（push数字），每生产一个数据就通知所有等待的消费者线程（cv.notify_all），并休眠100ms。Consumer（消费者）线程不断等待队列有数据（cv.wait），一旦有数据就取出并消费（pop并打印），如果队列空且生产结束（done为true），则退出循环。
 
 需要解释的一点是，`cv.wait(lock, [] { return !FakeDiskScheduler.empty() || done;`这句话的作用是，线程调用 `cv.wait(lock, pred)`时，先检查 `lambda`表达式的返回值，如果为`True`则直接不进入等待；若为`false`则释放`lock`持有的互斥量,将线程加入 `cv` 的等待队列，阻塞，直到被 `cv.notify_one()` / `cv.notify_all()` 唤醒，再次加锁。
-

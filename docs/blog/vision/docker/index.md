@@ -11,6 +11,9 @@ resources:
       byline: ""
 ---
 
+!!! warning "提示"
+		本文撰写于2025年1月，因而有些内容并不具有参考性，希望读者以阅读专业教程为准。
+
 > 本文侧重1.讲解docker的插件使用。2.视觉consimulation项目的跨环境迁移
 # 基础配置
 - 安装vscode。
