@@ -8,13 +8,13 @@ CMake能够输出各种各样的makefile或者project文件，能测试编译器
 
 CMake通过**CMakeLists.txt** 文件来描述项目的构建过程，用户可以在这个文件中定义源代码、库、头文件、编译选项等信息，从而让CMake自动生成相应的构建文件。
 ![](images/Pasted%20image%2020250801133829.png)
-# install
+## install
 在ubuntu上：
 ```bash
 $ sudo apt-get install build-essential
 $ sudo apt-get install cmake
 ```
-# simple instance
+## simple instance
 此示例显示如何生成make install目标以在您的系统上安装文件和二进制文件。
 
 ```bash
@@ -108,9 +108,9 @@ install (FILES cmake-examples.conf
 - `find_library()`:查找外部库文件的基础命令，优先在 `/usr/local/lib` 和 `/usr/lib` 中搜寻。
 
 还有一些方法暂不举出，大部分时候是查阅官方文档或者直接询问chat老师。
-# HomeWork
+## HomeWork
 
-#  值得阅读的教程与文献
+## 值得阅读的教程与文献
 - 一个cmake项目的“标准”结构——[github repository](https://github.com/kigster/cmake-project-template)
 - [From sources to executables — CMake Workshop documentation](https://coderefinery.github.io/cmake-workshop/hello-cmake/)的HANDS ON WORKSHOP部分。
 - [github上的learning cmake](https://github.com/ttroy50/cmake-examples/blob/master)

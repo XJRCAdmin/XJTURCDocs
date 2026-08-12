@@ -15,20 +15,20 @@
 ![](output_image/ef3f63ac3034a0b9de6a1f472905545e.png)
 接下来，选择机器标注还是人工标注。下面分两个标题讲述。
 ![](output_image/7e964e4e8df41032e15810462d46c1b1.png)
-# 机器标注
+## 机器标注
 这种情况下使用机器标注，每一百张将耗费1credit，普通用户每个月有30credits。
 
 如下图所示，您可以添加不同的类名，并且给AI labeler一句话的描述：
 ![](output_image/c25f0c13b4e6d37767f11f869b23a50c.png)
 
 AI labeler会给你标注的预览图，效果不错的话可以直接开始让机器自动标注，标注完成之后最好自己一个一个地review过去。
-# 人工标注
+## 人工标注
 ![](output_image/1238bd67a1dba40ae5e98ada270cac9b.png)![](output_image/f4480803f553fbaadca8d50a2dc5601f.png)![](output_image/c7ae8eeec29b36c3ccfef5e9edc6c2f5.png)
 ![](output_image/c06ccc4a251bda0d99ef50c8dbc4b5d7.png)
 
 ![](output_image/1aa02514ec1d4fd39d1de562cf5117f7.png)
 ![](output_image/d784e0971c1503ce13d7db533e2a4302.png)
-# 导出数据集
+## 导出数据集
 ![](output_image/3de1e64c917747854345136c20c68f5f.png)
 ![](output_image/c2c9a342183205d05564386082e431c5.png)
 ![](output_image/a77f9236a6043ce68f090e46decbf705.png)

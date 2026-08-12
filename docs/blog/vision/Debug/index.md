@@ -9,12 +9,12 @@
 mkdir build
 cd build
 ```
-# 安装CMake
+## 安装CMake
 vscode插件搜索CMake并且下载。
 ![](images/图片.webp)
 接着在vscode的左侧栏中找到CMake。
 
-# 调试步骤
+## 调试步骤
 首先，请确保你的项目有CMakeLists.txt并且能够通过build target阶段，也就是大概这样的：
 ```bash
 cd build
@@ -62,7 +62,7 @@ make -j`nproc`  # nproc代表逻辑核数目，也可以是线程数这样的
 ![](images/3.png)
 
 
-# 生成launch.json
+## 生成launch.json
 如果你的工作空间内没有`.vscode/launch.json`的话，会在接下来的debug阶段报错`launch:program '/home/pi/xixiboliya/CSAPP/busthub/build/test/hyperloglog_test' does not exist.`，所以新建一个`.vscode/launch.json`文件。
 
 接着，选择你要调试的对象，该对象是add_executable的target，接着点击旁边的小虫子：

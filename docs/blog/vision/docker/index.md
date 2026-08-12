@@ -15,15 +15,15 @@ resources:
 		本文撰写于2025年1月，因而有些内容并不具有参考性，希望读者以阅读专业教程为准。
 
 > 本文侧重1.讲解docker的插件使用。2.视觉consimulation项目的跨环境迁移
-# 基础配置
+## 基础配置
 - 安装vscode。
 - 在vscode安装 Docker 插件与ms-vscode-remote.remote-containers插件。
-# Docker 学习
+## Docker 学习
 这里可以参考：[阮一峰docker教程](https://ruanyifeng.com/blog/2018/02/docker-tutorial.html)、[菜鸟教程docker](https://www.runoob.com/docker/docker-tutorial.html)、[雪雁docker](https://www.cnblogs.com/codelove/p/10606434.html)
 
 > 容器container是镜像image的实例化。
 
-# 生成 dockerfile 
+## 生成 dockerfile
 > 一种途径是自行编写dockerfile，另一种途径是使用插件自动生成再进行修改。
 
 dockerfile的编写：[知乎](https://zhuanlan.zhihu.com/p/79949030)、[CSDN](https://blog.csdn.net/x1131230123/article/details/135769591)
@@ -44,7 +44,7 @@ dockerfile的编写：[知乎](https://zhuanlan.zhihu.com/p/79949030)、[CSDN](h
 
 这些信息自行GPT即可。
 
-# build
+## build
 上面步骤完成之后，你的项目会有`dockerfile`和`.dockerignore`，或许会有`docker-compose.debug.yml`、`docker-compose.yml`。
 
 在资源管理器中选中`dockerfile`并且右键点击，找到`build image..`选项，接着输入<镜像名>:<标签>
@@ -79,7 +79,7 @@ dockerfile的编写：[知乎](https://zhuanlan.zhihu.com/p/79949030)、[CSDN](h
 ![alt text](image-5.png)
 
 接着会发现，我们的image实例化之后的容器虽然在build时没有包含代码功能包，但我们是可以发现存在于本地项目下的代码功能包却在dockercontainer开发容器中。这样就可以对已经构建的容器进行测试了。。
-# .devcontainer文件
+## .devcontainer文件
 当你`build`好`image`之后，这时你的的`image`还在本地，本机可以作为宿主机。
 
 Visual Studio Code Dev Containers扩展允许您使用Docker 容器作为功能齐全的开发环境。项目中的文件告诉 VS Code 如何使用定义良好的工具和运行时堆栈devcontainer.json访问（或创建） Dev Containers 。该VS Code 的容器配置存储在devcontainer.json文件中。该文件类似于用于launch.json调试配置的文件，但用于启动（或附加到） Dev Containers 。
@@ -115,7 +115,7 @@ Visual Studio Code Dev Containers扩展允许您使用Docker 容器作为功能�
 
 编写好.devcontainer/devcontainer.json文件之后，就能畅通无阻使用`ctrl+shift+p`在开发容器玩耍了。
 
-# con_simulation视觉代码
+## con_simulation视觉代码
 由于dockerhub难以连接上(蚌埠住了)，假设原镜像有n层，本人build的n+1层镜像无法push到dockerhub，因此使用母镜像，经过测试确实能够使用，只不过镜像并不是本人的：
 ```bash
 docker pull lihanchen2004/pb_rm_simulation:1.0.0

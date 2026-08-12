@@ -332,16 +332,16 @@ ssh [其他选项] -L [bind_address:]local_port:dest_host:dest_port user@ssh_ser
 ssh [其他选项] -R [bind_address:]remote_port:dest_host:dest_port user@ssh_server
 ```
 
-##### bind_address（可选）
+#### bind_address（可选）
 
 - 对 -L：表示**在本地（client）**上绑定哪个地址（默认 localhost）。比如 0.0.0.0:8080 让本机所有网卡可访问该端口（注意安全）。
 
 - 对 -R：表示在**远端（server）**上绑定哪个地址（默认 localhost，通常只有 server 本机能访问，若想让外网也能访问需服务器端开启 GatewayPorts yes 或使用 0.0.0.0，且服务端 SSHD 配置允许）。
-##### local_port / remote_port
+#### local_port / remote_port
 
 本地或远程被监听的端口号。
 
-##### dest_host:dest_port
+#### dest_host:dest_port
 
 当隧道被触发时，SSH 的那一端会尝试连接到此目的地。注意解析位置：
 

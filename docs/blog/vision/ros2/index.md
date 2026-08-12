@@ -3,13 +3,13 @@
 !!! info
     ROS2内容之广，并非一篇教程能够覆盖所有内容，因此仅列出一些有用的入口以便参考、学习,并且配有了基本的概念解读。
 
-# 学习教程
+## 学习教程
 - [鱼香动手学ROS2](https://fishros.com/d2lros2/#/)，它的配套源码：[GitHub链接](https://github.com/fishros/ros2bookcode)，[Gitee链接](https://gitee.com/ohhuo/ros2bookcode)
 - [小鱼ROS2 bilibili](https://www.bilibili.com/video/BV1GW42197Ck?spm_id_from=333.788.videopod.sections&vd_source=7bd9495d31281f143b7b2db3418d2f17)
 - [小鱼ROS2 视频源代码](https://github.com/fishros/ros2bookcode)
 
-# 节点 Node 和软件包 Package
-## Node
+## 节点 Node 和软件包 Package
+### Node
 
 一个 节点（node） 是 ROS 2 图中的参与者，它使用客户端库与其他节点进行通信。节点之间可以在同一进程内通信，也可以在不同进程，甚至在不同机器之间通信。节点通常是 ROS 图中的计算单元；每个节点应当完成一个逻辑功能。
 
@@ -23,7 +23,7 @@
 
 ROS 和手机又很多相似之处，手机中的 APP 等同于 ROS 中的 Node。
 ![Node](images/1.png)
-## Package
+### Package
 虽然 ROS 程序的基础单元是节点，但我们并不能像手机安装 app 一样只安装单个节点，而是以 Package 为单位进行安装
 
 ![Package](images/package.png)
@@ -37,8 +37,8 @@ ROS 采用的模块化的设计理念，强调功能的相互独立，所以造�
 
 ![ROS Workspace](images/ros_workspace.png)
 
-# 话题 Topic 和消息 Message
-## Topic->"频道"
+## 话题 Topic 和消息 Message
+### Topic->"频道"
 ![](images/topic.gif)
 
 `ros2 run <your-package>`之后，在终端输入rqt，你会看到类似下图的graph：
@@ -51,7 +51,7 @@ ROS 采用的模块化的设计理念，强调功能的相互独立，所以造�
 - 机器人速度指令话题通常会有多个发布者，但同一时间只能有一个发言人
 ![](images/wangzhe2.png)
 
-# Message->"语言"
+### Message->"语言"
 消息的作用是携带数据，从 Publisher 流动到 Subscriber。但不同数据的类型和容量都不一样，因此就需要提前指定数据类型进行传输
 ![](images/message.png)
 
@@ -67,7 +67,7 @@ ros2 interface show <type>
 
 实际开发中也会遇到的,自定义消息类型参考文档:[Custom-ROS2-Interfaces](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Custom-ROS2-Interfaces.html)
 
-# 第一个Node
+## 第一个Node
 - [创建一个 ROS 2 包](https://docs.ros.org/en/humble/How-To-Guides/Developing-a-ROS-2-Package.html)
 - [编写一个简单的 C++ 发布者和订阅者](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html)
 
@@ -97,7 +97,7 @@ ament_target_dependencies(pub_sub_cmd_vel rclcpp geometry_msgs tf2_ros tf2_geome
 ```bash
 colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 ```
-## 代码
+### 代码
 ```pub_sub_cmd_vel.cpp
 #include <geometry_msgs/msg/twist.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -205,12 +205,12 @@ ament_package()
 ![](images/result.png)
 除了上述方法之外，也可以模仿 ROS2 官方文档：[Writing-A-Simple-Cpp-Publisher-And-Subscriber](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html)
 
-# ROS2其他通信机制
+## ROS2其他通信机制
 - [Services](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Services/Understanding-ROS2-Services.html)
 - [Actions](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Actions/Understanding-ROS2-Actions.html)
 - [Topic Services Actions](https://docs.ros.org/en/humble/How-To-Guides/Topics-Services-Actions.html)
 
-# 参考学习
+## 参考学习
 - [阿杰的ROS视频教程](https://www.bilibili.com/video/BV1BP4y1o7pw/)
 
 推荐这个系列视频的原因在于讲的非常生动有趣，但可惜是 ROS1 的。
@@ -225,7 +225,7 @@ ROS1 和 ROS2 在核心概念上是几乎相同的，都有 Node，Topic，Actio
 - [rm_vision](https://gitlab.com/rm_vision)
 - [Robomaster-oss](https://github.com/robomaster-oss/rmoss_core)
 
-# ROS2 Debug 的vscode配置
+## ROS2 Debug 的vscode配置
 
 在项目根目录的.vscode文件夹下创建launch.json文件，内容如下：
 

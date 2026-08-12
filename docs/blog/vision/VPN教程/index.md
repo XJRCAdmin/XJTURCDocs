@@ -18,7 +18,7 @@ resources:
 
 ubuntu 版本不同其实差别不是很大，本文的教程适用于 ubuntu 22.04，架构为 x86_64.
 
-#### 步骤一：建立 clash 文件夹并导入安装包
+### 步骤一：建立 clash 文件夹并导入安装包
 
 ```bash
 mkdir clash
@@ -36,7 +36,7 @@ tar -xzvf clashpremium-release-linux-amd64-v3.tar.gz
 !!! red "注意"
     不同 release 版本的 clash 安装包的名称不同，截至 2025-11-18，其 linux-86_64 版本的安装包为`clashpremium-release-linux-amd64-v3.tar.gz`。amd64 是 x86_64 的另一种叫法。之后随着更新，您或许需要自行修改一下安装包的名称。
 
-#### 步骤二：配置 VPN 参数文件
+### 步骤二：配置 VPN 参数文件
 
 ```bash
 wget -O config.yaml "https://cqd4w.no-mad-world.club/link/JMdr9H6ofZOHDvJO?clash=3"
@@ -45,7 +45,7 @@ wget -O config.yaml "https://cqd4w.no-mad-world.club/link/JMdr9H6ofZOHDvJO?clash
 当然，若上述链接不行的话你也可以在这里复制 wget 命令：
 ![](imgs/test.png)
 
-#### 步骤三：执行配置命令实现启动 clash 和 VPN 代理
+### 步骤三：执行配置命令实现启动 clash 和 VPN 代理
 
 ```bash
 chmod +x clash
@@ -55,7 +55,7 @@ chmod +x clash
 执行效果图如下所示：
 ![clash_results image](imgs/clash_results.png)
 
-#### 步骤四：购买机场提供的稳定 VPN,并修改设置网络参数
+### 步骤四：购买机场提供的稳定 VPN,并修改设置网络参数
 
 机场链接[IKUUU VPN](https://ikuuu.one/user/tutorial?os=linux&client=clash##)
 

@@ -3,13 +3,13 @@ title: Blender 自动化数据集生成指南
 date: 2025-11-22
 ---
 
-# Blender 数据集生成完整指南（完善版）
+## Blender 数据集生成完整指南（完善版）
 
 本指南面向 **熟悉编程但不熟悉 Blender** 的用户，帮助你在 Windows / Ubuntu 环境下，使用 Blender + Python 自动化生成数据集。文档已经对你提供的内容进行了补全、标准化，同时修复了逻辑不严谨的地方，并补全了 Blender API 中常用对象的属性、数据格式说明。
 
 ---
 
-# 目录
+## 目录
 
 1. 环境配置
 2. blender 的运行逻辑
@@ -37,7 +37,7 @@ date: 2025-11-22
 
 ---
 
-# 1 环境配置
+## 1 环境配置
 
 这是我的操作系统与 Blender 版本：
 
@@ -53,11 +53,11 @@ blender -v
 
 ---
 
-# 2 blender 的运行逻辑
+## 2 blender 的运行逻辑
 
 这个章节用于讲解 blender 渲染的逻辑以及场景的组成。如果感觉不够形象，或者是给出太多概念（就犹如亲爱的高数和线代），可以先看后面的应用示例，再回来对应，加深理解。
 
-## 2.1 关于 blender 的基本概念
+### 2.1 关于 blender 的基本概念
 
 Blender 是“数据块 Data-Block”系统，每个元素都是数据，可以被引用、共享、复用。
 blender 中有 5 个核心对象类型：
@@ -76,7 +76,7 @@ Scene
 
 #### Scene（场景）
 
-###### 定义
+##### 定义
 
 Scene 是 Blender 中的 **最高级容器**，代表一个完整的动画或渲染场景。
 
@@ -215,7 +215,7 @@ Blender 会在帧与帧之间自动补间（Interpolation），形成平滑动�
 如果有兴趣加深了解，请自行查阅官方文档：[Blender Python API](https://docs.blender.org/api/current/?utm_medium=www-footer)
 或者是更加完整的：[Blender Documentation - blender.org](https://docs.blender.org/)
 
-##### 移动与 transform
+#### 移动与 transform
 
 Blender 中有三种 transform：
 
@@ -234,11 +234,11 @@ Blender 中有三种 transform：
 3. **Local vs Global space（局部坐标 vs 世界坐标）** - Blender 所有矩阵变换都基于此 - `matrix_world` → 把本地转到世界 - `matrix_local` → 在局部空间
    比如，前文所述，在 collection 中有多个 object，每个又有多个属性。对于每一个 object 来说，其操作有：位置（location），旋转（rotation），缩放（scale）而真正的顶点、边、面的数据存在 Mesh（网格数据）。**你在 3D 视图移动一个立方体，移动的是 Object 的 transform，而不是 Mesh 的顶点。** 这是 Blender 最容易误解的部分，也是后文我们在处理顶点时需要进行一次相对于中心的 TF 的原因，同时这样也可以大幅增加数据复用的效率。
 
-##### **外观与渲染操作（材料相关）**
+#### **外观与渲染操作（材料相关）**
 
 一个物体的“视觉表现”通过材质决定：
 
-###### （1）材质本身（Material）：
+##### （1）材质本身（Material）：
 
 - 基础 BSDF（为反射和折射函数） 参数（金属、粗糙度、透明度）
 - 法线 Normal
@@ -256,7 +256,7 @@ Blender 中有三种 transform：
 | alpha              | float              | 透明度（非节点模式）     |
 | specular_intensity | float              | 高光强度（非节点模式）   |
 
-###### （2）材质内部的节点（Shader Nodes）
+##### （2）材质内部的节点（Shader Nodes）
 
 节点操作包括：
 
@@ -316,7 +316,7 @@ Blender 中有三种 transform：
 
 ![](pic/mapping.png)
 
-##### 模式（Mode）
+#### 模式（Mode）
 
 Blender 的所有操作都依赖“模式”，也可以理解为不同的”编辑窗口“，在 API 中是不同的对象。
 Mode 决定 API 可访问的数据集合，切换模式时，Blender 会切换内部数据上下文
@@ -335,22 +335,22 @@ Mode 决定 API 可访问的数据集合，切换模式时，Blender 会切换�
 ![](pic/blender_mode.png)
 **你能不能编辑某类数据，取决于你所处于的模式。** 不然，可能会出现你本想拖动一个方块，却只拖动其一个顶点的现象。
 
-# 3 构建模型
+## 3 构建模型
 
-## 3.0 blender 的可视化界面的使用
+### 3.0 blender 的可视化界面的使用
 
 推荐观看 up 主 KurTips 的视频以进行深入了解建模
 链接如下：[【Kurt】Blender 零基础入门教程 | Blender 中文区新手必刷教程(已完结)\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV14u41147YH/?spm_id_from=333.337.search-card.all.click&vd_source=0602723d2fa6ae76fcf6451fc6e70abd)
 ![](pic/initial.png)
 
-## 3.1 创建基础模型
+### 3.1 创建基础模型
 
 - Blender 默认文件中会包含一个立方体。
 - 若你删除了，可通过：
   - GUI 菜单：`Add → Mesh → Cube`
   - 或快捷键：**Shift + A → Mesh → Cube**
 
-### 位置 / 旋转 / 缩放调整
+#### 位置 / 旋转 / 缩放调整
 
 在右侧 **Object Properties（蓝色图标）**：
 
@@ -371,7 +371,7 @@ obj.scale = (1.0, 2.0, 1.0)
 
 ![](pic/python.png)
 
-## 3.2 纹理贴图
+### 3.2 纹理贴图
 
 这一个操作是用于进行方块表面的纹理（平面）进行处理。这里的操作有些复杂，较为详细的基础知识在前文中有所提及，在 blender 的图形界面里面的实现可以参照 KurTips 的视频里材质篇有关 UV 纹理绘制的部分。
 ![](wenli_show.png)
@@ -500,16 +500,16 @@ tex.name = f"Image_{tex.image.name}"
 
 ---
 
-# 录制 Blender 动画
+## 录制 Blender 动画
 
-## 4.1 进入相机视角
+### 4.1 进入相机视角
 
 - 选中相机 → 小键盘 0
 - 没有小键盘：`View → Cameras → Active Camera`（左上角菜单）
 
 进入“飞行模式”：**Shift + ~**（波浪线）
 
-## 4.2 录制关键帧
+### 4.2 录制关键帧
 
 - 打开底部的 **Timeline**
 - 点击红色圆点启用自动关键帧
@@ -519,9 +519,9 @@ tex.name = f"Image_{tex.image.name}"
 
 ---
 
-# 光照与背景
+## 光照与背景
 
-## 5.1 环境光 HDRI
+### 5.1 环境光 HDRI
 
 GUI/图形化界面操作：
 
@@ -554,15 +554,15 @@ def enable_hdri(hdri_path):
 
 ---
 
-## 5.2 发光物体
+### 5.2 发光物体
 
 使用发光材质，让物体变成纯白，背景变成纯黑，目前可以用于生成 mask。注意，这不是一个指令，是一系列操作。
 
 ---
 
-# Python 自动化 Blender
+## Python 自动化 Blender
 
-## 6.0 调用 blender 的方式
+### 6.0 调用 blender 的方式
 
 由于目前我已知的 blenderAPI 里只有对 python 的支持，因此使用 python 进行代码实现。
 可以使用两种方式：1.在 blender 中直接在使用 text editor 进行脚本编写，或者是在命令行中使用语句。2.在 VScode 等编辑器里面打好代码后使用 blender 运行。这两种方法实际上都是在 blender 里运行 python（注意，blender 中的 python 并没有 numpy，opencv 等库，注意使用，或者将其下载到 blender 的 python 环境中）。显然，在 VScode 中的编辑的体感更好，因此以下示例使用 VScode 视角。
@@ -577,7 +577,7 @@ Ubuntu 相似形式。
 
 ---
 
-# 6.1 初始化 Scene
+### 6.1 初始化 Scene
 
 ```python
 scene = bpy.context.scene
@@ -596,7 +596,7 @@ scene.render.resolution_y = 1080
 
 ---
 
-# 6.2 遍历动画帧
+### 6.2 遍历动画帧
 
 ```python
 frame_start = scene.frame_start
@@ -609,9 +609,9 @@ for frame in range(frame_start, frame_end + 1):
 
 ---
 
-# 6.3 物体姿态、矩阵、坐标转换
+### 6.3 物体姿态、矩阵、坐标转换
 
-## 物体对象的常见属性
+### 物体对象的常见属性
 
 | 属性                      | 数据类型        | 说明                      |
 | ------------------------- | --------------- | ------------------------- |
@@ -645,7 +645,7 @@ uv = world_to_camera_view(scene, camera, world_point)
 
 ---
 
-# 6.4 Mask 渲染（遮挡其他物体）
+### 6.4 Mask 渲染（遮挡其他物体）
 
 1.可以通过之前获得的顶点数据进行计算得到
 
@@ -723,7 +723,7 @@ bpy.context.scene.world = original_world
 
 ---
 
-# 6.5 更换纹理
+### 6.5 更换纹理
 
 使用 Image Texture 节点替换纹理即可。
 其中，texture_dir 是指放置纹理图案的文件位置
@@ -748,7 +748,7 @@ texture_files = sorted([f for f in os.listdir(texture_dir) if f.lower().endswith
 
 ---
 
-# 6.6 渲染图片 + 写标签
+### 6.6 渲染图片 + 写标签
 
 ```python
 # ========= 渲染 =========

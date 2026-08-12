@@ -3,14 +3,14 @@ title: 常用命令汇总
 date: 2025-04-20
 ---
 
-# 常用命令汇总
+## 常用命令汇总
 
 !!! note "前言"
     任何人都可以完善这一篇博文。
 
 由于不想一直 gpt 询问或者搜索一些很基础的命令，所以这里总结一下。
 
-## 基础编译套餐
+### 基础编译套餐
 
 ```bash
 sudo apt install -y build-essential clang cmake make git curl wget unzip zip
@@ -22,7 +22,7 @@ sudo apt-get install git-lfs
 git lfs install
 ```
 
-## 开启 ssh service
+### 开启 ssh service
 
 ```bash
 sudo systemctl enable ssh
@@ -30,7 +30,7 @@ sudo systemctl start ssh
 sudo systemctl status ssh #查看状态
 ```
 
-## miniconda
+### miniconda
 
 以下命令不需要加上`sudo`，因为我们需要将 conda 安装在用户目录下。
 
@@ -78,7 +78,7 @@ custom_channels:
   simpleitk: https://mirrors.ustc.edu.cn/anaconda/cloud
 ```
 
-## zsh 或者 oh-my-zsh
+### zsh 或者 oh-my-zsh
 
 ```bash
 sudo apt update
@@ -113,7 +113,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(z git zsh-autosuggestions zsh-syntax-highlighting)
 ```
 
-## git
+### git
 
 要修改全局的 Git 用户名和邮箱，可以使用以下命令：
 
@@ -122,11 +122,11 @@ git config --global user.name "新的用户名"
 git config --global user.email "新的邮箱地址"
 ```
 
-## Neovim
+### Neovim
 
 [安装 lazyvim](../lazyvim/index.md)
 
-## docx 阅读器
+### docx 阅读器
 
 ```bash
 sudo apt update
@@ -135,13 +135,13 @@ sudo apt install libreoffice-writer
 libreoffice yourfile.docx  # 打开文件
 ```
 
-## 鱼香 ros 一键安装脚本
+### 鱼香 ros 一键安装脚本
 
 ```bash
 wget http://fishros.com/install -O fishros && . fishros
 ```
 
-# git lfs 安装
+## git lfs 安装
 
 ```bash
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
@@ -151,7 +151,7 @@ git lfs track "dev/rtd/models/*.trt"  # 添加示例文件
 git add .gitattributes
 ```
 
-## Google chrome 安装
+### Google chrome 安装
 
 ```bash
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -159,7 +159,7 @@ sudo apt install ./google-chrome-stable_current_amd64.deb
 # 或者 sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
 
-## kill 脚本
+### kill 脚本
 
 下面是一个强制 kill 某个进程的脚本，用于替代`ps aux | grep xxx | kill -9 <PID>`的繁琐操作，您可以将他保存起来。
 
@@ -185,7 +185,7 @@ done
 
 如上所述,该脚本的用法是`./kill.sh <name>`。
 
-## windows 安装 WSL2
+### windows 安装 WSL2
 
 所谓 WSL，也就是 Windows Subsystem for Linux，是 Windows 系统中的一种 Linux 子系统，它允许你在 Windows 系统中运行 Linux 应用程序，并且以一种类似 Docker 的方式运行。值得注意的是，WSL 本身并不支持 GUI 应用程序，但是目前的 WSL2 可以与 Windows 共享 GUI，也就是从 WSL 中发起的 GUI 应用可以直接显示在 Windows 系统中。
 

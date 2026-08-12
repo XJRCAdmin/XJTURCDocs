@@ -16,12 +16,12 @@ resources:
 !!! info "提示"
     本文写作的时候脑子有一些混乱，写的不是很好，希望读者可以进行调整和补充。
 
-# 开始之前
+## 开始之前
 在开始之前，你可以在vscode中下载插件**通灵译码**、**GitHub copilot**、**Trae**等插件，也可以使用`cursor`、`windsurf`这些Code编辑器，能极大~~偷懒~~提升效率。
 示例：
 
 ![](1.png)
-# 什么是Doxygen
+## 什么是Doxygen
 
 Doxygen 是一种**文档生成工具**，常用于整个项目的Doxyfile的生成，主要用于从源代码中提取注释，并生成技术文档。它广泛用于 C++、C、Java、Python 等多种编程语言中，帮助开发者自动生成文档，从而提高代码的可读性和维护性。
 ### 具体功能：
@@ -33,8 +33,8 @@ Doxygen 是一种**文档生成工具**，常用于整个项目的Doxyfile的生
 3. **交叉引用代码和文档**：Doxygen 可以生成类结构、函数调用图等内容，使得文档与代码紧密结合，便于开发者理解代码的架构。
     
 4. **可生成不同格式的输出**：例如 HTML 文档可以方便地作为在线帮助系统，LaTeX 格式可以用于打印高质量的 PDF 文档。
-# 下载与使用
-## vscode插件
+## 下载与使用
+### vscode插件
 在扩展商店里搜索并安装如下扩展
 - Doxygen Documentation Generator
 ![](2.png)
@@ -67,11 +67,11 @@ Doxygen 是一种**文档生成工具**，常用于整个项目的Doxyfile的生
   "doxdocgen.generic.customTags": ["@attention"]
 }
 ```
-## Windows下载doxygen
+### Windows下载doxygen
  - 打开开始菜单，查找“Doxygen”。如果未找到，说明你需要下载并安装 Doxygen。
  - 访问 [Doxygen 官方下载页面](http://www.doxygen.nl/download.html)，下载适用于 Windows 的 Doxygen 安装包。
  - 安装完成后，重新打开 VSCode 尝试运行 `doxygen`。
-## Ubuntu / Linux
+### Ubuntu / Linux
 ```bash
 	sudo apt-get install doxygen
 ```
@@ -87,16 +87,16 @@ Doxygen 是一种**文档生成工具**，常用于整个项目的Doxyfile的生
 ```bash
 	 source ~/.bashrc  # 使用 Bash
 ```
-## 使用
-### 文件头
+### 使用
+#### 文件头
 这部分包括`license`、版权声明注释、文件描述注释。
 ![](3.png)
-## 方法
+### 方法
 接着在函数名前、`#include`前输入`/***/`或者`///`并且分行，便可以使用`Doxygen`。
 ![](4.png)
 将鼠标`hover`在函数上会出现如下信息：
 ![](5.png)
-## 生成Doxyfile
+### 生成Doxyfile
 
 打开当前工作目录，在终端中输入:
 ```bash
@@ -109,8 +109,8 @@ Doxygen 是一种**文档生成工具**，常用于整个项目的Doxyfile的生
 ```
 你的项目下会生成`html`和`latex`文件夹。
 
-# 语法
-## 文件
+## 语法
+### 文件
 - @file： 文件名
 - @brief：文件一句话介绍
 - @author：文件作者
@@ -118,7 +118,7 @@ Doxygen 是一种**文档生成工具**，常用于整个项目的Doxyfile的生
 - @see：额外的一些参考信息，比如有用过的链接
 - @addtogroup ：创建方法分组 ，`@{` 和 `@}` 表示分组的开始和结束
 
-## 变量前的注释
+### 变量前的注释
 
 ```c
 /**
@@ -132,7 +132,7 @@ typedef struct BoxStruct
     double c; /**< Etc. */
 } tBoxStruct;
 ```
-## API 方法注释样例
+### API 方法注释样例
 ```c
 /* GLOBAL FUNCTIONS */
 /**
@@ -197,7 +197,7 @@ API Groups:
 - @note：备注信息
 - @warning：需要方法使用者注意的信息，比如：功能未经完全验证
 
-# commit规范
+## commit规范
 
 ## 1.示例
 ![](example.png)
@@ -231,4 +231,3 @@ API Groups:
 
 具体可以[参考这篇文档](https://zhuanlan.zhihu.com/p/684354477)
 [如何规范你的Git commit？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/182553920)
-
