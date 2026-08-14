@@ -1,210 +1,231 @@
 ---
-title: 常用命令汇总
-date: 2025-04-20
+title: Ubuntu 重装后的快速配置清单
+date: 2026-08-14
+description: 视觉组电脑重装 Ubuntu 后的环境恢复顺序、常用安装命令与检查清单。
 ---
 
-## 常用命令汇总
+# Ubuntu 重装后的快速配置清单
 
-!!! note "前言"
-    任何人都可以完善这一篇博文。
+!!! info "这篇文档的用途"
+    本页不是 Linux 入门教程，而是一份**系统重装后的环境恢复清单**。当视觉组的 Intel NUC、雷神主机或个人开发电脑需要重装 Ubuntu 时，可以按照这里的顺序快速恢复常用工具。
 
-由于不想一直 gpt 询问或者搜索一些很基础的命令，所以这里总结一下。
+    如果你是第一次学习 Linux，请先阅读[视觉组文档导览与学习路径](../learning-path/index.md)，再回到本页操作。
 
-### 基础编译套餐
+本文主要面向 Ubuntu 22.04/24.04 LTS 与 x86_64（amd64）设备。不同项目可能固定使用不同的 Ubuntu、ROS 2、CUDA 或驱动版本，重装前应先确认项目要求。
+
+## 0. 重装前先备份
+
+如果旧系统仍能启动，至少检查以下内容：
+
+- 已完成的代码是否已经提交并推送到远程仓库；
+- `~/.ssh/`、`~/.gitconfig` 和需要保留的 `~/.config/` 配置；
+- 浏览器书签、实验数据、标定文件、模型权重和数据集；
+- VS Code 扩展列表；
+- Conda/Python 环境及项目依赖；
+- 设备驱动版本、CUDA 版本、ROS 2 发行版和项目分支。
+
+可以先导出部分清单：
 
 ```bash
-sudo apt install -y build-essential clang cmake make git curl wget unzip zip
-sudo apt install -y vim tree htop tmux iproute2
+mkdir -p ~/reinstall-backup
 
-# git lfs
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-sudo apt-get install git-lfs
+git config --global --list > ~/reinstall-backup/git-config.txt
+code --list-extensions > ~/reinstall-backup/vscode-extensions.txt
+conda env list > ~/reinstall-backup/conda-env-list.txt 2>/dev/null || true
+dpkg --get-selections > ~/reinstall-backup/apt-packages.txt
+```
+
+!!! danger "不要上传密钥"
+    SSH 私钥、API Key、VPN 订阅地址和服务器密码只能保存到可信的离线介质或密码管理器，不要提交到 Git 仓库。
+
+## 1. 更新系统
+
+```bash
+sudo apt update
+sudo apt upgrade -y
+```
+
+如果升级了内核、显卡驱动或其他底层组件，建议先重启再继续：
+
+```bash
+sudo reboot
+```
+
+## 2. 安装基础工具
+
+下面这组软件覆盖常见的 C/C++ 编译、调试、Git、网络诊断和终端操作：
+
+```bash
+sudo apt install -y \
+  build-essential clang clangd cmake ninja-build gdb \
+  git git-lfs curl wget ca-certificates gnupg \
+  unzip zip vim tree htop tmux \
+  iproute2 net-tools openssh-client openssh-server
+
 git lfs install
 ```
 
-### 开启 ssh service
+快速检查：
 
 ```bash
-sudo systemctl enable ssh
-sudo systemctl start ssh
-sudo systemctl status ssh #查看状态
+gcc --version
+clang --version
+clangd --version
+cmake --version
+git --version
 ```
 
-### miniconda
+## 3. 配置 Git
 
-以下命令不需要加上`sudo`，因为我们需要将 conda 安装在用户目录下。
+将示例内容替换为自己的姓名和邮箱：
 
 ```bash
-x86_64：
+git config --global user.name "你的名字"
+git config --global user.email "你的邮箱"
+git config --global init.defaultBranch main
+git config --global core.autocrlf input
+```
+
+检查配置：
+
+```bash
+git config --global --list
+```
+
+Git、分支、远程仓库和 SSH 密钥的解释见 [Git 入门](../GitIntro/index.md)。
+
+## 4. 开启 SSH 服务（按需）
+
+只有需要让其他电脑远程登录本机时，才需要开启 SSH 服务端：
+
+```bash
+sudo systemctl enable --now ssh
+systemctl status ssh --no-pager
+```
+
+查看本机地址：
+
+```bash
+ip address
+```
+
+远程连接、密钥认证和 VS Code Remote SSH 的配置见 [SSH 与 Remote SSH](../ssh&remotessh/index.md)。
+
+## 5. 安装 Miniconda（按需）
+
+先确认处理器架构：
+
+```bash
+dpkg --print-architecture
+```
+
+Intel NUC 和雷神主机通常显示 `amd64`：
+
+```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-chmod +x Miniconda3-latest-Linux-x86_64.sh
-./Miniconda3-latest-Linux-x86_64.sh  # not sudo
-接着一路ENTER...
+bash Miniconda3-latest-Linux-x86_64.sh
 ```
 
-`arrch64`例如树莓派 Jetson 系列：
+ARM64 设备通常显示 `arm64`：
 
 ```bash
-arrch_64:
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
-chmod 776 Miniconda3-latest-Linux-aarch64.sh
-./Miniconda3-latest-Linux-aarch64.sh
-# 取消开机自启动
+bash Miniconda3-latest-Linux-aarch64.sh
+```
+
+安装完成后重新打开终端，然后关闭 base 环境的自动激活：
+
+```bash
 conda config --set auto_activate_base false
+conda --version
 ```
 
-换源：
+恢复项目时应优先使用仓库提供的 `environment.yml`、`requirements.txt`、容器或其他锁定依赖的文件，不要仅凭旧电脑的全局环境猜测依赖。
+
+## 6. 安装 VS Code 与常用扩展
+
+如果系统已经启用 Snap，可以安装 VS Code：
 
 ```bash
-vim ~/.condarc
+sudo snap install code --classic
 ```
 
-在里面粘贴中科大镜像源：
+视觉组常用扩展可以按需安装：
 
 ```bash
-channels:
-  - defaults
-show_channel_urls: true
-default_channels:
-  - https://mirrors.ustc.edu.cn/anaconda/pkgs/main
-  - https://mirrors.ustc.edu.cn/anaconda/pkgs/r
-  - https://mirrors.ustc.edu.cn/anaconda/pkgs/msys2
-custom_channels:
-  conda-forge: https://mirrors.ustc.edu.cn/anaconda/cloud
-  msys2: https://mirrors.ustc.edu.cn/anaconda/cloud
-  bioconda: https://mirrors.ustc.edu.cn/anaconda/cloud
-  menpo: https://mirrors.ustc.edu.cn/anaconda/cloud
-  pytorch: https://mirrors.ustc.edu.cn/anaconda/cloud
-  simpleitk: https://mirrors.ustc.edu.cn/anaconda/cloud
+code --install-extension llvm-vs-code-extensions.vscode-clangd
+code --install-extension ms-vscode.cmake-tools
+code --install-extension vadimcn.vscode-lldb
+code --install-extension ms-vscode-remote.remote-ssh
+code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-python.python
+code --install-extension openai.chatgpt
 ```
 
-### zsh 或者 oh-my-zsh
+如果重装前已经导出了扩展列表，可以批量恢复：
 
 ```bash
-sudo apt update
-sudo apt install zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+xargs -n 1 code --install-extension < ~/reinstall-backup/vscode-extensions.txt
 ```
 
-为了兼容主题，接下来安装字体:
+## 7. 安装桌面常用软件（按需）
 
-```zsh
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/JetBrainsMono.zip -O JetBrainsMono.zip
-unzip JetBrainsMono.zip -d JetBrainsMono
-mkdir -p ~/.local/share/fonts/JetBrainsMono
-cp JetBrainsMono/*.ttf ~/.local/share/fonts/JetBrainsMono/
-fc-cache -fv
-```
-
-安装完插件之后就可以修改命令行中的字体选项了，找到安装的字体并设定。
-![](images/image.45hryie6yz.webp)
-安装插件：
-
-```zsh
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-```
-
-修改配置文件：
-
-```zsh
-ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(z git zsh-autosuggestions zsh-syntax-highlighting)
-```
-
-### git
-
-要修改全局的 Git 用户名和邮箱，可以使用以下命令：
+安装文档阅读工具：
 
 ```bash
-git config --global user.name "新的用户名"
-git config --global user.email "新的邮箱地址"
+sudo apt install -y libreoffice-writer
 ```
 
-### Neovim
-
-[安装 lazyvim](../lazyvim/index.md)
-
-### docx 阅读器
-
-```bash
-sudo apt update
-sudo apt-get install libreoffice # 安装 libreoffice 基础包
-sudo apt install libreoffice-writer
-libreoffice yourfile.docx  # 打开文件
-```
-
-### 鱼香 ros 一键安装脚本
-
-```bash
-wget http://fishros.com/install -O fishros && . fishros
-```
-
-## git lfs 安装
-
-```bash
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-sudo apt-get install git-lfs
-git lfs install
-git lfs track "dev/rtd/models/*.trt"  # 添加示例文件
-git add .gitattributes
-```
-
-### Google chrome 安装
+安装 Google Chrome：
 
 ```bash
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
-# 或者 sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo apt install -y ./google-chrome-stable_current_amd64.deb
 ```
 
-### kill 脚本
+Chrome 安装包只适用于 amd64。ARM64 设备应使用系统仓库中的 Chromium 或其他支持该架构的浏览器。
 
-下面是一个强制 kill 某个进程的脚本，用于替代`ps aux | grep xxx | kill -9 <PID>`的繁琐操作，您可以将他保存起来。
+## 8. 配置 Zsh（可选）
+
+Zsh、Oh My Zsh、主题和字体属于个人偏好，不是项目运行的必要条件。先安装 Zsh：
 
 ```bash
-#!/bin/bash
-# Usage: ./kill.sh <pattern>
-
-if [ $# -ne 1 ]; then
-echo "Usage: $0 <pattern>"
-exit 1
-fi
-
-PATTERN="$1"
-
-# 以下命令列出所有进程，过滤出包含 PATTERN 的行，排除 grep 本身和本脚本，然后取 PID 列并 kill -9
-ps aux | grep -F "$PATTERN" | grep -v grep | grep -v "$0" | awk '{ print $2 }' | while read PID; do
-if [ -n "$PID" ]; then
-echo "Killing PID: $PID (matching "$PATTERN")"
-kill -9 "$PID"
-fi
-done
+sudo apt install -y zsh fonts-powerline
+chsh -s "$(command -v zsh)"
 ```
 
-如上所述,该脚本的用法是`./kill.sh <name>`。
+如果要安装第三方配置框架，应先阅读脚本内容，再决定是否执行远程安装脚本。安装完成后，可根据个人需要配置自动补全和语法高亮。
 
-### windows 安装 WSL2
+## 9. 恢复项目环境
 
-所谓 WSL，也就是 Windows Subsystem for Linux，是 Windows 系统中的一种 Linux 子系统，它允许你在 Windows 系统中运行 Linux 应用程序，并且以一种类似 Docker 的方式运行。值得注意的是，WSL 本身并不支持 GUI 应用程序，但是目前的 WSL2 可以与 Windows 共享 GUI，也就是从 WSL 中发起的 GUI 应用可以直接显示在 Windows 系统中。
+恢复项目时建议遵循以下顺序：
 
-参考教程:
-
-- [刘悦的技术博客](https://www.cnblogs.com/v3ucn/p/18339221)
-- [Win11 家庭版启用或关闭 Windows 功能中没有 hyper-v？](https://zhuanlan.zhihu.com/p/700411014)
-- [在 Windows 11 家庭版中安装 Windows Sandbox](https://zhuanlan.zhihu.com/p/700419029)
-
-WSL2 上网配置 config，即在 windows 的用户目录下新建`.wslconfig`文件，内容如下,也可以参考[阿汐的博客](https://axi404.top/blog/wsl-coding)：
+1. 克隆仓库并切换到项目指定分支；
+2. 执行 `git lfs pull` 获取大文件；
+3. 阅读仓库的 `README`、`AGENTS.md`、Dockerfile 或 `.devcontainer/`；
+4. 安装项目明确声明的依赖；
+5. 编译并运行最小测试；
+6. 最后再配置相机、雷达、串口、CUDA、ROS 2 等硬件相关环境。
 
 ```bash
-[wsl2]
-[wsl2]
-networkingMode=mirrored
-nestedVirtualization=true
-ipv6=true
-autoMemoryReclaim=gradual # gradual | dropcache | disabled
-dnsTunneling=true
-firewall=true
-autoProxy=true
+git clone <仓库地址>
+cd <仓库目录>
+git lfs pull
 ```
+
+Docker 与开发容器见 [Docker 与 Dev Container](../docker/index.md)，ROS 2 见 [ROS 2 编程基础](../ros2/index.md)。
+
+!!! warning "不要盲目执行一键脚本"
+    ROS 2、显卡驱动、CUDA 和设备 SDK 必须与项目版本匹配。远程脚本可能随时间变化，执行前应确认来源并阅读内容。
+
+## 10. 重装完成检查
+
+- [ ] 系统版本和架构符合项目要求；
+- [ ] Git 姓名、邮箱、SSH 密钥和 Git LFS 正常；
+- [ ] 编译器、CMake、调试器和 clangd 可用；
+- [ ] VS Code 能打开项目并识别头文件；
+- [ ] 项目能够完成一次干净编译和最小测试；
+- [ ] ROS 2、CUDA、相机和雷达驱动版本已记录；
+- [ ] 未把密码、API Key、VPN 订阅或私钥提交到仓库。
+
+如果某一步失败，不要继续堆叠安装命令。先记录报错、系统版本和已经执行的命令，再根据对应专题文档排查。

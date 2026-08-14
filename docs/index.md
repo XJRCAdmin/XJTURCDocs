@@ -1,9 +1,9 @@
 ---
-title: XJTURC文档网站
+title: XJTURC 2027届文档网站
 comments: true
 ---
 
-# Welcome to XJTURC!
+# Welcome to XJTURC 2027！
 
 <p style="text-align:center; font-size:2em;">
   <span>🚀</span>
@@ -13,7 +13,7 @@ comments: true
   <span>🎉</span>
 </p>
 
-这里是XJTURC的文档网站，您可以查看各组介绍与各组相关文档。
+这里是 XJTURC 2027 届文档网站，您可以查看各组介绍、学习路径与相关技术文档。
 
 !!! green "TODO"
     

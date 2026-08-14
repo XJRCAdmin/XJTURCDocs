@@ -1,5 +1,5 @@
-site_name: XJTU RC
-site_description: A short description of RC project.
+site_name: XJTU RC 2027 届
+site_description: XJTURC 2027 届技术文档与视觉组学习资料。
 site_author: Admin
 site_url: https://localhost:7788/
 site_dir: site
@@ -80,7 +80,7 @@ extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
-copyright: Copyright &copy; 2020 - 2025 XJRCAdmin CC BY-SA 4.0
+copyright: Copyright &copy; 2020 - 2027 XJRCAdmin CC BY-SA 4.0
 
 nav:
   - Home: index.md
@@ -93,10 +93,10 @@ nav:
   - 电控组:
       - 新手指南: blog/electronics/freshman/index.md
       - R2上层代码说明: blog/electronics/r2/index.md
-  - 视觉组:
+  - 视觉组（2027届）:
       - Introduction: blog/vision/index.md
-      - 在windows上搭建cpp环境: blog/vision/windows-cpp/index.md
-      - 常用命令汇总: blog/vision/common-command/index.md
+      - 文档导览与学习路径: blog/vision/learning-path/index.md
+      - Ubuntu 重装快速配置: blog/vision/common-command/index.md
       - Markdown: blog/vision/markdown/index.md
       - Bash自学: blog/vision/bash/index.md
       - 硬盘固件等知识: blog/vision/SSD-knowledge/index.md
@@ -104,14 +104,13 @@ nav:
       - 进程、前后台、服务与例行任务: blog/vision/ustc-linux101-ch4/index.md
       - Git Intro: blog/vision/GitIntro/index.md
       - SSH: blog/vision/ssh&remotessh/index.md
-      - 安装lazyvim: blog/vision/lazyvim/index.md
-      - 一些现代C++语法特性: blog/vision/ModernCpp/index.md
       - 网线连接树莓派须知: blog/vision/raspberry/index.md
       - Ubuntu VPN: blog/vision/VPN教程/index.md
-      - Doxygen与commit规范: blog/vision/Doxygen-commit/index.md
+      - Codex 与 DeepSeek API: blog/vision/Doxygen-commit/index.md
+      - 提示词工程与日常 AI 使用: blog/vision/prompt-engineering/index.md
       - Missing Semester qa: blog/vision/qa/index.md
       - CMake Introduction: blog/vision/CMake/index.md
-      - Cmake Debug: blog/vision/Debug/index.md
+      - 程序的启动与调试: blog/vision/Debug/index.md
       - Docker & Dev Container: blog/vision/docker/index.md
       - 视觉设备: blog/vision/visualDev/index.md
       - 串口使用: blog/vision/serialUse/index.md
@@ -119,10 +118,8 @@ nav:
       - intel-realsense相机: blog/vision/realsense/index.md
       - Roboflow标注概览: blog/vision/roboflow/Roboflow.md
       - ROS2相关教程: blog/vision/ros2/index.md
-      - Navigation 2: blog/vision/Nav2/index.md
       - 强化学习: blog/vision/RL/index.md
       - 队内服务器使用指南: blog/vision/RCserver/index.md
-      - 安装队内服务器证书: blog/vision/install-ca-crt/index.md
       - 培训讲稿:
           - index: blog/vision/tutorial/index.md
           - 第一次培训讲稿: blog/vision/tutorial/class1/index.md
