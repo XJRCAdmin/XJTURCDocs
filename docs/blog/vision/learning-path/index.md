@@ -32,7 +32,7 @@ description: 介绍2027届视觉组文档的内容、推荐阅读顺序与不同
 ### C++ 工程能力
 
 - [CMake 入门](../CMake/index.md)：理解目标、头文件、库和构建过程。
-- [程序的启动与调试](../Debug/index.md)：使用 CMake Presets、Bash、Batch、VS Code 配置和参数文件统一构建、启动与调试流程。
+- [程序的启动与调试](../Debug/index.md)：优先使用 `launch.json` 固化调试入口，再通过 Batch、Bash 和 CMake Presets 统一启动与构建流程。
 - [第二次培训讲稿](../tutorial/class2/index.md)：编译、目标文件、静态库、动态库、Make 与 CMake。
 - [第三次培训讲稿](../tutorial/class3/index.md)：SSH、网络以及 C++ 多线程基础。
 

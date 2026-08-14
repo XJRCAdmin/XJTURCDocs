@@ -2,7 +2,7 @@
 title: 2027届视觉组教学文档
 date: 2026-08-14
 categories:
-  - technology 
+  - technology
 description: 面向 XJTURC 2027 届视觉组的教学文档集合。
 resources:
   - src: "**.{png,jpg}"
@@ -10,124 +10,106 @@ resources:
     params:
       byline: ""
 ---
+
 # 你好，2027届视觉组！
 
 欢迎来到 XJTURC 2027 届视觉组教学文档！这里收录了 Robocon 视觉开发、环境配置、程序调试、AI 协作及远程工作流相关的基础教程与资源。
 
 !!! green "提示"
-    本站的文档只能帮助您快速地速览相关工具的基础用法，并且有些许纰漏。
+    本站的文档用于帮助成员快速了解相关工具的基础用法，部分内容仍在持续完善。
 
-    如果您想详细学习，建议您参考相关工具的官方文档，官方文档和源代码永远是最权威的。
-
+    如果需要深入学习，请继续阅读对应工具的官方文档；官方文档和源代码始终是最权威的资料。
 
 ![](intropic.png)
 
 !!! warning "注意"
     本站以 2027 届视觉组的学习与开发需求为当前维护方向。部分历史教程和资源仍在逐步更新；涉及队内服务器的内容可能需要使用校园网访问。
 
-## Linux 入门
+## 文档导览与学习路径
 
-### 入门书：
+视觉组的工作不仅包括图像算法，还涉及 Linux、C++、网络、构建系统、机器人通信、传感器和工程部署。本目录的目标是帮助新成员从“能够使用开发环境”逐步走到“能够独立开发和排查机器人视觉程序”。
 
-首推 **《鸟哥的Linux私房菜》** 讲述的是CentOS7的系统。[[电子书网址]](https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/15.html)，这本书从“什么是电脑”讲起，通俗易懂适合小白，其中视觉需用到的有：
+!!! tip "如何使用这套文档"
+    不需要从头到尾读完所有页面。Codex 可以协助完成很多重复工作，但成员仍然需要理解基本原理，才能判断生成结果是否正确并安全地应用修改。
 
-  - 0-2章：计算机入门
-  - 5-7章：Linux系统核心(kernel)功能
-  - 11,12,(13),14章：操作Linux的各个工具：Bash与vim
-  - （拓展）16,17章：程序与服务
-  - 21章：软件安装与部署
-  - （拓展）23章：X Windows图形系统
-  - （不太可能会用到）24章：Linux核心的编译
+    [Ubuntu 重装后的快速配置清单](common-command/index.md)是一份恢复电脑环境的操作清单，不是 Linux 入门教材。
 
-### `Ubuntu` 的双系统安装：
+### 开发环境与基础工具
 
-所有的软件都是运行在操作系统的管理之下。选择 `Ubuntu` 作为系统是因为它是持续更新的系统，并且用户量比较大，社区支持比较好，教育通用，`debian` 系。
+- [硬盘、分区与启动方式](SSD-knowledge/index.md)：理解磁盘、GPT、UEFI 和安装系统时的关键选择。
+- [Linux 入门](linux/linux.md)：命令行、文件系统、权限、SSH 和常用工具。
+- [Bash 自学](bash/index.md)：Shell 命令与简单自动化。
+- [进程、服务与例行任务](ustc-linux101-ch4/index.md)：进程、信号、tmux、systemd 和定时任务。
+- [Markdown 入门](markdown/index.md)：编写项目说明和队内文档。
 
-参考安装文档：**《Ubuntu双系统安装教程》**[[pdf下载地址]](https://115.154.129.4:5200/files/api/public/dl/J1gGccUv/public/Share/links/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.pdf)
+### Git 与远程开发
 
-!!! blue-tip "潘羽涵"
-    如果有安装在外置硬盘上的安装需求，可以参考：**《Ubuntu安装教程——磁盘分区设置》** [[pdf下载地址]](https://115.154.129.4:5200/files/api/public/dl/dJ32ey2v/public/Share/links/Ubuntu%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E8%AE%BE%E7%BD%AE.pdf) 就是写的有点抽象（我写的），并且需要注意，有的电脑的UEFI/BIOS有特殊的地方：对于一个物理硬盘，只识别第一个ESP(EFI)分区，不识别后面的分区，那么就需要在安装完系统后，保证EFI分区在第一个，如果ventoy抢占了第一个，需要在windows中将ventoy分区格式化掉。此时不可以按照文章中提到的“小技巧”进行操作，而是需要反向操作，将ventoy装在后面，并且会有额外的好处：可以和后面的逻辑分区合并成一个更大的分区作为u盘使用。（该段话是否有表述不当？误会点？）
+- [Git 入门](GitIntro/index.md)：提交、分支、远程仓库、冲突与 Git LFS。
+- [SSH 与 Remote SSH](ssh&remotessh/index.md)：登录机器人、NUC 和服务器，在 VS Code 中远程开发。
+- [队内服务器](RCserver/index.md)：仅在需要使用相关内部服务时阅读。
 
-在安装Ubnutu系统时，我们可能会遇到一系列问题致使我们要重新安装Ubuntu系统，所以找了以下博客提供重新装系统时的一些帮助。[电脑双系统完美卸载Ubuntu_双系统卸载ubuntu-CSDN博客](https://blog.csdn.net/m0_37548216/article/details/123376311?sharetype=blog&shareId=123376311&sharerefer=APP&sharesource=2501_90812940)
+### C++ 工程能力
 
-《鸟哥的Linux私房菜》 有所涉及，但是安装的系统是比较老的`CentOS`
+- [CMake 入门](CMake/index.md)：理解目标、头文件、库和构建过程。
+- [程序的启动与调试](Debug/index.md)：优先使用 `launch.json` 固化调试入口，再通过 Batch、Bash 和 CMake Presets 统一启动与构建流程。
+- [第二次培训讲稿](tutorial/class2/index.md)：编译、目标文件、静态库、动态库、Make 与 CMake。
+- [第三次培训讲稿](tutorial/class3/index.md)：SSH、网络以及 C++ 多线程基础。
 
-### Bash 学习：
+### 容器与项目环境
 
-`Bash` 是 `Ubuntu 桌面版` 的原生终端，`Linux` 里面的所有非基本的操作往往只能依赖于终端完成。
+- [Docker 与 Dev Container](docker/index.md)：复现项目环境并减少“换一台电脑就不能运行”的问题。
+- [常用命令恢复清单](common-command/index.md)：重装 Ubuntu 后快速恢复开发工具。
 
--  **《阮一峰的Bash教程》**——[bookstack电子书网址](https://www.bookstack.cn/read/bash-tutorial/docs-intro.md)
+### AI 的使用
 
-## About C++ Development
+- [Codex 与 DeepSeek API](Doxygen-commit/index.md)：在 VS Code 中使用 Codex，并按需接入 DeepSeek 模型。
+- [提示词工程与日常 AI 使用](prompt-engineering/index.md)：学习如何为 Codex、ChatGPT 和其他大语言模型提供上下文、约束与验收标准，并检查输出是否可靠。
+- [Ubuntu VPN](VPN教程/index.md)：仅在确有网络访问需求时参考，并注意保护个人订阅信息。
 
-追求高效率以及合适的抽象层次，以及简单有利于初学者学习的特性，C++是一门广泛用于开发完整应用程序的语言，我们主要使用C++中的面向对象设计方法，辅以其他设计模式，加上C++11标准后添加的一些新的语法糖写出漂亮的代码。
+### 视觉设备与数据
 
-除此之外，我们还会借助到中第三方编写的C++ 开源library进行工作，这大大拓展了我们的能力。
+- [视觉设备介绍](visualDev/index.md)：了解队内主机、相机、雷达和通信设备。
+- [Intel RealSense](realsense/index.md)：深度相机基本使用与 API。
+- [串口与 SocketCAN](serialUse/index.md)：连接和排查硬件设备。
+- [Roboflow 标注](roboflow/Roboflow.md)：数据集标注与导出入口。
+- [Blender 数据集生成](blender/index.md)：合成数据、渲染和自动生成标签。
+- [第四次培训讲稿](tutorial/class4/index.md)：相机标定、卡尔曼滤波和 Docker 概念。
 
-### 语法基础学习
+### ROS 2 与机器人软件
 
-- C语言基础：浙江大学翁恺教授的bilibili视频，MOOC等资料
-- C++学习：
-  - B站上：黑马程序员，翁恺老师
-  - 《Essential C++》 C++ 特性的最小集合
-  - 侯捷老师的视频
-- C++写程序的额外注意点：[pdf book:《Effective C++》](https://115.154.129.4:5200/files/api/public/dl/c1IHQFQa/public/Share/links/C%2B%2B/Effective%20C%2B%2B%20%E4%B8%AD%E6%96%87%E7%AC%AC%E4%B8%89%E7%89%88.pdf)
-- C++11新特性的小汇总：[pdf book:《morden C++》](https://115.154.129.4:5200/files/api/public/dl/zz4zJABW/public/Share/links/C%2B%2B/morden%20C%2B%2B%20%E6%95%99%E7%A8%8B%20%E4%B8%AD%E6%96%87%E7%89%88.pdf)
+- [ROS 2 编程基础](ros2/index.md)：节点、包、话题、消息和第一个 C++ 节点。
+- [强化学习](RL/index.md)：当前仍是待完善的拓展方向，不属于基础必修内容。
 
-### 初等算法自学
+## 推荐学习路径
 
-《数据结构与算法》课程的参考资料。
+### 第一阶段：能独立使用 Ubuntu
 
-### 编译过程的理解
+目标：理解终端、文件路径、权限、软件安装、进程和网络，不再依赖复制不理解的命令。
 
-- 知乎等其他网站，还没有找到更加深入浅出的资料 TODO
+建议顺序：
 
-这里举一个例子：[一个例子](https://zhuanlan.zhihu.com/p/612556530)
+1. Linux 入门；
+2. Bash 自学；
+3. 进程、服务与例行任务；
+4. SSH 与 Remote SSH；
+5. Git 入门和 Markdown。
 
-### 构建工具学习
+完成标准：能够通过 SSH 登录另一台主机，使用 Git 提交修改，并能根据报错找到日志和相关进程。
 
-借助Cmake来进行C++的多单元编译，网上关于cmake的教程有很多，但是cmake版本更新比较快，一些以前的常用做法现在已经不推荐了。这里只推荐一个教程，比较新且详细
+### 第二阶段：能编译和调试 C++ 项目
 
-- **《Cmake CookBook 中文版》**——[bookstack电子书网址](https://www.bookstack.cn/books/CMake-Cookbook)
+目标：理解源文件如何变成可执行程序，以及项目为什么需要 CMake。
 
-### 项目规范
+建议顺序：
 
-- 一个cmake项目的“标准”结构——[github repository](https://github.com/kigster/cmake-project-template)
-- C++编码规范：google编码规范——[线上文档网址](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/headers.html)
-- commit message 规范
-- Pull Request 规范——[图文并茂的开源教程](https://zhuanlan.zhihu.com/p/584834288)和[开源规范](https://github.com/TaleLin/lin-ui/wiki/Pull-Request-%E8%A7%84%E8%8C%83)
+1. 第二次培训讲稿中的编译与链接；
+2. CMake 入门；
+3. 程序的启动与调试；
+4. 使用 Codex 辅助解释、修改和审查代码；
+5. 第三次培训讲稿中的多线程部分。
 
-## 其他工具
+完成标准：能够从干净的构建目录配置、编译、运行和调试一个多文件 C++ 项目，并能解释常见的编译错误与链接错误。
 
-### VSCode 介绍
+### 第三阶段：实际开发
 
-你需要安装的插件有:
-
-- CMake Tools
-- C/C++ Extension Pack
-- clangd
-- CMake
-- Git Graph
-- Remote SSH
-- Dev Containers
-- Tabnine
-- GitHub Copilot
-
-### git学习与使用
-
-**《git菜单(git-receipe)》**——[gitbook网址](https://selierlin.github.io/git-recipes/#/)
-
-### 其他工具
-
-- blog: ssh与remotessh插件的使用
-- Cmake插件的使用
-- git与git graph插件的使用
-
-!!! quote "提示"
-    这是一个引用框，用来做信息/通知类提示。
-!!! success "成功"
-    这是一个成功提示框，意思是人类你赢了。
-!!! bug "错误"
-    这是一个错误提示框，意思是你的操作错误。
-!!! danger "危险"
-    这是一个危险提示框，意思是操作迷人的最危险。
+在以上工程能力和基础知识之上参与实际项目，并在应用中继续学习。
