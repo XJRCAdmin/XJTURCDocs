@@ -4,6 +4,7 @@
 
 ### 什么是ROS？一个生动的比喻
 想象一下，我们要建造一个机器人。这个机器人需要有：
+
 - **眼睛** (摄像头、激光雷达)
 - **大脑** (用于决策的电脑，如NUC、树莓派)
 - **四肢** (轮子、机械臂)
@@ -17,6 +18,7 @@
 **需要澄清的一个误区：** ROS虽然名字里有“操作系统”，但它并不是像Windows或Ubuntu那样的真正意义上的操作系统。它更应该被称为一个“**元操作系统**”（meta-operating system）或者**软件框架**。它运行在Linux（主要是Ubuntu）系统之上，为机器人软件开发提供了一整套强大的工具和库。
 
 ### **我们为什么选择ROS？**
+
 
 在团队项目中，统一的技术栈和开发规范至关重要。ROS为我们提供了以下核心优势：
 - **标准化与模块化 (Standardization & Modularity)**
@@ -47,7 +49,9 @@
 在你开始学习和搜索资料时，很快会发现一个重要事实：ROS有两个主要的版本——ROS 1和ROS 2。它们之间有显著的差异，而**我们团队将主要使用ROS 2，并将现有的程序从ROS1迁移到ROS2**。
 
 **为什么会有ROS 2？**
+
 ROS 1是一个里程碑式的项目，但它诞生于十多年前，主要为学术界的单机机器人研究设计。随着技术发展，它的一些底层设计暴露了局限性，例如：
+
 - **单点故障**：ROS 1依赖于一个中心“主节点”（Master）。如果Master崩溃，整个系统的通信就会瘫痪。
 - **网络不稳定**：在不稳定的网络（如Wi-Fi）下，通信质量不佳。
 - **缺乏实时性**：不适合需要严格实时控制的场景。
@@ -68,6 +72,7 @@ ROS 1是一个里程碑式的项目，但它诞生于十多年前，主要为学
 
 **给新手的实用提醒：**
 由于ROS 1历史更悠久，网上仍有海量的教程和代码是基于ROS 1的。在查找资料时，请注意区分！
+
 - **关键词**：搜索时，明确加入“**ROS 2**”或你的发行版名称（如“**Humble**”、“**Foxy**”）。
 - **编译命令**：看到 catkin_make 或 catkin build，这是ROS 1；看到 colcon build，这是ROS 2。
 - **代码**：看到 import rospy (Python) 或 #include "ros/ros.h" (C++)，这是ROS 1；看到 import rclpy 或 #include "rclcpp/rclcpp.hpp"，这是ROS 2。
@@ -140,6 +145,7 @@ export ROS_HOSTNAME=localhost
 Zsh 是一款功能强大的 Shell，而 Oh My Zsh 是一个 Zsh 的开源配置管理框架。它简化了 Zsh 的配置过程，并捆绑了数千个有用的函数、助手、插件和主题，能极大地提升你的终端使用体验。
 
 安装过程主要分为以下几个部分：
+
 1.  **前置准备**：安装 Oh My Zsh 所需的依赖。
 2.  **安装 Oh My Zsh**：核心框架的安装。
 3.  **安装核心插件**：安装 `zsh-autosuggestions` 和 `zsh-syntax-highlighting`。
@@ -178,6 +184,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ```
 
 在安装过程中，脚本会：
+
 1.  备份你现有的 `~/.zshrc` 文件（如果存在）。
 2.  创建一个新的 `~/.zshrc` 配置文件。
 3.  **询问你是否希望将 Zsh 设置为默认 Shell**。强烈建议你输入 `Y` 并按回车。
@@ -353,6 +360,7 @@ eval "$(register-python-argcomplete ros2)"
 最后，再次执行 `source ~/.zshrc` 或重启终端使所有配置生效。
 
 **验证一下效果：**
+
 1.  **自动 Sourcing**: 打开一个新终端，输入 `ros2` 并按回车。如果能看到 `ros2` 的帮助信息，说明 `ros2` 插件已成功自动 source 环境。
 2.  **ROS 2 补全**: 输入 `ros2 topic list -` 然后按 `Tab` 键，你应该能看到 `-t`, `--show-type` 等参数提示。
 3.  **Colcon 补全**: 在你的工作区目录，输入 `colcon build --` 然后按 `Tab` 键，你应该能看到 `--packages-select` 等补全选项。
@@ -416,6 +424,7 @@ cd src
 ros2 pkg create --build-type ament_python --node-name simple_publisher my_first_package
 ```
 让我们分解一下这个命令：
+
 *   `ros2 pkg create`: 这是创建功能包的命令。
 *   `--build-type ament_python`: 指定我们要创建一个Python包。ROS 2的构建系统叫做`ament`。如果是C++包，这里会是`ament_cmake`。
 *   `--node-name simple_publisher`: 这是一个非常方便的选项，它会自动为我们生成一个名为 `simple_publisher.py` 的基础节点文件，省去了我们手动创建的麻烦。
@@ -672,6 +681,7 @@ cd ~/ros2_ws/src
 ros2 pkg create --build-type ament_cmake my_first_sub --dependencies rclcpp std_msgs
 ```
 **这个会**:
+
   - 创建一个 `my_first_sub` 目录。
   - `--build-type ament_cmake` 指定了构建系统。
   - `--dependencies rclcpp std_msgs` 为我们添加了两个核心依赖：
@@ -895,10 +905,11 @@ ros2 topic pub --once /talker_topic std_msgs/msg/String "data: 'Hello, world'"
 
 ROS 2的强大之处在于其分布式特性。你可以轻松地让多个节点通过话题进行通信，构建复杂的系统。
 **通信模式：**
-1. **一对一 (One-to-One)**: 如上例所示，一个发布者和一个订阅者。
-2. **一对多 (One-to-Many)**: 一个发布者，多个订阅者。这是非常常见的模式。例如，一个相机节点发布 `/image_raw` 话题，一个图像处理节点、一个录制节点和一个显示节点可以同时订阅该话题，并行处理任务。
-3. **多对一 (Many-to-One)**: 多个发布者，一个订阅者。例如，多个机器人上的传感器节点可以向同一个 `/diagnostics`（诊断）话题发布状态信息，由一个中央监控节点统一接收处理。
-4. **多对多 (Many-to-Many)**: 多个发布者和多个订阅者在同一个话题上交互。
+
+- **一对一 (One-to-One)**: 如上例所示，一个发布者和一个订阅者。
+- **一对多 (One-to-Many)**: 一个发布者，多个订阅者。这是非常常见的模式。例如，一个相机节点发布 `/image_raw` 话题，一个图像处理节点、一个录制节点和一个显示节点可以同时订阅该话题，并行处理任务。
+- **多对一 (Many-to-One)**: 多个发布者，一个订阅者。例如，多个机器人上的传感器节点可以向同一个 `/diagnostics`（诊断）话题发布状态信息，由一个中央监控节点统一接收处理。
+- **多对多 (Many-to-Many)**: 多个发布者和多个订阅者在同一个话题上交互。
 
 工作机制：
 ROS 2的DDS（Data Distribution Service）中间件负责底层的节点发现和数据路由。只要一个发布者和一个订阅者使用了相同的话题名称和兼容的消息类型，并且它们的QoS设置兼容，DDS就会自动为它们建立连接，无需任何手动配置。
@@ -916,24 +927,30 @@ ROS 2的DDS（Data Distribution Service）中间件负责底层的节点发现�
 在理想的网络环境下，数据总能瞬时、可靠地送达。但在现实世界，尤其是在无线通信的机器人上，网络会发生丢包、延迟和抖动。QoS就是ROS 2提供的一套强大的工具，让你能够根据不同数据的特性，精细地控制通信的可靠性和实时性。
 当发布者和订阅者连接时，它们会协商QoS策略。只有当策略兼容时，连接才能建立。
 **核心QoS策略：**
+
 1. **History (历史记录)**:
+
     - `KEEP_LAST`: 只保留最新的N条数据。N由`Depth`选项指定。适用于状态类数据，如传感器读数，你只关心最新的值。
     - `KEEP_ALL`: 保留所有历史数据，直到资源耗尽。适用于需要确保不丢失任何一条消息的场景，如录制数据。
 2. **Depth (深度)**:
+
     - 与 `KEEP_LAST` 结合使用，指定队列的大小。例如 `Depth=10` 表示最多保留最近的10条消息。
 3. **Reliability (可靠性)**:
+
     - `BEST_EFFORT` (尽力而为): 传输速度快，但不保证送达，可能会丢包。适用于高频率、可容忍丢失的数据，如视频流、激光雷达数据。
     - `RELIABLE` (可靠): 保证送达，会进行重传尝试。适用于绝对不能丢失的指令，如机器人移动的`cmd_vel`指令、重要的服务调用。可靠传输会增加一些延迟和网络开销。
 4. **Durability (持久性)**:
+
     - `VOLATILE` (易失): 只将消息发送给当前已经连接的订阅者。如果订阅者在消息发布后才启动，它将收不到这条消息。
     - `TRANSIENT_LOCAL` (瞬态本地): 发布者会“保留”最新发布的消息。当一个新的订阅者连接上时，发布者会立刻将这些“陈旧”的消息发送给它。非常适用于配置信息或地图数据，这样后启动的节点也能立即获取到最新的配置或地图。
 
 **如何在代码中设置QoS？**
 你可以创建一个QoS配置文件（Profile），并在创建发布者或订阅者时应用它。
-**Python QoS 示例**:
-Python
 
-```
+**Python QoS 示例**:
+
+
+```python
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 
 # 创建一个用于传感器数据的QoS配置
@@ -957,9 +974,9 @@ qos_profile_system_status = QoSProfile(
 ```
 
 **C++ QoS 示例**:
-C++
 
-```
+
+```C++
 // C++的语法稍有不同，但理念一致
 #include "rclcpp/rclcpp.hpp"
 
@@ -1028,6 +1045,7 @@ my_awesome_package/
 ```
 
 **各目录和文件详解：**
+
 - **`package.xml` (必需)**: 这是功能包的“身份证”。它定义了功能包的名称、版本、作者、许可证、构建类型以及最重要的——依赖项。无论是C++还是Python功能包，此文件都是必不可少的。构建系统（如`colcon`）会读取此文件来确定功能包之间的依赖关系。
 - **`CMakeLists.txt` (C++功能包必需)**: 如果你的功能包包含C++代码，就需要这个文件。它遵循CMake语法，并使用`ament_cmake`提供的宏来查找依赖、定义可执行文件（节点）、库，并指定安装规则。
 - **`setup.py` (Python功能包必需)**: 对于包含Python代码的功能包，此文件是必需的。它遵循Python `setuptools`的格式，用于指定如何打包和安装Python模块、脚本和数据文件。
@@ -1050,10 +1068,10 @@ my_awesome_package/
 ##### C++ 节点代码结构 (面向对象)
 
 在C++中，最佳实践是将节点封装成一个类。这个类继承自`rclcpp::Node`。这样做的好处是代码结构清晰，易于管理状态和资源。
-**示例 (`my_node.cpp`):**
-C++
 
-```
+**示例 (`my_node.cpp`):**
+
+```C++
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 #include "my_pkg_cpp/my_class.hpp" // 引入头文件
@@ -1187,11 +1205,13 @@ if __name__ == '__main__':
 ## 核心配置文件概述
 
 在ROS2中，一个功能包（Package）是一个包含代码、数据和文档的独立单元。每个功能包都包含以下一个或多个配置文件：
+
 - **`package.xml`**: 功能包的“清单”文件。它定义了功能包的名称、版本、作者、依赖项等元数据。**所有功能包都必须有这个文件**。
 - **`CMakeLists.txt`**: 用于C++功能包的构建配置文件。它告诉`colcon`这样的构建工具如何编译你的C++代码。
 - **`setup.py`**: 用于Python功能包的构建和安装配置文件。它告诉`colcon`如何安装你的Python代码和脚本。
 
 一个功能包可以是纯C++的、纯Python的，或者是混合语言的。
+
 - **C++ 功能包**: 包含 `package.xml` 和 `CMakeLists.txt`。
 - **Python 功能包**: 包含 `package.xml` 和 `setup.py`。
 - **混合功能包**: 包含 `package.xml`, `CMakeLists.txt` 和 `setup.py`。
@@ -1249,6 +1269,7 @@ if __name__ == '__main__':
     - `<build_type>`: 在这里再次声明构建类型，与 `<buildtool_depend>` 对应。
 
 **最佳实践**:
+
 - 对于一个依赖项，如果你不确定它是构建时依赖还是运行时依赖，直接使用 `<depend>` 是最安全的选择。
 - 保持 `package.xml` 的信息准确，`rosdep` 等工具会使用这些信息来自动安装依赖。
 - 在ROS1中，CMakeLists中的功能包必须在 `package.xml` 中声明，否则会编译报错。而在ROS2中似乎没有这样的限制。
@@ -1305,24 +1326,30 @@ ament_package()
 #### 2.2 命令详解
 
 1. **`find_package(...)`**:
+
     - 这是配置的第一步，用于查找所有在 `package.xml` 中声明的、且在C++代码中需要用到的依赖包。
     - 每个 `find_package` 都应该对应 `package.xml` 中的一个 `<depend>` 或 `<build_depend>`。
     - `ament_cmake` 是构建ROS2 C++包所必需的，必须首先找到它。
 2. **`add_executable(可执行文件名 源文件...)`**:
+
     - 为你的C++源文件创建一个可执行文件。
     - 第一个参数 `my_node` 是生成的可执行文件的名称。
     - 后续参数是用于编译这个可执行文件的源文件路径，例如 `src/my_node.cpp`。
 3. **`ament_target_dependencies(可执行文件名 依赖包...)`**:
+
     - **至关重要的一步**。将 `find_package` 找到的包链接到你用 `add_executable` 创建的目标上。
     - 如果缺少这一步，编译时会报 “undefined reference to...” 的链接错误。
     - 引用的依赖包名称必须与 `find_package` 中的名称一致（用引号括起来）。
 4. **`install(TARGETS ...)`**:
+
     - 将编译生成的可执行文件安装到ROS2环境能够找到它的地方（`install/my_robot_controller/lib/my_robot_controller/`）。
     - `DESTINATION lib/${PROJECT_NAME}` 是ROS2 C++节点的标准安装路径。
 5. **`install(DIRECTORY ...)`**:
+
     - 安装(直接复制文件或软链接的方式)非代码文件，如 `launch` 文件、`urdf` 文件、`rviz` 配置文件等。
     - `DESTINATION share/${PROJECT_NAME}` 是这些文件的标准安装路径。
 6. **`ament_package()`**:
+
     - 文件末尾的必需命令，用于处理所有 `install()` 命令并完成打包。
 
 ----
@@ -1392,23 +1419,29 @@ setup(
 #### 总结与工作流程
 
 1. **创建功能包**:
+
     - 使用 `ros2 pkg create --build-type ament_cmake my_cpp_pkg --dependencies rclcpp std_msgs` 创建C++包。
     - 使用 `ros2 pkg create --build-type ament_python my_py_pkg --dependencies rclpy std_msgs` 创建Python包。
     - 这些命令会自动生成模板化的配置文件。
 2. **编辑 `package.xml`**:
+
     - 首先填写描述、作者、许可证信息。
     - 在你添加新的依赖（如 `sensor_msgs`）时，记得在这里添加 `<depend>sensor_msgs</depend>`。
 3. **编写代码并配置构建文件**:
+
     - **对于C++包**:
         - 在 `src` 目录下编写 `.cpp` 文件。
         - 在 `CMakeLists.txt` 中，使用 `find_package` 查找新依赖，`add_executable` 添加新节点，并用 `ament_target_dependencies` 链接它们。
     - **对于Python包**:
+
         - 在与 `setup.py` 同级的包目录（如 `my_py_pkg`）下编写 `.py` 文件。
         - 在 `setup.py` 的 `entry_points` 中为你的新节点添加一个入口点。
 4. **安装附加文件**:
+
     - 将 `launch` 文件、配置文件等放入功能包的相应目录（如 `launch/`, `config/`）。
     - 在 `CMakeLists.txt` (使用 `install(DIRECTORY ...)` ) 或 `setup.py` (在 `data_files` 中添加条目) 中配置安装规则。
 5. **构建和测试**:
+
     - 回到工作区的根目录，运行 `colcon build --packages-select <你的包名>`。
     - `source install/setup.bash`。
     - 使用 `ros2 run <你的包名> <你的节点名>` 运行你的节点，检查是否一切正常。
@@ -1423,6 +1456,7 @@ setup(
 
 在ROS2中，Launch文件是一个强大的工具，用于同时启动和配置一个或多个节点。想象一下一个复杂的机器人系统，可能需要同时运行十几个节点（感知、定位、规划、控制等），手动一个一个地用 `ros2 run` 启动会非常繁琐且容易出错。Launch文件就是为了解决这个问题而生的。
 **Launch文件的核心功能：**
+
 - **同时启动多个节点**：一次性运行整个应用程序。
 - **自动配置节点**：为节点设置参数（parameters）、重映射话题（remapping topics/services/actions）、设置命名空间（namespaces）等。
 - **启动其他Launch文件**：模块化地组织和复用启动配置。
@@ -1476,8 +1510,11 @@ def generate_launch_description():
 ```
 
 **核心概念**:
+
 - **`generate_launch_description()` 函数**: 这是launch系统的入口点。当你用 `ros2 launch` 运行此文件时，ROS2会执行这个函数并获取它返回的 `LaunchDescription` 对象。
+
 - **`LaunchDescription` 对象**: 这是一个容器，用于存放所有要执行的“动作”（Actions）。
+
 - **动作（Action）**: 最常见的动作就是 `Node`，它代表启动一个ROS节点。
 
 ##### 4.1.2 常用配置与`Node`动作的参数
@@ -1588,7 +1625,7 @@ def generate_launch_description():
     ])
 ```
 
-**如何运行带参数的launch文件:**
+##### **如何运行带参数的launch文件:**
 
 ```
 # 使用默认值 'my_turtle'
@@ -1602,6 +1639,7 @@ ros2 launch my_pkg my_launch_file.launch.py turtle_name:=tina
 
 最后，别忘了安装你的Launch文件！
 无论你使用哪种格式，都需要在 CMakeLists.txt (对于C++包) 或 setup.py (对于Python包) 中添加安装规则，将 launch/ 目录安装到 share/<你的包名>/ 目录下，这样 ros2 launch 命令才能找到它们。
+
 **CMakeLists.txt (C++)**:
 
 ```CMake
